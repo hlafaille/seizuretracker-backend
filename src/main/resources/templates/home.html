@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="scripts_common :: bootstrap"></div>
+    <title>Page Title</title>
+</head>
+<body>
+
+<!-- navbar -->
+<div th:replace="fragments/nav :: bar"></div>
+
+<!-- basic card -->
+<div id="content" class="container-fluid h-100 w-100">
+    <div class="row justify-content-center align-items-center p-3">
+        <div class="card">
+            <img src="/images/icon.png" class="card-img-top img-fluid" alt="icon">
+            <div class="card-body">
+                <h5 class="card-title">Welcome</h5>
+                <p class="card-text">Say something cool :)</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
