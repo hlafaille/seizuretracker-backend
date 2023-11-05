@@ -4,13 +4,11 @@
     <div th:replace="scripts_common :: bootstrap"></div>
     <title>Log In - SeizureTracker</title>
 </head>
-<body>
+<body class="d-flex flex-column vh-100">
 
 <!-- Your page content -->
-<!-- <div th:replace="fragments/nav :: bar"></div> -->
-
-<div id="content" class="h-100 d-flex align-items-center justify-content-center p-3">
-    <div class="align-items-center justify-content-center p-3">
+<main class="flex-fill">
+    <div class="container my-5">
         <div class="card">
             <div class="card-header">Welcome</div>
             <div class="card-body">
@@ -31,6 +29,7 @@
             </div>
         </div>
     </div>
-</div>
+</main>
+<div th:replace="fragments/footer :: bar"></div>
 </body>
 </html>
