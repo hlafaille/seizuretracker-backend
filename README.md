@@ -1,11 +1,11 @@
-<div style="text-align: center; ">
-  <img style="border-radius: 50%" src="https://i.imgur.com/PHzVZTZ.png" width="200x" height="200px" alt="SeizureTracker Icon">
-  <h1>Seizure Tracker</h1>
+<div align="center">
+  <img src="https://i.imgur.com/yUE7Wsp.png" width="200x" height="200px" alt="SeizureTracker Icon">
+  <h4>Seizure Tracker</h4>
   A self-hosted tool for logging seizures and tracking seizure medications.
   </div>
 <hr>
 
 # Features
 
-* Log Individual Seizures
-    * Data points like beginning/end of seizure, 
+### Log Individual Seizures
+People with epilepsy typically need to log their seizures for their doctors. 
