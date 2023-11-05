@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="scripts_common :: bootstrap(activeSection='home')"></div>
+    <title>Page Title</title>
+</head>
+<body>
+
+<!-- Your page content -->
+<div th:replace="fragments/nav :: bar"></div>
+<div class="p-2">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Oops</h5>
+            <p class="card-text">An error occurred</p>
+            <a href="/" class="btn btn-primary">Go Home</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
