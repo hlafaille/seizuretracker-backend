@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:replace="scripts_common :: bootstrap"></div>
-    <title>Page Title</title>
+    <title>Log In - SeizureTracker</title>
 </head>
 <body>
 
@@ -10,20 +10,25 @@
 <!-- <div th:replace="fragments/nav :: bar"></div> -->
 
 <div id="content" class="h-100 d-flex align-items-center justify-content-center p-3">
-    <div class="card">
-        <div class="card-header">Welcome</div>
-        <div class="card-body">
-            <form>
-                <div class="mb-3">
-                    <label for="emailInput">Email address</label>
-                    <input id="emailInput" type="email" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label for="passwordInput">Password</label>
-                    <input id="passwordInput" type="password" class="form-control">
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+    <div class="align-items-center justify-content-center p-3">
+        <div class="card">
+            <div class="card-header">Welcome</div>
+            <div class="card-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="emailInput">Email address</label>
+                        <input id="emailInput" type="email" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="passwordInput">Password</label>
+                        <input id="passwordInput" type="password" class="form-control">
+                    </div>
+                    <div class="btn-group w-100" role="group">
+                        <button type="submit" class="btn btn-primary">Log In</button>
+                        <a href="/signup" class="btn btn-outline-secondary">Create Account</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
