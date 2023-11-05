@@ -8,5 +8,24 @@
 
 <!-- Your page content -->
 <!-- <div th:replace="fragments/nav :: bar"></div> -->
+
+<div id="content" class="h-100 d-flex align-items-center justify-content-center p-3">
+    <div class="card">
+        <div class="card-header">Welcome</div>
+        <div class="card-body">
+            <form>
+                <div class="mb-3">
+                    <label for="emailInput">Email address</label>
+                    <input id="emailInput" type="email" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="passwordInput">Password</label>
+                    <input id="passwordInput" type="password" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

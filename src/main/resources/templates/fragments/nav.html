@@ -1,7 +1,8 @@
 <div th:fragment="bar">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">SeizureTracker</a>
+            <a class="navbar-brand" href="#">
+                <img src="/images/icon.png" style="height: 30px; width: auto; border-radius: 50%; margin-right: 5px;">SeizureTracker</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -14,14 +15,14 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/log"
-                           th:classappend="${activeSection} == 'home' ? 'active' : ''">Log</a>
+                           th:classappend="${activeSection} == 'log' ? 'active' : ''">Seizure Log</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/medication"
-                           th:classappend="${activeSection} == 'home' ? 'active' : ''">Medication</a>
+                           th:classappend="${activeSection} == 'medication' ? 'active' : ''">Medication</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/hlafaille/seizuretracker/issues">Issues</a>
+                        <a class="nav-link" href="https://github.com/hlafaille/seizuretracker/issues">Report Issues</a>
                     </li>
                 </ul>
             </div>
