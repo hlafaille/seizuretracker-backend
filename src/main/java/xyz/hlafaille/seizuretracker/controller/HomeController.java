@@ -12,12 +12,10 @@ import xyz.hlafaille.seizuretracker.service.AuthService;
 public class HomeController {
 
     private final AuthService authService;
-    private final SessionRepository sessionRepository;
 
     @Autowired
     public HomeController(AuthService authService, SessionRepository sessionRepository) {
         this.authService = authService;
-        this.sessionRepository = sessionRepository;
     }
 
     @GetMapping("/home")

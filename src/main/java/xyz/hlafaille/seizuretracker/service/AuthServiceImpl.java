@@ -62,7 +62,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public UUID beginSession(String emailAddress, String password) throws RuntimeException {
         // find the user from the database, ensure that their password matches
-        User user = userRepository.findUserByEmail(emailAddress);
+        User user = userRepository.findByEmail(emailAddress);
         matchPassword(user, password);
 
         // determine when this session should expire
