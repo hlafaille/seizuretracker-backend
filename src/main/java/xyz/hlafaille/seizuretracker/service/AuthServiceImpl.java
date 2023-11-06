@@ -1,6 +1,7 @@
 package xyz.hlafaille.seizuretracker.service;
 
 import jakarta.transaction.Transactional;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import xyz.hlafaille.seizuretracker.entity.User;
 import xyz.hlafaille.seizuretracker.repository.UserRepository;
@@ -21,7 +22,23 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public User getUserById(UUID id) {
-        return null;
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
+    public String encryptPassword(String password) {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        return bCryptPasswordEncoder.encode(password);
+    }
+
+    @Override
+    public UUID beginSession(String emailAddress, String password) throws RuntimeException {
+        User user = userRepository.findUserByEmail(emailAddress);
+        String encryptedPassword = encryptPassword(password);
+        if (!user.getPassword().equals(encryptedPassword)) {
+            throw new RuntimeException("Invalid password");
+        }
+        return user.getId();
     }
 
     @Override
