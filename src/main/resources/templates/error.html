@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
 <head>
     <div th:replace="scripts_common :: bootstrap(activeSection='home')"></div>
     <title>Error - SeizureTracker</title>
@@ -11,7 +11,7 @@
     <div class="container my-5">
         <div class="card">
             <div class="card-body">
-                <h2 class="card-title pt-2">Oops</h2>
+                <h2 class="card-title pt-2">Oh no!</h2>
                 <p class="card-subtitle pt-1 pb-3 text-muted" th:text="${funnyCardSubtitle}"></p>
                 <div class="alert alert-secondary font-monospace text-uppercase" role="alert">
                     <div th:text="${errorMessage}"></div>

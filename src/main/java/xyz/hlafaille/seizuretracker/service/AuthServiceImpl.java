@@ -40,7 +40,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public void matchPassword(User user, String password) {
+    public void matchPassword(User user, String password) throws RuntimeException {
         // get the user by their email
         Argon2PasswordEncoder argon2PasswordEncoder = new Argon2PasswordEncoder(
                 ARGON_SALT_LENGTH, ARGON_HASH_LENGTH, ARGON_PARALLELISM, ARGON_MEMORY, ARGON_ITERATIONS
@@ -55,11 +55,9 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public UUID beginSession(String emailAddress, String password) throws RuntimeException {
+        // find the user from the database, ensure that their password matches
         User user = userRepository.findUserByEmail(emailAddress);
-        String encryptedPassword = encryptPassword(password);
-        if (!user.getPassword().equals(encryptedPassword)) {
-            throw new RuntimeException("Invalid password");
-        }
+        matchPassword(user, password);
         return user.getId();
     }
 
