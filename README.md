@@ -5,6 +5,8 @@
 </div>
 <hr>
 
+[![Java CI with Gradle](https://github.com/hlafaille/seizuretracker/actions/workflows/gradle.yml/badge.svg)](https://github.com/hlafaille/seizuretracker/actions/workflows/gradle.yml)
+
 # Features
 
 ### Log Individual Seizures
