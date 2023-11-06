@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -21,6 +22,6 @@ public class Session {
     private UUID user;
 
     @Column(nullable = false)
-    private Date expire;
+    private ZonedDateTime expire;
 
 }

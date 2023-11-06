@@ -1,5 +1,7 @@
 package xyz.hlafaille.seizuretracker.controller;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,11 +39,17 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String doLogin(@ModelAttribute LoginFormModel formData) {
+    public String doLogin(@ModelAttribute LoginFormModel formData, HttpServletResponse response) {
+        // start the session
         UUID sessionId = authService.beginSession(
                 formData.getEmailAddress(),
                 formData.getPassword()
         );
+
+        // set the cookie
+        Cookie sessionCookie = new Cookie("session", sessionId.toString());
+        response.addCookie(sessionCookie);
+
         return "redirect:/home";
     }
 

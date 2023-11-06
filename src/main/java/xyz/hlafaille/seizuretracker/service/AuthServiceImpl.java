@@ -2,11 +2,14 @@ package xyz.hlafaille.seizuretracker.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import xyz.hlafaille.seizuretracker.entity.Session;
 import xyz.hlafaille.seizuretracker.entity.User;
+import xyz.hlafaille.seizuretracker.repository.SessionRepository;
 import xyz.hlafaille.seizuretracker.repository.UserRepository;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 /**
@@ -21,9 +24,11 @@ public class AuthServiceImpl implements AuthService {
     private static final int ARGON_ITERATIONS = 16;
 
     private final UserRepository userRepository;
+    private final SessionRepository sessionRepository;
 
-    public AuthServiceImpl(UserRepository userRepository) {
+    public AuthServiceImpl(UserRepository userRepository, SessionRepository sessionRepository) {
         this.userRepository = userRepository;
+        this.sessionRepository = sessionRepository;
     }
 
     @Override
@@ -58,7 +63,18 @@ public class AuthServiceImpl implements AuthService {
         // find the user from the database, ensure that their password matches
         User user = userRepository.findUserByEmail(emailAddress);
         matchPassword(user, password);
-        return user.getId();
+
+        // determine when this session should expire
+        ZonedDateTime expiresAt = ZonedDateTime.now(ZoneId.of("UTC")).plusHours(3);
+
+        // create a new session
+        UUID sessionId = UUID.randomUUID();
+        Session session = new Session();
+        session.setId(sessionId);
+        session.setUser(user.getId());
+        session.setExpire(expiresAt);
+        sessionRepository.save(session);
+        return sessionId;
     }
 
     @Override
