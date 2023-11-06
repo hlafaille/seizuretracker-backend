@@ -11,16 +11,30 @@
     <div class="container my-5">
         <div class="card">
             <div class="card-body">
-                <h2 class="card-title">Let's get you an account</h2>
-                <p class="card-subtitle pb-3 text-muted">This shouldn't take long</p>
+                <h2 class="card-title pt-2">Let's get you an account</h2>
+                <p class="card-subtitle pt-1 pb-3 text-muted">This shouldn't take long</p>
                 <form action="/signup" method="post" id="signupForm">
                     <div class="mb-3">
-                        <label for="emailAddressInput">Email address</label>
-                        <input id="emailAddressInput" name="emailAddress" type="email" class="form-control">
+                        <div class="d-grid">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="firstNameInput">First name</label>
+                                    <input id="firstNameInput" name="firstName" type="text" required class="form-control">
+                                </div>
+                                <div class="col">
+                                    <label for="lastNameInput">Last name</label>
+                                    <input id="lastNameInput" name="lastName" type="text" required class="form-control">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="passwordInput">Password</label>
-                        <input id="passwordInput" name="password" type="password" class="form-control">
+                        <label for="emailAddressInput">Email address</label>
+                        <input placeholder="bob@burgers.com" id="emailAddressInput" name="emailAddress" type="email" required class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="passwordInput">Password (minimum 8 characters)</label>
+                        <input id="passwordInput" name="password" type="password" required class="form-control" pattern=".{8,}">
                     </div>
                     <div class="btn-group w-100" role="group">
                         <button type="submit" class="btn btn-primary">Create Account</button>

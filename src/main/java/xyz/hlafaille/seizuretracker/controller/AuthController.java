@@ -1,16 +1,18 @@
 package xyz.hlafaille.seizuretracker.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import xyz.hlafaille.seizuretracker.model.SignupFormModel;
+import xyz.hlafaille.seizuretracker.model.form.auth.SignupFormModel;
 
 @Controller
-public class LoginController {
+public class AuthController {
+    @GetMapping("/")
+    public String index() {
+        return "redirect:/login";
+    }
     @GetMapping("/login")
     public String login(){
         return "login";
@@ -23,8 +25,8 @@ public class LoginController {
     }
 
     @PostMapping("/signup")
-    public void doSignup(@ModelAttribute SignupFormModel formData, BindingResult bindingResult){
+    public String doSignup(@ModelAttribute SignupFormModel formData){
         System.out.println("GOT SIGNUP REQUEST" + formData.toString());
-        System.out.println(bindingResult.getAllErrors());
+        return "redirect:/login?newAccount=true";
     }
 }
