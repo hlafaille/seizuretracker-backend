@@ -28,6 +28,14 @@ public class SessionEnforcementInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
         Cookie[] cookies = request.getCookies();
+
+        // if there are no cookies to iterate over
+        if (cookies == null) {
+            response.sendRedirect("/login");
+            return false;
+        }
+
+        // iterate over the cookies
         Cookie sessionCookie = null;
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("session")) {

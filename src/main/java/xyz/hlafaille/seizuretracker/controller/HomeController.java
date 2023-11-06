@@ -1,14 +1,29 @@
 package xyz.hlafaille.seizuretracker.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import xyz.hlafaille.seizuretracker.repository.SessionRepository;
+import xyz.hlafaille.seizuretracker.service.AuthService;
 
 @Controller
 public class HomeController {
 
-    private final HomeSession homeSession;
+    private final AuthService authService;
+    private final SessionRepository sessionRepository;
+
+    @Autowired
+    public HomeController(AuthService authService, SessionRepository sessionRepository) {
+        this.authService = authService;
+        this.sessionRepository = sessionRepository;
+    }
+
     @GetMapping("/home")
-    public String index(){
+    public String index(HttpServletRequest request, Model model){
+        // get the session by
+        // model.addAttribute("userFirstName", sessionRepository.findById());
         return "home";
     }
 }
