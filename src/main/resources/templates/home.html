@@ -10,16 +10,15 @@
 <div th:replace="fragments/nav :: bar(activeSection = 'home')"></div>
 
 <!-- basic card -->
-<div id="content" class="container-fluid h-100 w-100">
-    <div class="row justify-content-center align-items-center p-3">
+<main class="flex-fill">
+    <div class="container my-5">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Welcome</h5>
-                <p class="card-text">Say something cool :)</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <h2 class="card-title pt-2">Welcome, <span th:text="${userFirstName}"></span></h2>
+                <p class="card-subtitle pt-1 pb-3 text-muted">We hope you're doing okay.</p>
             </div>
         </div>
     </div>
-</div>
+</main>
 </body>
 </html>

@@ -1,7 +1,6 @@
 package xyz.hlafaille.seizuretracker.service;
 
 import jakarta.servlet.http.Cookie;
-import jakarta.transaction.SystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.hlafaille.seizuretracker.entity.Session;
@@ -76,7 +75,7 @@ public class UserServiceImpl implements UserService {
         // get the user from the database by its session id
         Optional<User> user = userRepository.findById(session.get().getUser());
         if (user.isEmpty()) {
-            throw new RuntimeException("User for session was not found. This should not happen.");
+            throw new RuntimeException("User for this session was not found. This should not happen.");
         }
 
         return user.get();
