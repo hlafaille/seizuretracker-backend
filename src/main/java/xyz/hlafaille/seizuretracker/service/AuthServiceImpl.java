@@ -1,6 +1,7 @@
 package xyz.hlafaille.seizuretracker.service;
 
 import jakarta.transaction.Transactional;
+import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import xyz.hlafaille.seizuretracker.entity.User;
@@ -13,6 +14,11 @@ import java.util.UUID;
  */
 @Service
 public class AuthServiceImpl implements AuthService {
+    private static final int ARGON_SALT_LENGTH = 16;
+    private static final int ARGON_HASH_LENGTH = 128;
+    private static final int ARGON_PARALLELISM = 8;
+    private static final int ARGON_MEMORY = 1024;
+    private static final int ARGON_ITERATIONS = 16;
 
     private final UserRepository userRepository;
 
@@ -27,8 +33,24 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public String encryptPassword(String password) {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder.encode(password);
+        Argon2PasswordEncoder argon2PasswordEncoder = new Argon2PasswordEncoder(
+                ARGON_SALT_LENGTH, ARGON_HASH_LENGTH, ARGON_PARALLELISM, ARGON_MEMORY, ARGON_ITERATIONS
+        );
+        return argon2PasswordEncoder.encode(password);
+    }
+
+    @Override
+    public void matchPassword(User user, String password) {
+        // get the user by their email
+        Argon2PasswordEncoder argon2PasswordEncoder = new Argon2PasswordEncoder(
+                ARGON_SALT_LENGTH, ARGON_HASH_LENGTH, ARGON_PARALLELISM, ARGON_MEMORY, ARGON_ITERATIONS
+        );
+
+        // check if the password matches
+        boolean passwordMatches = argon2PasswordEncoder.matches(password, user.getPassword());
+        if (!passwordMatches) {
+            throw new RuntimeException("Given password does not match the users password");
+        }
     }
 
     @Override

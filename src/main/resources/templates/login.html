@@ -10,11 +10,12 @@
 <main class="flex-fill">
     <div class="container my-5">
         <div class="card">
-            <div class="card-header">Welcome</div>
             <div class="card-body">
                 <div th:if="${newAccount}" class="alert alert-success" role="alert">
                     Account created! Try logging in.
                 </div>
+                <h2 class="card-title pt-2">Hey There</h2>
+                <p class="card-subtitle pt-1 pb-3 text-muted">Enter your login to get started</p>
                 <form action="/signup" method="post" id="loginForm">
                     <div class="mb-3">
                         <label for="emailInput">Email address</label>
