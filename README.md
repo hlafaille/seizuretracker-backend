@@ -2,6 +2,7 @@
   <img src="https://i.imgur.com/yUE7Wsp.png" width="200x" height="200px" alt="SeizureTracker Icon">
   <h4>SeizureTracker</h4>
   A self-hosted organizational tool for those with epilepsy
+  [![Java CI with Gradle](https://github.com/hlafaille/seizuretracker/actions/workflows/gradle.yml/badge.svg)](https://github.com/hlafaille/seizuretracker/actions/workflows/gradle.yml)
 </div>
 <hr>
 
