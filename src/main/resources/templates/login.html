@@ -12,14 +12,17 @@
         <div class="card">
             <div class="card-header">Welcome</div>
             <div class="card-body">
-                <form>
+                <div th:if="${newAccount}" class="alert alert-success" role="alert">
+                    Account created! Try logging in.
+                </div>
+                <form action="/signup" method="post" id="loginForm">
                     <div class="mb-3">
                         <label for="emailInput">Email address</label>
-                        <input id="emailInput" type="email" class="form-control">
+                        <input id="emailInput" name="emailAddress" type="email" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label for="passwordInput">Password</label>
-                        <input id="passwordInput" type="password" class="form-control">
+                        <input id="passwordInput" name="password" type="password" class="form-control">
                     </div>
                     <div class="btn-group w-100" role="group">
                         <button type="submit" class="btn btn-primary">Log In</button>
