@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
+
+    private final HomeSession homeSession;
     @GetMapping("/home")
     public String index(){
         return "home";
