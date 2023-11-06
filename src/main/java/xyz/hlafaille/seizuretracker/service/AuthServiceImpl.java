@@ -50,7 +50,7 @@ public class AuthServiceImpl implements AuthService {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setEmail(email);
-        user.setPassword(password);
+        user.setPassword(encryptPassword(password));
         userRepository.save(user);
         return userId;
     }

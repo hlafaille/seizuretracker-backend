@@ -7,14 +7,21 @@
 <body>
 
 <!-- Your page content -->
-<div class="p-2">
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Oops</h5>
-            <p class="card-text">An error occurred</p>
-            <a href="/" class="btn btn-primary">Go Home</a>
+<main class="flex-fill">
+    <div class="container my-5">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title pt-2">Oops</h2>
+                <p class="card-subtitle pt-1 pb-3 text-muted">Something went wrong...</p>
+                <div class="alert alert-secondary font-monospace text-uppercase" role="alert">
+                    <div th:text="${errorMessage}"></div>
+                    <br>
+                    <div class="text-muted" th:text="${detailedErrorMessage}"></div>
+                </div>
+                <a href="/" class="btn btn-primary">Go Home</a>
+            </div>
         </div>
     </div>
-</div>
+</main>
 </body>
 </html>
