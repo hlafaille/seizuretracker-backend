@@ -2,17 +2,12 @@ package xyz.hlafaille.seizuretracker.controller;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import xyz.hlafaille.seizuretracker.model.form.auth.LoginFormModel;
 import xyz.hlafaille.seizuretracker.model.form.auth.SignupFormModel;
 import xyz.hlafaille.seizuretracker.service.AuthService;
-import xyz.hlafaille.seizuretracker.service.AuthServiceImpl;
 
 import java.util.UUID;
 

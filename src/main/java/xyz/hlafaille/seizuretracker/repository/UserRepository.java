@@ -11,7 +11,6 @@ public interface UserRepository extends JpaRepository<User, UUID> {
         List<User> users = this.findAll();
         for (User x : users) {
             if (x.getEmail().equals(email)) {
-                System.out.println(x);
                 return x;
             }
         }

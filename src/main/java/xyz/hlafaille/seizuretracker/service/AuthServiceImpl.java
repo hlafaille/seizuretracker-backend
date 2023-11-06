@@ -1,6 +1,7 @@
 package xyz.hlafaille.seizuretracker.service;
 
 import jakarta.transaction.Transactional;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.stereotype.Service;
 import xyz.hlafaille.seizuretracker.entity.Session;
@@ -73,7 +74,16 @@ public class AuthServiceImpl implements AuthService {
         session.setId(sessionId);
         session.setUser(user.getId());
         session.setExpire(expiresAt);
-        sessionRepository.save(session);
+
+        // return existing session id if it already exists
+        try {
+            sessionRepository.save(session);
+        } catch (DataIntegrityViolationException e) {
+            if (e.getMessage().toLowerCase().contains("duplicate entry")) {
+                Session existingSession = sessionRepository.findSessionByUser(user.getId());
+                return existingSession.getId();
+            }
+        }
         return sessionId;
     }
 
