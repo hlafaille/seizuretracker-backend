@@ -9,7 +9,6 @@ import java.util.UUID;
 public interface UserRepository extends JpaRepository<User, UUID> {
     default User findUserByEmail(String email) throws RuntimeException {
         List<User> users = this.findAll();
-        System.out.println("Email " + email);
         for (User x : users) {
             if (x.getEmail().equals(email)) {
                 System.out.println(x);
