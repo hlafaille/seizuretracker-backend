@@ -1,6 +1,7 @@
 package xyz.hlafaille.seizuretracker.service;
 
 import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 import xyz.hlafaille.seizuretracker.entity.User;
 import xyz.hlafaille.seizuretracker.repository.UserRepository;
 
@@ -9,9 +10,10 @@ import java.util.UUID;
 /**
  * AuthService implementation
  */
-public abstract class AuthServiceImpl implements AuthService {
+@Service
+public class AuthServiceImpl implements AuthService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public AuthServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
