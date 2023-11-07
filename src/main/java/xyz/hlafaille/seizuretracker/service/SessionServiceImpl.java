@@ -2,6 +2,7 @@ package xyz.hlafaille.seizuretracker.service;
 
 import jakarta.servlet.http.Cookie;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import xyz.hlafaille.seizuretracker.entity.Session;
 import xyz.hlafaille.seizuretracker.entity.User;
@@ -9,6 +10,7 @@ import xyz.hlafaille.seizuretracker.exception.*;
 import xyz.hlafaille.seizuretracker.repository.SessionRepository;
 import xyz.hlafaille.seizuretracker.repository.UserRepository;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -17,12 +19,12 @@ import java.util.UUID;
 @Service
 public class SessionServiceImpl implements SessionService {
     private SessionRepository sessionRepository;
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Autowired
-    public SessionServiceImpl(SessionRepository sessionRepository, UserRepository userRepository) {
+    public SessionServiceImpl(SessionRepository sessionRepository, UserService userService) {
         this.sessionRepository = sessionRepository;
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
 
@@ -175,11 +177,37 @@ public class SessionServiceImpl implements SessionService {
             Cookie sessionCookie = getSessionCookieFromBrowserCookies(cookies);
             Session session = getSessionEntityFromCookie(sessionCookie);
             User sessionUser = getUserEntityFromSessionId(session.getId());
-        } catch (SessionCookieInvalidException | SessionEntityMissingException |
-                 SessionCookieMissingException | SessionUserMissingException e) {
+        } catch (SessionCookieInvalidException | SessionEntityMissingException | SessionCookieMissingException |
+                 SessionUserMissingException e) {
             return false;
         }
         return true;
     }
 
+    public UUID beginSession(String emailAddress, String password) throws RuntimeException {
+        // find the user from the database, ensure that their password matches
+        User user = userService.getUserEntityByEmail(emailAddress);
+        authService.matchPassword(user, password);
+
+        // determine when this session should expire
+        ZonedDateTime expiresAt = ZonedDateTime.now(ZoneId.of("UTC")).plusHours(3);
+
+        // create a new session
+        UUID sessionId = UUID.randomUUID();
+        Session session = new Session();
+        session.setId(sessionId);
+        session.setUser(user.getId());
+        session.setExpire(expiresAt);
+
+        // return existing session id if it already exists
+        try {
+            sessionRepository.save(session);
+        } catch (DataIntegrityViolationException e) {
+            if (e.getMessage().toLowerCase().contains("duplicate entry")) {
+                Session existingSession = sessionRepository.findSessionByUser(user.getId());
+                return existingSession.getId();
+            }
+        }
+        return sessionId;
+    }
 }

@@ -11,14 +11,4 @@ import java.util.UUID;
 @Service
 public class UserServiceImpl implements UserService {
 
-
-    @Override
-    public User getUserById(UUID userId) {
-        return null;
-    }
-
-    @Override
-    public UUID createUser(String firstName, String lastName, String email, String password) {
-        return null;
-    }
 }
