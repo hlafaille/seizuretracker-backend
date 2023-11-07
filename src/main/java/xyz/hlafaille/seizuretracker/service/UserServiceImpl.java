@@ -1,12 +1,12 @@
 package xyz.hlafaille.seizuretracker.service;
 
-import jakarta.servlet.http.Cookie;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.stereotype.Service;
-import xyz.hlafaille.seizuretracker.entity.Session;
 import xyz.hlafaille.seizuretracker.entity.User;
-import xyz.hlafaille.seizuretracker.exception.SessionCookieInvalidException;
-import xyz.hlafaille.seizuretracker.repository.SessionRepository;
+import xyz.hlafaille.seizuretracker.exception.UserEntityMissingException;
+import xyz.hlafaille.seizuretracker.exception.UserPasswordMismatchException;
 import xyz.hlafaille.seizuretracker.repository.UserRepository;
 
 import java.util.List;
@@ -18,66 +18,79 @@ import java.util.UUID;
  */
 @Service
 public class UserServiceImpl implements UserService {
+    private static final int ARGON_SALT_LENGTH = 16;
+    private static final int ARGON_HASH_LENGTH = 128;
+    private static final int ARGON_PARALLELISM = 8;
+    private static final int ARGON_MEMORY = 1024;
+    private static final int ARGON_ITERATIONS = 16;
 
-    private SessionRepository sessionRepository;
     private UserRepository userRepository;
 
     @Autowired
-    public UserServiceImpl(SessionRepository sessionRepository, UserRepository userRepository) {
-        this.sessionRepository = sessionRepository;
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    /**
-     * Get the user by a session ID
-     *
-     * @param sessionId Session UUID
-     * @return User entity
-     */
     @Override
-    public User getUserBySessionId(UUID sessionId) {
-        return null;
+    public User getUserEntityById(UUID userId) throws UserEntityMissingException {
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isEmpty()) {
+            throw new UserEntityMissingException();
+        }
+        return user.get();
     }
 
-    /**
-     * Get the user by their session Cookie
-     *
-     * @param cookies Array of Cookie(s)
-     * @return User entity
-     */
     @Override
-    public User getUserBySessionCookie(Cookie[] cookies) throws SessionCookieInvalidException {
-        // if there is no cookies (cookies is null), throw SessionCookieInvalidException
-        if (cookies == null) {
-            throw new SessionCookieInvalidException();
-        }
-
-        // iterate over the cookies, find our "session"
-        Cookie sessionCookie = null;
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("session")) {
-                sessionCookie = cookie;
-            }
-        }
-
-        // if there was no session cookie (but there are others)
-        if (sessionCookie == null) {
-            throw new SessionCookieInvalidException();
-        }
-
-        // get the session id as uuid from the cookie, then get the session from the database
-        UUID sessionIdFromCookie = UUID.fromString(sessionCookie.getValue());
-        Optional<Session> session = sessionRepository.findById(sessionIdFromCookie);
-        if (session.isEmpty()) {
-            throw new SessionCookieInvalidException();
-        }
-
-        // get the user from the database by its session id
-        Optional<User> user = userRepository.findById(session.get().getUser());
+    public User getUserEntityByEmail(String email) throws UserEntityMissingException {
+        Optional<User> user = userRepository.findByEmail(email);
         if (user.isEmpty()) {
-            throw new RuntimeException("User for this session was not found. This should not happen.");
+            throw new UserEntityMissingException();
         }
-
         return user.get();
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    @Transactional
+    public UUID createUser(String firstName, String lastName, String email, String password) {
+        UUID userId = UUID.randomUUID();
+        User user = new User();
+        user.setId(userId);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEmail(email);
+        user.setPassword(encryptPassword(password));
+        userRepository.save(user);
+        return userId;
+    }
+
+    @Override
+    public String encryptPassword(String password) {
+        Argon2PasswordEncoder argon2PasswordEncoder = new Argon2PasswordEncoder(
+                ARGON_SALT_LENGTH, ARGON_HASH_LENGTH, ARGON_PARALLELISM, ARGON_MEMORY, ARGON_ITERATIONS
+        );
+        return argon2PasswordEncoder.encode(password);
+    }
+
+    @Override
+    public boolean isPasswordMatching(User user, String password) {
+        // get the user by their email
+        Argon2PasswordEncoder argon2PasswordEncoder = new Argon2PasswordEncoder(
+                ARGON_SALT_LENGTH, ARGON_HASH_LENGTH, ARGON_PARALLELISM, ARGON_MEMORY, ARGON_ITERATIONS
+        );
+
+        // check if the password matches
+        return argon2PasswordEncoder.matches(password, user.getPassword());
+    }
+
+    @Override
+    public void matchPassword(User user, String password) throws UserPasswordMismatchException {
+        if (!isPasswordMatching(user, password)) {
+            throw new UserPasswordMismatchException();
+        }
     }
 }

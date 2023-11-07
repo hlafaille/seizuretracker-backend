@@ -2,26 +2,27 @@ package xyz.hlafaille.seizuretracker.service;
 
 import jakarta.servlet.http.Cookie;
 import xyz.hlafaille.seizuretracker.entity.User;
+import xyz.hlafaille.seizuretracker.exception.UserEntityMissingException;
+import xyz.hlafaille.seizuretracker.exception.UserPasswordMismatchException;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
- * Example implementation of the UserService
- *
- * @version 1.0.0
+ * Interface for interacting with Users
  */
 public interface UserService {
-    /**
-     * Get the user by a session ID
-     * @param sessionId Session UUID
-     * @return User entity
-     */
-    User getUserBySessionId(UUID sessionId);
+    User getUserEntityById(UUID userId) throws UserEntityMissingException;
 
-    /**
-     * Get the user by their session Cookie
-     * @param cookies Array of Cookie(s)
-     * @return User entity
-     */
-    User getUserBySessionCookie(Cookie[] cookies);
+    User getUserEntityByEmail(String email) throws UserEntityMissingException;
+
+    List<User> getAllUsers();
+
+    UUID createUser(String firstName, String lastName, String email, String password);
+
+    String encryptPassword(String password);
+
+    boolean isPasswordMatching(User user, String password);
+
+    void matchPassword(User user, String password) throws UserPasswordMismatchException;
 }
