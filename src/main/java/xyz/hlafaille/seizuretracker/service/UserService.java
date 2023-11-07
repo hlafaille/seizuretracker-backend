@@ -6,24 +6,11 @@ import xyz.hlafaille.seizuretracker.entity.User;
 import java.util.UUID;
 
 /**
- * Example implementation of the UserService
- *
- * @version 1.0.0
+ * Interface for interacting with Users
  */
 public interface UserService {
-    /**
-     * Get the user by a session ID
-     * @param sessionId Session UUID
-     * @return User entity
-     */
-    @Deprecated
-    User getUserBySessionId(UUID sessionId);
+    User getUserById(UUID userId);
 
-    /**
-     * Get the user by their session Cookie
-     * @param cookies Array of Cookie(s)
-     * @return User entity
-     */
-    @Deprecated
-    User getUserBySessionCookie(Cookie[] cookies);
+    UUID createUser(String firstName, String lastName, String email, String password);
+
 }

@@ -33,6 +33,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
+    @Deprecated
     public User getUserById(UUID id) {
         throw new RuntimeException("Not implemented");
     }
@@ -59,6 +60,7 @@ public class AuthServiceImpl implements AuthService {
         }
     }
 
+    @Deprecated
     @Override
     public UUID beginSession(String emailAddress, String password) throws RuntimeException {
         // find the user from the database, ensure that their password matches

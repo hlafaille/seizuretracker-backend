@@ -23,39 +23,44 @@ import java.util.UUID;
 
 @Controller
 public class LoginSignupController {
+    private final UserService userService;
     private final SessionService sessionService;
 
     @Autowired
-    public LoginSignupController(SessionService sessionService) {
+    public LoginSignupController(UserService userService, SessionService sessionService) {
+        this.userService = userService;
         this.sessionService = sessionService;
     }
 
+    /**
+     * Basic redirect to /login
+     */
     @GetMapping("/")
     public String index() {
         return "redirect:/login";
     }
 
+    /**
+     * Log in page
+     */
     @GetMapping("/login")
-    public String login(
-            @RequestParam(required = false) boolean newAccount,
-            HttpServletRequest request,
-            Model model
-    ) {
+    public String login(@RequestParam(required = false) boolean newAccount, HttpServletRequest request, Model model) {
         boolean isSessionResumable = sessionService.isSessionResumableByBrowserCookies(request.getCookies());
         if (isSessionResumable) {
             return "redirect:/home";
         }
-        model.addAttribute("newAccount", newAccount);
+        // todo maybe remove -> model.addAttribute("newAccount", newAccount);
         return "pages/login";
     }
 
+    /**
+     * Log in the user by establishing them a new session, setting that cookie and then redirecting the user to /home
+     */
     @PostMapping("/login")
     public String doLogin(@ModelAttribute LoginFormModel formData, HttpServletResponse response) {
         // start the session
-        UUID sessionId = authService.beginSession(
-                formData.getEmailAddress(),
-                formData.getPassword()
-        );
+        // todo finish writing UserService before dealing with this
+        UUID sessionId = authService.beginSession(formData.getEmailAddress(), formData.getPassword());
 
         // set the cookie
         Cookie sessionCookie = new Cookie("session", sessionId.toString());
@@ -64,44 +69,34 @@ public class LoginSignupController {
         return "redirect:/home";
     }
 
+    /**
+     * Signup page
+     */
     @GetMapping("/signup")
     public String signup(HttpServletRequest request) {
-        // try to get the user by a session cookie, if they have a valid session cookie, redirect them to /home
-        try {
-            User sessionUser = userService.getUserBySessionCookie(request.getCookies());
-        } catch (SessionCookieInvalidException e) {
-            return "pages/signup";
+        boolean isSessionResumable = sessionService.isSessionResumableByBrowserCookies(request.getCookies());
+        if (isSessionResumable) {
+            return "redirect:/home";
         }
-        return "redirect:/home";
+        return "redirect:/signup";
     }
 
+    /**
+     * Create a new user with data submitted by the user in the SignupFormModel and redirect them to /login
+     */
     @PostMapping("/signup")
-    public String doSignup(@ModelAttribute SignupFormModel formData
-    ) {
-        authService.createUser(
-                formData.getFirstName(),
-                formData.getLastName(),
-                formData.getEmailAddress(),
-                formData.getPassword()
-        );
+    public String doSignup(@ModelAttribute SignupFormModel formData) {
+        userService.createUser(formData.getFirstName(), formData.getLastName(), formData.getEmailAddress(), formData.getPassword());
         return "redirect:/login?newAccount=true";
     }
 
     /**
-     * Log out the current user by getting their session cookie, invalidating it, deleting it from the browser cookies,
-     * and redirecting the user to /login
-     *
-     * @param request
-     * @return
+     * Log out the current user and redirect the user to /login
      */
     @GetMapping("/logout")
-    public String doLogout(HttpServletRequest request) {
-        try {
-            Cookie sessionCookie = sessionService.getSessionCookieFromBrowserCookies(request.getCookies());
-
-        } catch (SessionCookieInvalidException | SessionCookieMissingException e) {
-            return "redirect:/login";
-        }
+    public String doLogout(HttpServletRequest request) throws SessionCookieMissingException, SessionEntityMissingException {
+        Session session = sessionService.getSessionEntityFromCookie(sessionService.getSessionCookieFromBrowserCookies(request.getCookies()));
+        sessionService.endSessionById(session.getId());
         return "redirect:/login";
     }
 }
