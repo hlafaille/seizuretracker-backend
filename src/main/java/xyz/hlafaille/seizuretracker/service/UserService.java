@@ -3,6 +3,7 @@ package xyz.hlafaille.seizuretracker.service;
 import jakarta.servlet.http.Cookie;
 import xyz.hlafaille.seizuretracker.entity.User;
 import xyz.hlafaille.seizuretracker.exception.UserEntityMissingException;
+import xyz.hlafaille.seizuretracker.exception.UserPasswordMismatchException;
 
 import java.util.List;
 import java.util.UUID;
@@ -23,5 +24,5 @@ public interface UserService {
 
     boolean isPasswordMatching(User user, String password);
 
-    void matchPassword(User user, String password);
+    void matchPassword(User user, String password) throws UserPasswordMismatchException;
 }
