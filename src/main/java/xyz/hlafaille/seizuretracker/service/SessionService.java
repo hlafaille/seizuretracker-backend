@@ -84,4 +84,14 @@ public interface SessionService {
      * @param sessionId Session ID
      */
     void endSessionByUserId(UUID sessionId) throws SessionEntityMissingException;
+
+
+    /**
+     * Private method for determining if the user has a resumable session. For example, this is useful for if the
+     * user goes to /login or /signup with a session cookie in their browser.
+     *
+     * @param cookies Array of browser cookies
+     * @return True if the user has a valid session that can be resumed, false if not.
+     */
+    boolean isSessionResumableByBrowserCookies(Cookie[] cookies);
 }
