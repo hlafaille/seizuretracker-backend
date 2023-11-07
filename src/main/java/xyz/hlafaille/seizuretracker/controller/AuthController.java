@@ -30,7 +30,7 @@ public class AuthController {
             Model model
     ) {
         model.addAttribute("newAccount", newAccount);
-        return "login";
+        return "pages/login";
     }
 
     @PostMapping("/login")
@@ -50,7 +50,7 @@ public class AuthController {
 
     @GetMapping("/signup")
     public String signup() {
-        return "signup";
+        return "pages/signup";
     }
 
     @PostMapping("/signup")
