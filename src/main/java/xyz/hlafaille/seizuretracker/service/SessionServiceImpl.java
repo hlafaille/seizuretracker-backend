@@ -183,7 +183,7 @@ public class SessionServiceImpl implements SessionService {
         return true;
     }
 
-    public UUID beginSession(String emailAddress, String password) throws UserEntityMissingException {
+    public UUID beginSession(String emailAddress, String password) throws UserEntityMissingException, UserPasswordMismatchException {
         // find the user from the database, ensure that their password matches
         User user = userService.getUserEntityByEmail(emailAddress);
         userService.matchPassword(user, password);

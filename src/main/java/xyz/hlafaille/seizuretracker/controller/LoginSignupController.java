@@ -11,6 +11,7 @@ import xyz.hlafaille.seizuretracker.entity.Session;
 import xyz.hlafaille.seizuretracker.exception.SessionCookieMissingException;
 import xyz.hlafaille.seizuretracker.exception.SessionEntityMissingException;
 import xyz.hlafaille.seizuretracker.exception.UserEntityMissingException;
+import xyz.hlafaille.seizuretracker.exception.UserPasswordMismatchException;
 import xyz.hlafaille.seizuretracker.model.form.auth.LoginFormModel;
 import xyz.hlafaille.seizuretracker.model.form.auth.SignupFormModel;
 import xyz.hlafaille.seizuretracker.service.SessionService;
@@ -54,9 +55,8 @@ public class LoginSignupController {
      * Log in the user by establishing them a new session, setting that cookie and then redirecting the user to /home
      */
     @PostMapping("/login")
-    public String doLogin(@ModelAttribute LoginFormModel formData, HttpServletResponse response) throws UserEntityMissingException {
+    public String doLogin(@ModelAttribute LoginFormModel formData, HttpServletResponse response) throws UserEntityMissingException, UserPasswordMismatchException {
         // start the session
-        // todo finish writing UserService before dealing with this
         UUID sessionId = sessionService.beginSession(formData.getEmailAddress(), formData.getPassword());
 
         // set the cookie

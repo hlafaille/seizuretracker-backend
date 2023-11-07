@@ -92,5 +92,5 @@ public interface SessionService {
      */
     boolean isSessionResumableByBrowserCookies(Cookie[] cookies);
 
-    UUID beginSession(String emailAddress, String password) throws UserEntityMissingException;
+    UUID beginSession(String emailAddress, String password) throws UserEntityMissingException, UserPasswordMismatchException;
 }
