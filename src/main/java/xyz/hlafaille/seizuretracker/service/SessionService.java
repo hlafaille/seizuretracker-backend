@@ -4,10 +4,7 @@ import jakarta.servlet.http.Cookie;
 import org.springframework.stereotype.Service;
 import xyz.hlafaille.seizuretracker.entity.Session;
 import xyz.hlafaille.seizuretracker.entity.User;
-import xyz.hlafaille.seizuretracker.exception.SessionCookieMissingException;
-import xyz.hlafaille.seizuretracker.exception.SessionEntityMissingException;
-import xyz.hlafaille.seizuretracker.exception.SessionExpiredException;
-import xyz.hlafaille.seizuretracker.exception.SessionUserMissingException;
+import xyz.hlafaille.seizuretracker.exception.*;
 
 import java.util.UUID;
 
@@ -69,7 +66,7 @@ public interface SessionService {
      * @param sessionId Session ID
      * @return User entity
      */
-    public User getUserEntityFromSessionId(UUID sessionId) throws SessionEntityMissingException, SessionUserMissingException;
+    User getUserEntityFromSessionId(UUID sessionId) throws SessionEntityMissingException, SessionUserMissingException;
 
     /**
      * End a session by its ID
@@ -94,4 +91,6 @@ public interface SessionService {
      * @return True if the user has a valid session that can be resumed, false if not.
      */
     boolean isSessionResumableByBrowserCookies(Cookie[] cookies);
+
+    UUID beginSession(String emailAddress, String password) throws UserEntityMissingException;
 }

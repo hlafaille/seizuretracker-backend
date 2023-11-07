@@ -8,14 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import xyz.hlafaille.seizuretracker.entity.Session;
-import xyz.hlafaille.seizuretracker.entity.User;
-import xyz.hlafaille.seizuretracker.exception.SessionCookieInvalidException;
 import xyz.hlafaille.seizuretracker.exception.SessionCookieMissingException;
 import xyz.hlafaille.seizuretracker.exception.SessionEntityMissingException;
-import xyz.hlafaille.seizuretracker.exception.SessionUserMissingException;
+import xyz.hlafaille.seizuretracker.exception.UserEntityMissingException;
 import xyz.hlafaille.seizuretracker.model.form.auth.LoginFormModel;
 import xyz.hlafaille.seizuretracker.model.form.auth.SignupFormModel;
-import xyz.hlafaille.seizuretracker.service.AuthService;
 import xyz.hlafaille.seizuretracker.service.SessionService;
 import xyz.hlafaille.seizuretracker.service.UserService;
 
@@ -57,10 +54,10 @@ public class LoginSignupController {
      * Log in the user by establishing them a new session, setting that cookie and then redirecting the user to /home
      */
     @PostMapping("/login")
-    public String doLogin(@ModelAttribute LoginFormModel formData, HttpServletResponse response) {
+    public String doLogin(@ModelAttribute LoginFormModel formData, HttpServletResponse response) throws UserEntityMissingException {
         // start the session
         // todo finish writing UserService before dealing with this
-        UUID sessionId = authService.beginSession(formData.getEmailAddress(), formData.getPassword());
+        UUID sessionId = sessionService.beginSession(formData.getEmailAddress(), formData.getPassword());
 
         // set the cookie
         Cookie sessionCookie = new Cookie("session", sessionId.toString());

@@ -8,7 +8,6 @@ import xyz.hlafaille.seizuretracker.entity.Session;
 import xyz.hlafaille.seizuretracker.entity.User;
 import xyz.hlafaille.seizuretracker.exception.*;
 import xyz.hlafaille.seizuretracker.repository.SessionRepository;
-import xyz.hlafaille.seizuretracker.repository.UserRepository;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -134,7 +133,7 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public User getUserEntityFromSessionId(UUID sessionId) throws SessionEntityMissingException, SessionUserMissingException {
         Session session = getSessionEntityById(sessionId);
-        List<User> allUsers = userRepository.findAll();
+        List<User> allUsers = userService.getAllUsers();
         for (User user : allUsers) {
             if (session.getUser().equals(user.getId())) {
                 return user;
@@ -184,10 +183,10 @@ public class SessionServiceImpl implements SessionService {
         return true;
     }
 
-    public UUID beginSession(String emailAddress, String password) throws RuntimeException {
+    public UUID beginSession(String emailAddress, String password) throws UserEntityMissingException {
         // find the user from the database, ensure that their password matches
         User user = userService.getUserEntityByEmail(emailAddress);
-        authService.matchPassword(user, password);
+        userService.matchPassword(user, password);
 
         // determine when this session should expire
         ZonedDateTime expiresAt = ZonedDateTime.now(ZoneId.of("UTC")).plusHours(3);

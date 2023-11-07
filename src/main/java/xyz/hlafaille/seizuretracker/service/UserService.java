@@ -4,6 +4,7 @@ import jakarta.servlet.http.Cookie;
 import xyz.hlafaille.seizuretracker.entity.User;
 import xyz.hlafaille.seizuretracker.exception.UserEntityMissingException;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -13,6 +14,8 @@ public interface UserService {
     User getUserEntityById(UUID userId) throws UserEntityMissingException;
 
     User getUserEntityByEmail(String email) throws UserEntityMissingException;
+
+    List<User> getAllUsers();
 
     UUID createUser(String firstName, String lastName, String email, String password);
 
