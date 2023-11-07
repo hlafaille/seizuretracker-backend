@@ -100,6 +100,7 @@ public class AuthController {
     public String doLogout(HttpServletRequest request) {
         try {
             Cookie sessionCookie = sessionService.getSessionCookieFromBrowserCookies(request.getCookies());
+
         } catch (SessionCookieInvalidException | SessionCookieMissingException e) {
             return "redirect:/login";
         }

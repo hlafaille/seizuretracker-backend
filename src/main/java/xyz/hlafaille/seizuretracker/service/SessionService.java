@@ -61,7 +61,7 @@ public interface SessionService {
      * @param userId User ID
      * @return Session entity
      */
-    Session getSessionEntityFromUser(UUID userId) throws SessionEntityMissingException;
+    Session getSessionEntityFromUserId(UUID userId) throws SessionEntityMissingException;
 
     /**
      * Get a user's entity from a session
@@ -69,5 +69,19 @@ public interface SessionService {
      * @param sessionId Session ID
      * @return User entity
      */
-    public User getUserEntityFromSession(UUID sessionId) throws SessionEntityMissingException, SessionUserMissingException;
+    public User getUserEntityFromSessionId(UUID sessionId) throws SessionEntityMissingException, SessionUserMissingException;
+
+    /**
+     * End a session by its ID
+     *
+     * @param sessionId Session ID
+     */
+    void endSessionById(UUID sessionId);
+
+    /**
+     * End a session by a user's ID
+     *
+     * @param sessionId Session ID
+     */
+    void endSessionByUserId(UUID sessionId) throws SessionEntityMissingException;
 }

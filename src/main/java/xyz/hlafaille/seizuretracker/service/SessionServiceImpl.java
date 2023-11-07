@@ -113,7 +113,7 @@ public class SessionServiceImpl implements SessionService {
      * @return Session entity
      */
     @Override
-    public Session getSessionEntityFromUser(UUID userId) throws SessionEntityMissingException {
+    public Session getSessionEntityFromUserId(UUID userId) throws SessionEntityMissingException {
         List<Session> allSessions = sessionRepository.findAll();
         for (Session session : allSessions) {
             if (session.getUser() == userId) {
@@ -130,7 +130,7 @@ public class SessionServiceImpl implements SessionService {
      * @return User entity
      */
     @Override
-    public User getUserEntityFromSession(UUID sessionId) throws SessionEntityMissingException, SessionUserMissingException {
+    public User getUserEntityFromSessionId(UUID sessionId) throws SessionEntityMissingException, SessionUserMissingException {
         Session session = getSessionEntityById(sessionId);
         List<User> allUsers = userRepository.findAll();
         for (User user : allUsers) {
@@ -140,4 +140,26 @@ public class SessionServiceImpl implements SessionService {
         }
         throw new SessionUserMissingException();
     }
+
+    /**
+     * End a session by a user's ID
+     *
+     * @param sessionId Session ID
+     */
+    @Override
+    public void endSessionById(UUID sessionId) {
+        sessionRepository.deleteById(sessionId);
+    }
+
+    /**
+     * End a session by a user's ID
+     *
+     * @param userId User ID
+     */
+    @Override
+    public void endSessionByUserId(UUID userId) throws SessionEntityMissingException {
+        Session session = getSessionEntityFromUserId(userId);
+        sessionRepository.deleteById(session.getId());
+    }
+
 }
