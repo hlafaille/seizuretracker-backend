@@ -17,12 +17,22 @@ public class LogController {
     }
 
     @GetMapping("/log")
-    public String log(HttpServletRequest request, Model model){
+    public String log(HttpServletRequest request, Model model) {
         // get the user by their session id
         model.addAttribute(
                 "userFirstName",
                 userService.getUserBySessionCookie(request.getCookies()).getFirstName()
         );
         return "pages/log";
+    }
+
+    @GetMapping("/log/newEntry")
+    public String logNewEntry(HttpServletRequest request, Model model) {
+        // get the user by their session id
+        model.addAttribute(
+                "userFirstName",
+                userService.getUserBySessionCookie(request.getCookies()).getFirstName()
+        );
+        return "pages/log_new";
     }
 }

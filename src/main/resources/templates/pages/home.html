@@ -15,7 +15,13 @@
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title pt-2">Hello, <span th:text="${userFirstName}"></span></h2>
-                <p class="card-subtitle pt-1 pb-3 text-muted">How is your day going?</p>
+                <p class="card-subtitle pt-1 text-muted">How is your day going?</p>
+                <hr>
+                <div class="btn-group w-100" role="group">
+                    <button type="submit" class="btn btn-primary">Great</button>
+                    <button type="submit" class="btn btn-warning">Meh</button>
+                    <button type="submit" class="btn btn-danger">Bad</button>
+                </div>
             </div>
         </div>
     </div>
