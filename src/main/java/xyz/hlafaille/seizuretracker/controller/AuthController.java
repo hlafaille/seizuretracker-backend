@@ -87,7 +87,8 @@ public class AuthController {
     }
 
     /**
-     * Log out the current user by getting their session cookie,
+     * Log out the current user by getting their session cookie, invalidating it, deleting it from the browser cookies,
+     * and redirecting the user to /login
      * @param request
      * @return
      */
@@ -98,6 +99,6 @@ public class AuthController {
         } catch (SessionCookieInvalidException e) {
             return "redirect:/login";
         }
-
+        return "redirect:/login";
     }
 }
