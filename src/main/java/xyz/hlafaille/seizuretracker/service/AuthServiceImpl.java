@@ -87,6 +87,7 @@ public class AuthServiceImpl implements AuthService {
         return sessionId;
     }
 
+    @Deprecated
     @Override
     @Transactional
     public UUID createUser(String firstName, String lastName, String email, String password) {

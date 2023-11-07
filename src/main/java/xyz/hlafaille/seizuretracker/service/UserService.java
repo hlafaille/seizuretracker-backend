@@ -16,6 +16,7 @@ public interface UserService {
      * @param sessionId Session UUID
      * @return User entity
      */
+    @Deprecated
     User getUserBySessionId(UUID sessionId);
 
     /**
@@ -23,5 +24,6 @@ public interface UserService {
      * @param cookies Array of Cookie(s)
      * @return User entity
      */
+    @Deprecated
     User getUserBySessionCookie(Cookie[] cookies);
 }

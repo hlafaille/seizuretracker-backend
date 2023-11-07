@@ -12,6 +12,7 @@ import java.util.UUID;
 public interface AuthService {
     User getUserById(UUID id);
 
+    @Deprecated
     UUID createUser(String firstName, String lastName, String email, String password);
 
     /**

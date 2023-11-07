@@ -48,7 +48,7 @@ public class SessionServiceImpl implements SessionService {
      * @return Cookie object
      */
     @Override
-    public Cookie getCookieFromBrowserCookies(Cookie[] cookies) throws SessionCookieMissingException {
+    public Cookie getSessionCookieFromBrowserCookies(Cookie[] cookies) throws SessionCookieMissingException {
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("session")) {
                 return cookie;

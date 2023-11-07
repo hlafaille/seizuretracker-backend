@@ -9,9 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import xyz.hlafaille.seizuretracker.entity.User;
 import xyz.hlafaille.seizuretracker.exception.SessionCookieInvalidException;
+import xyz.hlafaille.seizuretracker.exception.SessionCookieMissingException;
 import xyz.hlafaille.seizuretracker.model.form.auth.LoginFormModel;
 import xyz.hlafaille.seizuretracker.model.form.auth.SignupFormModel;
 import xyz.hlafaille.seizuretracker.service.AuthService;
+import xyz.hlafaille.seizuretracker.service.SessionService;
 import xyz.hlafaille.seizuretracker.service.UserService;
 
 import java.util.UUID;
@@ -20,11 +22,13 @@ import java.util.UUID;
 public class AuthController {
     private final AuthService authService;
     private final UserService userService;
+    private final SessionService sessionService;
 
     @Autowired
-    public AuthController(AuthService authService, UserService userService) {
+    public AuthController(AuthService authService, UserService userService, SessionService sessionService) {
         this.authService = authService;
         this.userService = userService;
+        this.sessionService = sessionService;
     }
 
     @GetMapping("/")
@@ -95,8 +99,8 @@ public class AuthController {
     @GetMapping("/logout")
     public String doLogout(HttpServletRequest request) {
         try {
-            User sessionUser = userService.getUserBySessionCookie(request.getCookies());
-        } catch (SessionCookieInvalidException e) {
+            Cookie sessionCookie = sessionService.getSessionCookieFromBrowserCookies(request.getCookies());
+        } catch (SessionCookieInvalidException | SessionCookieMissingException e) {
             return "redirect:/login";
         }
         return "redirect:/login";

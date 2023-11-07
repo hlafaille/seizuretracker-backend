@@ -8,8 +8,6 @@ import xyz.hlafaille.seizuretracker.entity.User;
 import xyz.hlafaille.seizuretracker.exception.SessionCookieInvalidException;
 import xyz.hlafaille.seizuretracker.repository.SessionRepository;
 import xyz.hlafaille.seizuretracker.repository.UserRepository;
-
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -19,8 +17,8 @@ import java.util.UUID;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private SessionRepository sessionRepository;
-    private UserRepository userRepository;
+    private final SessionRepository sessionRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public UserServiceImpl(SessionRepository sessionRepository, UserRepository userRepository) {
@@ -34,6 +32,7 @@ public class UserServiceImpl implements UserService {
      * @param sessionId Session UUID
      * @return User entity
      */
+    @Deprecated
     @Override
     public User getUserBySessionId(UUID sessionId) {
         return null;
@@ -45,6 +44,7 @@ public class UserServiceImpl implements UserService {
      * @param cookies Array of Cookie(s)
      * @return User entity
      */
+    @Deprecated
     @Override
     public User getUserBySessionCookie(Cookie[] cookies) throws SessionCookieInvalidException {
         // if there is no cookies (cookies is null), throw SessionCookieInvalidException

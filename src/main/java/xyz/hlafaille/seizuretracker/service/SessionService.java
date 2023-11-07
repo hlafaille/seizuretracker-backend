@@ -30,7 +30,7 @@ public interface SessionService {
      * @param cookies Array of Cookie(s) from HttpServletRequest
      * @return Cookie object
      */
-    Cookie getCookieFromBrowserCookies(Cookie[] cookies) throws SessionCookieMissingException;
+    Cookie getSessionCookieFromBrowserCookies(Cookie[] cookies) throws SessionCookieMissingException;
 
     /**
      * Get a Session entity from the database by a provided cookie.
