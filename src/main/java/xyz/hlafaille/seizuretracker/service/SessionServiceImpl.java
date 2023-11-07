@@ -4,22 +4,41 @@ import jakarta.servlet.http.Cookie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.hlafaille.seizuretracker.entity.Session;
-import xyz.hlafaille.seizuretracker.exception.SessionCookieInvalidException;
-import xyz.hlafaille.seizuretracker.exception.SessionCookieMissingException;
-import xyz.hlafaille.seizuretracker.exception.SessionEntityMissingException;
-import xyz.hlafaille.seizuretracker.exception.SessionExpiredException;
+import xyz.hlafaille.seizuretracker.entity.User;
+import xyz.hlafaille.seizuretracker.exception.*;
 import xyz.hlafaille.seizuretracker.repository.SessionRepository;
+import xyz.hlafaille.seizuretracker.repository.UserRepository;
 
+import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class SessionServiceImpl implements SessionService {
     private SessionRepository sessionRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    public SessionServiceImpl(SessionRepository sessionRepository) {
+    public SessionServiceImpl(SessionRepository sessionRepository, UserRepository userRepository) {
         this.sessionRepository = sessionRepository;
+        this.userRepository = userRepository;
+    }
+
+
+    /**
+     * Shim for Session Repository findById(). Get a Session by its ID.
+     *
+     * @param sessionId Session ID
+     * @return Session entity
+     */
+    @Override
+    public Session getSessionEntityById(UUID sessionId) throws SessionEntityMissingException {
+        Optional<Session> session = sessionRepository.findById(sessionId);
+        if (session.isEmpty()) {
+            throw new SessionEntityMissingException();
+        }
+        return session.get();
     }
 
     /**
@@ -41,6 +60,7 @@ public class SessionServiceImpl implements SessionService {
     /**
      * Get a Session entity from the database by a provided cookie.
      *
+     * @param cookie Session Cookie object
      * @return Session entity
      */
     @Override
@@ -50,12 +70,16 @@ public class SessionServiceImpl implements SessionService {
 
         // extract the session id from the cookie, ensure its not empty, get it into a UUID object
         String sessionCookieRawValue = cookie.getValue();
-        if (sessionCookieRawValue.isEmpty()) { throw new SessionCookieInvalidException(); }
+        if (sessionCookieRawValue.isEmpty()) {
+            throw new SessionCookieInvalidException();
+        }
         UUID sessionCookieValue = UUID.fromString(sessionCookieRawValue);
 
         // get the session entity
         Optional<Session> sessionEntity = sessionRepository.findById(sessionCookieValue);
-        if (sessionEntity.isEmpty()) { throw new SessionEntityMissingException();}
+        if (sessionEntity.isEmpty()) {
+            throw new SessionEntityMissingException();
+        }
         return sessionEntity.get();
     }
 
@@ -67,7 +91,7 @@ public class SessionServiceImpl implements SessionService {
      */
     @Override
     public boolean isSessionExpired(Session session) {
-        return false;
+        return ZonedDateTime.now().isAfter(session.getExpire());
     }
 
     /**
@@ -77,17 +101,43 @@ public class SessionServiceImpl implements SessionService {
      */
     @Override
     public void checkSessionExpired(Session session) throws SessionExpiredException {
-
+        if (isSessionExpired(session)) {
+            throw new SessionExpiredException();
+        }
     }
 
     /**
-     * Get a user's session
+     * Get a user's session entity
      *
      * @param userId User ID
      * @return Session entity
      */
     @Override
-    public Session getSessionEntityFromUser(UUID userId) {
-        return null;
+    public Session getSessionEntityFromUser(UUID userId) throws SessionEntityMissingException {
+        List<Session> allSessions = sessionRepository.findAll();
+        for (Session session : allSessions) {
+            if (session.getUser() == userId) {
+                return session;
+            }
+        }
+        throw new SessionEntityMissingException();
+    }
+
+    /**
+     * Get a user's entity from a session
+     *
+     * @param sessionId Session ID
+     * @return User entity
+     */
+    @Override
+    public User getUserEntityFromSession(UUID sessionId) throws SessionEntityMissingException, SessionUserMissingException {
+        Session session = getSessionEntityById(sessionId);
+        List<User> allUsers = userRepository.findAll();
+        for (User user : allUsers) {
+            if (session.getUser().equals(user.getId())) {
+                return user;
+            }
+        }
+        throw new SessionUserMissingException();
     }
 }
