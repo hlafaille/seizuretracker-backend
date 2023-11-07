@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
 <head>
     <div th:replace="scripts_common :: bootstrap"></div>
-    <title>Home - SeizureTracker</title>
+    <title>Record a Seizure - SeizureTracker</title>
 </head>
 <body>
 
@@ -17,45 +17,45 @@
                 <h2 class="card-title">Record a Seizure</h2>
                 <p class="card-subtitle text-muted">What do you remember?</p>
                 <hr>
-                <form action="#" method="post" id="logNewSeizureForm">
+                <form action="/log/newEntry" method="post" id="logNewSeizureForm">
                     <div class="mb-3">
                         <div class="d-grid">
-                            <div class="row pb-2">
-                                <div class="col">
+                            <div class="row">
+                                <div class="col p-1">
                                     <label for="severityInput">Severity</label>
                                     <input id="severityInput" name="severity" type="number" min="1" max="10"
                                            class="form-control">
                                 </div>
-                                <div class="col">
+                                <div class="col p-1">
                                     <label for="beginInput">Begin</label>
                                     <input id="beginInput" name="begin" type="datetime-local"
                                            class="form-control">
                                 </div>
-                                <div class="col">
+                                <div class="col p-1">
                                     <label for="endInput">End</label>
                                     <input id="endInput" name="begin" type="datetime-local"
                                            class="form-control">
                                 </div>
                             </div>
-                            <div class="row pb-2">
-                                <div class="col">
+                            <div class="row">
+                                <div class="col p-1">
                                     <label for="beforeNoteInput">Before</label>
                                     <textarea style="resize: none;" id="beforeNoteInput" name="beforeNote"
                                               class="form-control"></textarea>
                                 </div>
-                                <div class="col">
+                                <div class="col p-1">
                                     <label for="duringNoteInput">During</label>
                                     <textarea style="resize: none;" id="duringNoteInput" name="duringNote"
                                               class="form-control"></textarea>
                                 </div>
                             </div>
-                            <div class="row pb-2">
-                                <div class="col">
+                            <div class="row">
+                                <div class="col p-1">
                                     <label for="afterNoteInput">After</label>
                                     <textarea style="resize: none;" id="afterNoteInput" name="afterNote"
                                               class="form-control"></textarea>
                                 </div>
-                                <div class="col">
+                                <div class="col p-1">
                                     <label for="additionalCommentInput">Additional Comment</label>
                                     <textarea style="resize: none;" id="additionalCommentInput" name="additionalComment"
                                               class="form-control"></textarea>
