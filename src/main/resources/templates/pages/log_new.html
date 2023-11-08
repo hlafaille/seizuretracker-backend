@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
 <head>
-    <div th:replace="scripts_common :: bootstrap"></div>
+    <div th:replace="~{scripts_common :: bootstrap}"></div>
     <title>Record a Seizure - SeizureTracker</title>
 </head>
 <body>
 
 <!-- navbar -->
-<div th:replace="fragments/nav :: bar(activeSection = 'log')"></div>
+<div th:replace="~{fragments/nav :: bar(activeSection = 'log')}"></div>
 
 <!-- basic card -->
 <main class="flex-fill">

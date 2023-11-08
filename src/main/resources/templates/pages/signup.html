@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
 <head>
-    <div th:replace="scripts_common :: bootstrap"></div>
+    <div th:replace="~{scripts_common :: bootstrap}"></div>
     <title>Sign Up - SeizureTracker</title>
 </head>
 <body class="d-flex flex-column vh-100">
@@ -45,6 +45,6 @@
         </div>
     </div>
 </main>
-<div th:replace="fragments/footer :: bar"></div>
+<div th:replace="~{fragments/footer :: bar}"></div>
 </body>
 </html>
