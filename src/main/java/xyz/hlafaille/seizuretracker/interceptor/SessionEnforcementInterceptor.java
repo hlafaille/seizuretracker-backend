@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import xyz.hlafaille.seizuretracker.entity.Session;
+import xyz.hlafaille.seizuretracker.exception.SessionCookieMissingException;
+import xyz.hlafaille.seizuretracker.exception.SessionEntityMissingException;
 import xyz.hlafaille.seizuretracker.repository.SessionRepository;
+import xyz.hlafaille.seizuretracker.service.SessionService;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -18,43 +21,18 @@ import java.util.UUID;
  */
 @Component
 public class SessionEnforcementInterceptor implements HandlerInterceptor {
-    private final SessionRepository sessionRepository;
+    private final SessionService sessionService;
 
     @Autowired
-    public SessionEnforcementInterceptor(SessionRepository sessionRepository) {
-        this.sessionRepository = sessionRepository;
+    public SessionEnforcementInterceptor(SessionService sessionService) {
+        this.sessionService = sessionService;
     }
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
-        Cookie[] cookies = request.getCookies();
-
-        // if there are no cookies to iterate over
-        if (cookies == null) {
-            response.sendRedirect("/login");
-            return false;
-        }
-
-        // iterate over the cookies
-        Cookie sessionCookie = null;
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("session")) {
-                sessionCookie = cookie;
-                break;
-            }
-            response.sendRedirect("/login");
-            return false;
-        }
-
-        // if the cookie is not set, redirect to /login
-        if (sessionCookie == null) {
-            response.sendRedirect("/login");
-            return false;
-        }
-
-        // get the session by ID, ensure that it is actually returned
-        Optional<Session> session = sessionRepository.findById(UUID.fromString(sessionCookie.getValue()));
-        if (session.isEmpty()) {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws SessionCookieMissingException, SessionEntityMissingException, IOException {
+        Cookie cookie = sessionService.getSessionCookieFromBrowserCookies(request.getCookies());
+        Session session = sessionService.getSessionEntityFromCookie(cookie);
+        if (sessionService.isSessionExpired(session)) {
             response.sendRedirect("/login");
             return false;
         }
