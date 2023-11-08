@@ -47,7 +47,7 @@ public class LoginSignupController {
         if (isSessionResumable) {
             return "redirect:/home";
         }
-        // todo maybe remove -> model.addAttribute("newAccount", newAccount);
+        model.addAttribute("newAccount", newAccount);
         return "pages/login";
     }
 
