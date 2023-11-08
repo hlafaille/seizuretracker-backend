@@ -178,15 +178,19 @@ public class SessionServiceImpl implements SessionService {
      */
     @Override
     public boolean isSessionResumableByBrowserCookies(Cookie[] cookies) {
+        Session session = null;
         try {
             // get session cookie, session and user from session. then check if session is expired.
             Cookie sessionCookie = getSessionCookieFromBrowserCookies(cookies);
-            Session session = getSessionEntityFromCookie(sessionCookie);
+            session = getSessionEntityFromCookie(sessionCookie);
             User sessionUser = getUserEntityFromSessionId(session.getId());
             checkSessionExpired(session);
         } catch (SessionCookieInvalidException | SessionEntityMissingException | SessionCookieMissingException |
-                 SessionUserMissingException | SessionExpiredException e) {
+                 SessionUserMissingException e) {
             return false;
+        } catch (SessionExpiredException e) {
+            // note, `session` should be assigned if we're getting this exception :)
+            endSessionById(session.getId());
         }
         return true;
     }
