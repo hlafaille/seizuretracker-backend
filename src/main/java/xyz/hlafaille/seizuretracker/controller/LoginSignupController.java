@@ -3,6 +3,8 @@ package xyz.hlafaille.seizuretracker.controller;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import xyz.hlafaille.seizuretracker.exception.UserEntityMissingException;
 import xyz.hlafaille.seizuretracker.exception.UserPasswordMismatchException;
 import xyz.hlafaille.seizuretracker.model.form.auth.LoginFormModel;
 import xyz.hlafaille.seizuretracker.model.form.auth.SignupFormModel;
+import xyz.hlafaille.seizuretracker.service.SeizureLogService;
 import xyz.hlafaille.seizuretracker.service.SessionService;
 import xyz.hlafaille.seizuretracker.service.UserService;
 
@@ -23,6 +26,8 @@ import java.util.UUID;
 public class LoginSignupController {
     private final UserService userService;
     private final SessionService sessionService;
+    private final Logger logger = LoggerFactory.getLogger(SeizureLogService.class);
+
 
     @Autowired
     public LoginSignupController(UserService userService, SessionService sessionService) {
@@ -45,9 +50,11 @@ public class LoginSignupController {
     public String login(@RequestParam(required = false) boolean newAccount, HttpServletRequest request, Model model) {
         boolean isSessionResumable = sessionService.isSessionResumableByBrowserCookies(request.getCookies());
         if (isSessionResumable) {
+            logger.info("session is resumable, redirecting home");
             return "redirect:/home";
         }
         model.addAttribute("newAccount", newAccount);
+        logger.info("session doesn't exist or is not resumable, redirecting to login");
         return "pages/login";
     }
 
@@ -62,7 +69,6 @@ public class LoginSignupController {
         // set the cookie
         Cookie sessionCookie = new Cookie("session", sessionId.toString());
         response.addCookie(sessionCookie);
-
         return "redirect:/home";
     }
 
@@ -73,6 +79,7 @@ public class LoginSignupController {
     public String signup(HttpServletRequest request) {
         boolean isSessionResumable = sessionService.isSessionResumableByBrowserCookies(request.getCookies());
         if (isSessionResumable) {
+            logger.info("session is resumable, redirecting home");
             return "redirect:/home";
         }
         return "redirect:/signup";

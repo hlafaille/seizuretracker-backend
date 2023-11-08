@@ -1,6 +1,8 @@
 package xyz.hlafaille.seizuretracker.service;
 
 import jakarta.servlet.http.Cookie;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -17,8 +19,9 @@ import java.util.UUID;
 
 @Service
 public class SessionServiceImpl implements SessionService {
-    private SessionRepository sessionRepository;
-    private UserService userService;
+    private final SessionRepository sessionRepository;
+    private final UserService userService;
+    private final Logger logger = LoggerFactory.getLogger(SessionService.class);
 
     @Autowired
     public SessionServiceImpl(SessionRepository sessionRepository, UserService userService) {
@@ -176,11 +179,13 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public boolean isSessionResumableByBrowserCookies(Cookie[] cookies) {
         try {
+            // get session cookie, session and user from session. then check if session is expired.
             Cookie sessionCookie = getSessionCookieFromBrowserCookies(cookies);
             Session session = getSessionEntityFromCookie(sessionCookie);
             User sessionUser = getUserEntityFromSessionId(session.getId());
+            checkSessionExpired(session);
         } catch (SessionCookieInvalidException | SessionEntityMissingException | SessionCookieMissingException |
-                 SessionUserMissingException e) {
+                 SessionUserMissingException | SessionExpiredException e) {
             return false;
         }
         return true;
@@ -210,6 +215,7 @@ public class SessionServiceImpl implements SessionService {
                 return existingSession.getId();
             }
         }
+        logger.info("user:%s began session".formatted(user.getId().toString()));
         return sessionId;
     }
 }

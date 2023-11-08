@@ -3,6 +3,8 @@ package xyz.hlafaille.seizuretracker.interceptor;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -10,6 +12,7 @@ import xyz.hlafaille.seizuretracker.entity.Session;
 import xyz.hlafaille.seizuretracker.exception.SessionCookieMissingException;
 import xyz.hlafaille.seizuretracker.exception.SessionEntityMissingException;
 import xyz.hlafaille.seizuretracker.repository.SessionRepository;
+import xyz.hlafaille.seizuretracker.service.SeizureLogService;
 import xyz.hlafaille.seizuretracker.service.SessionService;
 
 import java.io.IOException;
@@ -22,6 +25,7 @@ import java.util.UUID;
 @Component
 public class SessionEnforcementInterceptor implements HandlerInterceptor {
     private final SessionService sessionService;
+    private final Logger logger = LoggerFactory.getLogger(SessionEnforcementInterceptor.class);
 
     @Autowired
     public SessionEnforcementInterceptor(SessionService sessionService) {
@@ -33,6 +37,7 @@ public class SessionEnforcementInterceptor implements HandlerInterceptor {
         Cookie cookie = sessionService.getSessionCookieFromBrowserCookies(request.getCookies());
         Session session = sessionService.getSessionEntityFromCookie(cookie);
         if (sessionService.isSessionExpired(session)) {
+            logger.info("session:%s is expired: redirecting user".formatted(session.getId().toString()));
             response.sendRedirect("/login");
             return false;
         }

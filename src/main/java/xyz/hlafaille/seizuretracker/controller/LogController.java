@@ -12,6 +12,7 @@ import xyz.hlafaille.seizuretracker.entity.User;
 import xyz.hlafaille.seizuretracker.exception.SessionCookieMissingException;
 import xyz.hlafaille.seizuretracker.exception.SessionEntityMissingException;
 import xyz.hlafaille.seizuretracker.exception.SessionUserMissingException;
+import xyz.hlafaille.seizuretracker.model.form.auth.CreateSeizureLogEntryFormModel;
 import xyz.hlafaille.seizuretracker.service.SeizureLogService;
 import xyz.hlafaille.seizuretracker.service.SessionService;
 import xyz.hlafaille.seizuretracker.service.UserService;
@@ -48,11 +49,17 @@ public class LogController {
     }
 
     @PostMapping("/log/newEntry")
-    public String doLogNewEntry(HttpServletRequest request, Model model) throws SessionCookieMissingException, SessionEntityMissingException, SessionUserMissingException {
+    public String doLogNewEntry(HttpServletRequest request, CreateSeizureLogEntryFormModel formData, Model model) throws SessionCookieMissingException, SessionEntityMissingException, SessionUserMissingException {
         // get the user by their session id
         Cookie sessionCookie = sessionService.getSessionCookieFromBrowserCookies(request.getCookies());
         Session session = sessionService.getSessionEntityFromCookie(sessionCookie);
         User user = sessionService.getUserEntityFromSessionId(session.getId());
+
+        System.out.println(formData);
+        // create the seizure log entry
+//        seizureLogService.createLogEntry(
+//
+//        )
         return "redirect:/log?entryCreated=true";
     }
 }

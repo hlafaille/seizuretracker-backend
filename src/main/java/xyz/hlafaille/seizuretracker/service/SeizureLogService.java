@@ -29,8 +29,8 @@ public interface SeizureLogService {
 
     /**
      * Get all seizure log entries for a particular user
-     * @param userId User UUOD
+     * @param userId User UUID
      * @return List of SeizureLog entities
      */
-    List<SeizureLog> getSeizureLogEntries(UUID userId);
+    List<SeizureLog> getSeizureLogEntriesByUserId(UUID userId);
 }
