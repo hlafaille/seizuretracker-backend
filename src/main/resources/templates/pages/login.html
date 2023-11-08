@@ -14,6 +14,9 @@
                 <div th:if="${newAccount}" class="alert alert-success" role="alert">
                     Account created! Try logging in.
                 </div>
+                <div th:if="${userMissing}" class="alert alert-danger" role="alert">
+                    User not found
+                </div>
                 <h2 class="card-title pt-2">Hey There</h2>
                 <p class="card-subtitle pt-1 text-muted">Enter your login to get started</p>
                 <hr>

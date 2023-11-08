@@ -28,6 +28,11 @@ public class LoginSignupController {
     private final SessionService sessionService;
     private final Logger logger = LoggerFactory.getLogger(SeizureLogService.class);
 
+    @ExceptionHandler({UserEntityMissingException.class})
+    public String handleUserEntityMissingException(Model model){
+        model.addAttribute("userMissing", true);
+        return "redirect:/login?userMissing=true";
+    }
 
     @Autowired
     public LoginSignupController(UserService userService, SessionService sessionService) {
@@ -47,15 +52,17 @@ public class LoginSignupController {
      * Log in page
      */
     @GetMapping("/login")
-    public String login(@RequestParam(required = false) boolean newAccount, HttpServletRequest request, Model model) {
+    public String login(
+            @RequestParam(required = false) boolean newAccount, @RequestParam(required = false) boolean userMissing,
+            HttpServletRequest request, Model model) {
         boolean isSessionResumable = sessionService.isSessionResumableByBrowserCookies(request.getCookies());
         if (isSessionResumable) {
             logger.info("session is resumable, redirecting home");
             return "redirect:/home";
         }
         model.addAttribute("newAccount", newAccount);
-        logger.info("session doesn't exist or is not resumable, redirecting to login");
-        return "pages/login";
+        model.addAttribute("userMissing", userMissing);
+       return "pages/login";
     }
 
     /**
