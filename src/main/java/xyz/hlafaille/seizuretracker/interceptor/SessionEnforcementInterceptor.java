@@ -33,11 +33,19 @@ public class SessionEnforcementInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws SessionCookieMissingException, SessionEntityMissingException, IOException {
-        Cookie cookie = sessionService.getSessionCookieFromBrowserCookies(request.getCookies());
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws SessionEntityMissingException, IOException {
+        Cookie cookie;
+        try {
+            cookie = sessionService.getSessionCookieFromBrowserCookies(request.getCookies());
+        } catch (SessionCookieMissingException e) {
+            logger.info("user does not have session cookie, redirecting user to /login");
+            response.sendRedirect("/login");
+            return false;
+        }
+
         Session session = sessionService.getSessionEntityFromCookie(cookie);
         if (sessionService.isSessionExpired(session)) {
-            logger.info("session:%s is expired: redirecting user".formatted(session.getId().toString()));
+            logger.info("session:%s is expired: redirecting user login".formatted(session.getId().toString()));
             response.sendRedirect("/login");
             return false;
         }
