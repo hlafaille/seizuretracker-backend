@@ -191,6 +191,7 @@ public class SessionServiceImpl implements SessionService {
         } catch (SessionExpiredException e) {
             // note, `session` should be assigned if we're getting this exception :)
             endSessionById(session.getId());
+            return false;
         }
         return true;
     }
