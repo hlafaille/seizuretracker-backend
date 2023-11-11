@@ -17,6 +17,8 @@ import xyz.hlafaille.seizuretracker.service.SeizureLogService;
 import xyz.hlafaille.seizuretracker.service.SessionService;
 import xyz.hlafaille.seizuretracker.service.UserService;
 
+import java.time.ZonedDateTime;
+
 @Controller
 public class LogController {
     private final SessionService sessionService;
@@ -55,7 +57,8 @@ public class LogController {
         Session session = sessionService.getSessionEntityFromCookie(sessionCookie);
         User user = sessionService.getUserEntityFromSessionId(session.getId());
 
-        System.out.println(formData);
+        // convert the ISO datetime string to a ZonedDateTime
+        // ZonedDateTime before = ZonedDateTime.ofInstant()
         // create the seizure log entry
 //        seizureLogService.createLogEntry(
 //

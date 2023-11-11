@@ -3,12 +3,13 @@ package xyz.hlafaille.seizuretracker.model.form.auth;
 import lombok.Data;
 
 import java.time.ZonedDateTime;
+import java.util.Date;
 
 @Data
 public class CreateSeizureLogEntryFormModel {
     private Integer severity;
-    private ZonedDateTime begin;
-    private ZonedDateTime end;
+    private String begin;
+    private String end;
     private String beforeNote;
     private String duringNote;
     private String afterNote;
