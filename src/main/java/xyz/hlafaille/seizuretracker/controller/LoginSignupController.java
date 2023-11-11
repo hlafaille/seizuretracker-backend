@@ -89,7 +89,7 @@ public class LoginSignupController {
             logger.info("session is resumable, redirecting home");
             return "redirect:/home";
         }
-        return "redirect:/signup";
+        return "pages/signup";
     }
 
     /**
