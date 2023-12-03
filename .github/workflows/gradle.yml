@@ -19,8 +19,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: amazoncorretto:17
+      image: amazoncorretto:17-alpine
     steps:
+      - name: Install Node
+        run: apk add nodejs
+      
       - uses: actions/checkout@v4
 
       - name: Execute Gradle Build
