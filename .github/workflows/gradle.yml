@@ -31,7 +31,7 @@ jobs:
   dependency-review:
     runs-on: ubuntu-latest
     container:
-      image: amazoncorretto:17-alpine
+      image: alpine:latest
     steps:
       - name: Install pre-requisite Alpine binaries
         run: apk add nodejs git
