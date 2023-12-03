@@ -34,7 +34,6 @@ jobs:
       - name: Execute Gradle build
         run: ./gradlew build
 
-      - name: Upload Artifact(s)
       - uses: actions/upload-artifact@v3
         with:
           name: seizuretracker.jar
