@@ -1,3 +1,5 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.1.5'
@@ -47,12 +49,14 @@ tasks.named('test') {
  * TypeScript Compilation
  */
 tasks.register('compileTypeScript', Exec) {
-    // Set the working directory if your tsconfig.json is not in the project root
-    workingDir 'src/main/ts' // Adjust this path as necessary
-
-    // Define the command to run (tsc)
-    commandLine 'tsc'
+    workingDir 'src/main/ts'
+    environment 'PATH', "/c/Program Files/nodejs:" + System.getenv("PATH")
+    String tscCommand = 'tsc';
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        tscCommand = 'tsc.cmd'
+    }
+    commandLine tscCommand
 }
 
 // Make the Java compile task depend on the TypeScript compile task
-compileJava.dependsOn compileTypeScript
+compileTypeScript.dependsOn processResources
