@@ -21,8 +21,8 @@ jobs:
     container:
       image: amazoncorretto:17-alpine
     steps:
-      - name: Install Node
-        run: apk add nodejs
+      - name: Install pre-requisite Alpine binaries
+        run: apk add nodejs git
       
       - uses: actions/checkout@v4
 
