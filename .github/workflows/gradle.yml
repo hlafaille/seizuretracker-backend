@@ -37,6 +37,8 @@ jobs:
 
   dependency-review:
     runs-on: ubuntu-latest
+    container:
+      image: amazoncorretto:17-alpine
     steps:
       - uses: actions/checkout@v4
 
