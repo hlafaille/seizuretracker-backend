@@ -16,6 +16,9 @@ jobs:
       image: docker:latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/download-artifact@master
+        with:
+          name: seizuretracker.jar
 
       - name: Extract tag name
         id: get_tag
