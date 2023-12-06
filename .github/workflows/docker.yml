@@ -1,0 +1,28 @@
+name: Build OCI/Docker Image
+
+on:
+  workflow_dispatch:
+  create:
+    tags:
+      - '*'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: docker:latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extract tag name
+        id: get_tag
+        run: echo ::set-output name=TAG::${GITHUB_REF#refs/tags/}
+
+      - name: Build OCI Image
+        run: docker build . -t git.hlafaille.xyz/hlafaille/seizuretracker:${{ steps.get_tag.outputs.TAG }}
+
+      - name: Push OCI Image
+        run: docker push git.hlafaille.xyz/hlafaille/seizuretracker
