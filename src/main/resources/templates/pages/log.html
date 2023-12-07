@@ -47,8 +47,8 @@
                             </thead>
                             <tbody>
                             <tr th:each="logEntry : ${seizureLogs}">
-                                <td th:text="${logEntry.getSeverity()}">/10</td>
-                                <td th:text="${logEntry.getDuration()}"> minutes</td>
+                                <td th:text="${logEntry.getSeverity()}/10"></td>
+                                <td th:text="${logEntry.getDuration()} minutes"></td>
                                 <td th:text="${logEntry.getBeforeSeizureNote()}"></td>
                                 <td th:text="${logEntry.getDuringSeizureNote()}"></td>
                                 <td th:text="${logEntry.getAfterSeizureNote()}"></td>
