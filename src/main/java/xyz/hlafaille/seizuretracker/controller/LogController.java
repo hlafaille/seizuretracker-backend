@@ -56,13 +56,16 @@ public class LogController {
         Cookie sessionCookie = sessionService.getSessionCookieFromBrowserCookies(request.getCookies());
         Session session = sessionService.getSessionEntityFromCookie(sessionCookie);
         User user = sessionService.getUserEntityFromSessionId(session.getId());
-
-        // convert the ISO datetime string to a ZonedDateTime
-        // ZonedDateTime before = ZonedDateTime.ofInstant()
-        // create the seizure log entry
-//        seizureLogService.createLogEntry(
-//
-//        )
+        seizureLogService.createLogEntry(
+                formData.getSeverity(),
+                user.getId(),
+                formData.getDuration(),
+                formData.getBeforeNote(),
+                formData.getDuringNote(),
+                formData.getAfterNote(),
+                formData.isHospitalVisitOccurred(),
+                formData.getAdditionalComment()
+        );
         return "redirect:/log?entryCreated=true";
     }
 }

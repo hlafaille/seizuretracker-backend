@@ -6,7 +6,9 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -22,11 +24,8 @@ public class SeizureLog {
     @Column(nullable = false, unique = true)
     private UUID user;
 
-    @Column(nullable = false, name = "seizure_begin")
-    private ZonedDateTime seizureBegin;
-
-    @Column(nullable = false, name = "seizure_end")
-    private ZonedDateTime seizureEnd;
+    @Column(nullable = false)
+    private Integer duration;
 
     @Column(nullable = false, name = "before_seizure_note")
     private String beforeSeizureNote;
@@ -42,4 +41,7 @@ public class SeizureLog {
 
     @Column(nullable = false, name = "additional_comment")
     private String additionalComment;
+
+    @Column(nullable = false)
+    private Instant instant = Instant.now();
 }

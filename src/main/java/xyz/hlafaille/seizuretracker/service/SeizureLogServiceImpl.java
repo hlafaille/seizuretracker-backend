@@ -27,8 +27,7 @@ public class SeizureLogServiceImpl implements SeizureLogService {
      *
      * @param severity              Severity level, where 1 is the best and 10 is the worst.
      * @param userId                User UUID
-     * @param seizureBegin          Date/time of when the seizure began
-     * @param seizureEnd            Date/time of when the seizure ended
+     * @param duration              Duration of the seizure in minutes
      * @param beforeSeizureNote     Notes before the seizure
      * @param duringSeizureNote     Notes during the seizure
      * @param afterSeizureNote      Notes after the seizure
@@ -38,18 +37,20 @@ public class SeizureLogServiceImpl implements SeizureLogService {
      */
     @Override
     @Transactional
-    public UUID createLogEntry(Integer severity, UUID userId, ZonedDateTime seizureBegin, ZonedDateTime seizureEnd, String beforeSeizureNote, String duringSeizureNote, String afterSeizureNote, boolean hospitalVisitOccurred, String additionalComment) {
+    public UUID createLogEntry(Integer severity, UUID userId, Integer duration, String beforeSeizureNote, String duringSeizureNote, String afterSeizureNote, boolean hospitalVisitOccurred, String additionalComment) {
         SeizureLog seizureLog = new SeizureLog();
         UUID seizureLogId = UUID.randomUUID();
         seizureLog.setId(seizureLogId);
         seizureLog.setSeverity(severity);
         seizureLog.setUser(userId);
-        seizureLog.setSeizureBegin(seizureBegin);
-        seizureLog.setSeizureEnd(seizureEnd);
+        seizureLog.setDuration(duration);
         seizureLog.setBeforeSeizureNote(beforeSeizureNote);
         seizureLog.setDuringSeizureNote(duringSeizureNote);
         seizureLog.setAfterSeizureNote(afterSeizureNote);
+        seizureLog.setHospitalVisitOccurred(hospitalVisitOccurred);
+        seizureLog.setAdditionalComment(additionalComment);
         logger.info("created seizure log entry: %s".formatted(seizureLogId.toString()));
+        seizureLogRepository.save(seizureLog);
         return seizureLogId;
     }
 
