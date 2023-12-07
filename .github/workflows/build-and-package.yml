@@ -10,12 +10,6 @@ jobs:
   build_jar:
     runs-on: ubuntu-latest
     steps:
-      #- name: Install pre-requisite Alpine binaries
-      #  run: apk add nodejs git
-
-      - name: Install NodeJS
-        run: apt-get update && apt-get install nodejs -y
-
       - uses: actions/setup-java@v3
         with:
           distribution: corretto
@@ -35,4 +29,4 @@ jobs:
           path: build/libs
 
   build_oci_image:
-    runs-on: alpine-latest
+    runs-on: ubuntu-latest
