@@ -24,15 +24,3 @@ jobs:
         with:
           name: seizuretracker.jar
           path: build/libs
-
-  build_oci_image:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          push: true
-          tags: git.hlafaille.xyz/hlafaille/seizuretracker:latest
