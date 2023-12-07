@@ -31,6 +31,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: build_jar
     steps:
+      - name: Checkout (for Dockerfile)
+        uses: actions/checkout@v4
+
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
