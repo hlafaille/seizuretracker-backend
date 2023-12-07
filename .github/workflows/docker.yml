@@ -11,9 +11,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    container:
-      image: docker:24.0.7-dind-alpine3.18
+    runs-on: alpine-latest
     steps:
       - name: Install pre-requisite Alpine binaries
         run: apk add nodejs git
