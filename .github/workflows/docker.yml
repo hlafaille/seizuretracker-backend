@@ -13,8 +13,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: docker:latest
+      image: docker:24.0.7-dind-alpine3.18
     steps:
+      - name: Install pre-requisite Alpine binaries
+        run: apk add nodejs git
+
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@master
         with:
