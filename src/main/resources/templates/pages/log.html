@@ -17,6 +17,9 @@
                 <div class="container">
                     <div class="row">
                         <div class="col">
+                            <div th:if="${entryCreated}" class="alert alert-success" role="alert">
+                                Entry Created
+                            </div>
                             <h2 class="card-title">We hope you're doing okay, <span
                                     th:text="${userFirstName}"></span>
                             </h2>
@@ -47,13 +50,16 @@
                             </thead>
                             <tbody>
                             <tr th:each="logEntry : ${seizureLogs}">
-                                <td th:text="${logEntry.getSeverity()}/10"></td>
-                                <td th:text="${logEntry.getDuration()} minutes"></td>
-                                <td th:text="${logEntry.getBeforeSeizureNote()}"></td>
-                                <td th:text="${logEntry.getDuringSeizureNote()}"></td>
-                                <td th:text="${logEntry.getAfterSeizureNote()}"></td>
-                                <td th:text="${logEntry.isHospitalVisitOccurred()}"></td>
-                                <td th:text="${logEntry.getAdditionalComment()}"></td>
+                                <td th:text="${logEntry.severity}+'/10'"></td>
+                                <td th:text="${logEntry.duration}+' minutes'"></td>
+                                <td th:text="${logEntry.beforeSeizureNote}"></td>
+                                <td th:text="${logEntry.duringSeizureNote}"></td>
+                                <td th:text="${logEntry.afterSeizureNote}"></td>
+
+                                <td th:if="${logEntry.hospitalVisitOccurred}">Yes</td>
+                                <td th:unless="${logEntry.hospitalVisitOccurred}">No</td>
+
+                                <td th:text="${logEntry.additionalComment}"></td>
                             </tr>
                             </tbody>
                         </table>

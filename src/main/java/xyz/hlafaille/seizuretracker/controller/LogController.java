@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import xyz.hlafaille.seizuretracker.entity.SeizureLog;
 import xyz.hlafaille.seizuretracker.entity.Session;
 import xyz.hlafaille.seizuretracker.entity.User;
@@ -33,7 +34,9 @@ public class LogController {
     }
 
     @GetMapping("/log")
-    public String log(HttpServletRequest request, Model model) throws SessionCookieMissingException, SessionEntityMissingException, SessionUserMissingException {
+    public String log(@RequestParam(required = false) boolean entryCreated, HttpServletRequest request, Model model) throws SessionCookieMissingException, SessionEntityMissingException, SessionUserMissingException {
+        model.addAttribute("entryCreated", entryCreated);
+
         // get the user by their session id
         Cookie sessionCookie = sessionService.getSessionCookieFromBrowserCookies(request.getCookies());
         Session session = sessionService.getSessionEntityFromCookie(sessionCookie);
