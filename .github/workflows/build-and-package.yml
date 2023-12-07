@@ -7,10 +7,8 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  build_jar:
     runs-on: alpine-latest
-    container:
-      image: amazoncorretto:17-alpine
     steps:
       - name: Install pre-requisite Alpine binaries
         run: apk add nodejs git
@@ -24,3 +22,6 @@ jobs:
         with:
           name: seizuretracker.jar
           path: build/libs
+
+  build_oci_image:
+    runs-on: alpine-latest
