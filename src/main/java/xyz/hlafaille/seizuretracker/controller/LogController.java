@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import xyz.hlafaille.seizuretracker.entity.SeizureLog;
 import xyz.hlafaille.seizuretracker.entity.Session;
 import xyz.hlafaille.seizuretracker.entity.User;
 import xyz.hlafaille.seizuretracker.exception.SessionCookieMissingException;
@@ -18,6 +19,7 @@ import xyz.hlafaille.seizuretracker.service.SessionService;
 import xyz.hlafaille.seizuretracker.service.UserService;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 
 @Controller
 public class LogController {
@@ -25,7 +27,7 @@ public class LogController {
     private final SeizureLogService seizureLogService;
 
     @Autowired
-    public LogController(UserService userService, SessionService sessionService, SeizureLogService seizureLogService) {
+    public LogController(SessionService sessionService, SeizureLogService seizureLogService) {
         this.sessionService = sessionService;
         this.seizureLogService = seizureLogService;
     }
@@ -37,6 +39,10 @@ public class LogController {
         Session session = sessionService.getSessionEntityFromCookie(sessionCookie);
         User user = sessionService.getUserEntityFromSessionId(session.getId());
         model.addAttribute("userFirstName", user.getFirstName());
+
+        // get the recorded logs
+        List<SeizureLog> seizureLogs = seizureLogService.getSeizureLogEntriesByUserId(user.getId());
+        model.addAttribute("seizureLogs", seizureLogs);
         return "pages/log";
     }
 

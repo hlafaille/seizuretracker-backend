@@ -21,7 +21,7 @@ public class SeizureLog {
     @Column(nullable = false)
     private Integer severity;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private UUID user;
 
     @Column(nullable = false)
