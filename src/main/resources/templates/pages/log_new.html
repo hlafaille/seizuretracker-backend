@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
 <head>
-    <div th:replace="scripts_common :: bootstrap"></div>
+    <div th:replace="~{scripts_common :: bootstrap}"></div>
     <title>Record a Seizure - SeizureTracker</title>
 </head>
 <body>
 
 <!-- navbar -->
-<div th:replace="fragments/nav :: bar(activeSection = 'log')"></div>
+<div th:replace="~{fragments/nav :: bar(activeSection = 'log')}"></div>
 
 <!-- basic card -->
 <main class="flex-fill">
@@ -27,14 +27,8 @@
                                            class="form-control">
                                 </div>
                                 <div class="col p-1">
-                                    <label for="beginInput">Begin</label>
-                                    <input id="beginInput" name="begin" type="datetime-local"
-                                           class="form-control">
-                                </div>
-                                <div class="col p-1">
-                                    <label for="endInput">End</label>
-                                    <input id="endInput" name="begin" type="datetime-local"
-                                           class="form-control">
+                                    <label for="durationInput">Duration (minutes)</label>
+                                    <input id="durationInput" name="duration" type="number" class="form-control">
                                 </div>
                             </div>
                             <div class="row">
@@ -59,6 +53,17 @@
                                     <label for="additionalCommentInput">Additional Comment</label>
                                     <textarea style="resize: none;" id="additionalCommentInput" name="additionalComment"
                                               class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col p-1">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="hospitalVisitCheck"
+                                               name="hospitalVisit">
+                                        <label class="form-check-label" for="hospitalVisitCheck">
+                                            Hospital Visit Occurred
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>

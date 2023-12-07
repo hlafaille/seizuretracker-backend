@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
 <head>
-    <div th:replace="scripts_common :: bootstrap"></div>
+    <div th:replace="~{scripts_common :: bootstrap}"></div>
     <title>Log In - SeizureTracker</title>
 </head>
 <body class="d-flex flex-column vh-100">
@@ -13,6 +13,9 @@
             <div class="card-body">
                 <div th:if="${newAccount}" class="alert alert-success" role="alert">
                     Account created! Try logging in.
+                </div>
+                <div th:if="${userMissing}" class="alert alert-danger" role="alert">
+                    User not found
                 </div>
                 <h2 class="card-title pt-2">Hey There</h2>
                 <p class="card-subtitle pt-1 text-muted">Enter your login to get started</p>
@@ -35,6 +38,6 @@
         </div>
     </div>
 </main>
-<div th:replace="fragments/footer :: bar"></div>
+<div th:replace="~{fragments/footer :: bar}"></div>
 </body>
 </html>

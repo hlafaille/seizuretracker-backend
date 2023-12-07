@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
 <head>
-    <div th:replace="scripts_common :: bootstrap"></div>
+    <div th:replace="~{scripts_common :: bootstrap}"></div>
     <title>Home - SeizureTracker</title>
 </head>
 <body>
 
 <!-- navbar -->
-<div th:replace="fragments/nav :: bar(activeSection = 'log')"></div>
+<div th:replace="~{fragments/nav :: bar(activeSection = 'log')}"></div>
 
 <!-- basic card -->
 <main class="flex-fill">
@@ -17,6 +17,9 @@
                 <div class="container">
                     <div class="row">
                         <div class="col">
+                            <div th:if="${entryCreated}" class="alert alert-success" role="alert">
+                                Entry Created
+                            </div>
                             <h2 class="card-title">We hope you're doing okay, <span
                                     th:text="${userFirstName}"></span>
                             </h2>
@@ -37,8 +40,7 @@
                             <thead>
                             <tr>
                                 <th scope="col">Severity</th>
-                                <th scope="col">Begin</th>
-                                <th scope="col">End</th>
+                                <th scope="col">Duration</th>
                                 <th scope="col">Before Note</th>
                                 <th scope="col">During Note</th>
                                 <th scope="col">After Note</th>
@@ -47,15 +49,17 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>4</td>
-                                <td>01/01/1970 00:00AM</td>
-                                <td>01/01/1970 00:05AM</td>
-                                <td>Visual auras, spots</td>
-                                <td>Speaking random words</td>
-                                <td>Went to sleep immediately</td>
-                                <td>No</td>
-                                <td>...</td>
+                            <tr th:each="logEntry : ${seizureLogs}">
+                                <td th:text="${logEntry.severity}+'/10'"></td>
+                                <td th:text="${logEntry.duration}+' minutes'"></td>
+                                <td th:text="${logEntry.beforeSeizureNote}"></td>
+                                <td th:text="${logEntry.duringSeizureNote}"></td>
+                                <td th:text="${logEntry.afterSeizureNote}"></td>
+
+                                <td th:if="${logEntry.hospitalVisitOccurred}">Yes</td>
+                                <td th:unless="${logEntry.hospitalVisitOccurred}">No</td>
+
+                                <td th:text="${logEntry.additionalComment}"></td>
                             </tr>
                             </tbody>
                         </table>
