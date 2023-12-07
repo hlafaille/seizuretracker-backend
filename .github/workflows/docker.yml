@@ -1,10 +1,11 @@
 name: Build OCI/Docker Image
 
 on:
-  workflow_dispatch:
-  create:
-    tags:
-      - '*'
+  workflow_run:
+    workflows:
+      - "Java CI with Gradle"
+    types:
+      - completed
 
 permissions:
   contents: read
