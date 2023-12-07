@@ -8,10 +8,21 @@ permissions:
 
 jobs:
   build_jar:
-    runs-on: alpine-latest
+    runs-on: ubuntu-latest
     steps:
-      - name: Install pre-requisite Alpine binaries
-        run: apk add nodejs git
+      #- name: Install pre-requisite Alpine binaries
+      #  run: apk add nodejs git
+
+      - name: Install NodeJS
+        run: apt-get update && apt-get install nodejs -y
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: corretto
+          java-version: 17
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v1
 
       - uses: actions/checkout@v4
 
