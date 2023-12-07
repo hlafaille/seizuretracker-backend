@@ -36,11 +36,8 @@ jobs:
         with:
           name: seizuretracker.jar
 
-      - name: Install Docker
-        run: curl -fsSL https://get.docker.com | sh
-
       - name: Registry login
-        run: docker login -u ${{ secrets.registry_username }} -p ${{ secrets.registry_password }}
+        run: docker login -u ${{ secrets.registry_username }} -p ${{ secrets.registry_password }} git.hlafaille.xyz
 
       - name: Build and push
         run: docker build . -t git.hlafaille.xyz/hlafaille/seizuretracker:${{ github.ref_name }} && docker push git.hlafaille.xyz/hlafaille/seizuretracker:${{ github.ref_name }}
