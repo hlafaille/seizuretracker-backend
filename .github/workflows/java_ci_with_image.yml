@@ -57,4 +57,4 @@ jobs:
           ssh-keyscan hlafaille.xyz >> ~/.ssh/known_hosts
       
       - name: Execute remote script
-        run: ssh hunter@hlafaille.xyz 'bash -s' < deploy.sh
+        run: ssh hunter@hlafaille.xyz /pool1/ds_containers/webservices/scripts/seizuretracker/deploy.sh
