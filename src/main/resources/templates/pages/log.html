@@ -20,11 +20,10 @@
                             <div th:if="${entryCreated}" class="alert alert-success" role="alert">
                                 Entry Created
                             </div>
-                            <h2 class="card-title">We hope you're doing okay, <span
+                            <h2 class="card-title">We hope you're okay, <span
                                     th:text="${userFirstName}"></span>
                             </h2>
                             <p class="card-subtitle text-muted">Below is a log of your recorded seizures. </p>
-                            <hr>
                         </div>
                     </div>
                     <div class="row pt-2">
@@ -39,27 +38,18 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th scope="col">Severity</th>
+                                <th scope="col">#</th>
+                                <th scope="col">Date</th>
                                 <th scope="col">Duration</th>
-                                <th scope="col">Before Note</th>
-                                <th scope="col">During Note</th>
-                                <th scope="col">After Note</th>
-                                <th scope="col">Hospital Visit</th>
-                                <th scope="col">Additional Comments</th>
+                                <th scope="col">Intensity</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="logEntry : ${seizureLogs}">
+                            <tr th:each="logEntry, iterStat : ${seizureLogs}">
+                                <td th:text="${iterStat.index} + 1"></td>
+                                <td th:text="${#dates.format(logEntry.getInstant(), 'MM/dd/yyyy')}"></td>
+                                <td th:text="${logEntry.duration}+' min'"></td>
                                 <td th:text="${logEntry.severity}+'/10'"></td>
-                                <td th:text="${logEntry.duration}+' minutes'"></td>
-                                <td th:text="${logEntry.beforeSeizureNote}"></td>
-                                <td th:text="${logEntry.duringSeizureNote}"></td>
-                                <td th:text="${logEntry.afterSeizureNote}"></td>
-
-                                <td th:if="${logEntry.hospitalVisitOccurred}">Yes</td>
-                                <td th:unless="${logEntry.hospitalVisitOccurred}">No</td>
-
-                                <td th:text="${logEntry.additionalComment}"></td>
                             </tr>
                             </tbody>
                         </table>
