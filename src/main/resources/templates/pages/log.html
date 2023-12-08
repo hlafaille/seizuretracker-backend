@@ -47,8 +47,8 @@
                             <tbody>
                             <tr th:each="logEntry, iterStat : ${seizureLogs}">
                                 <td th:text="${iterStat.index} + 1"></td>
-                                <td>01/01/1970</td>
-                                <td th:text="${logEntry.duration}+' minutes'"></td>
+                                <td th:text="${#dates.format(logEntry.getInstant(), 'MM/dd/yyyy')}"></td>
+                                <td th:text="${logEntry.duration}+' min'"></td>
                                 <td th:text="${logEntry.severity}+'/10'"></td>
                             </tr>
                             </tbody>
