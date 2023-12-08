@@ -40,7 +40,7 @@ jobs:
           name: seizuretracker.jar
 
       - name: Build image
-        run: docker build . -t git.hlafaille.xyz/hlafaille/seizuretracker:${{ github.ref_name }}
+        run: docker build . -t git.hlafaille.xyz/hlafaille/seizuretracker:${{ github.ref_name }} --no-cache
 
       - name: Registry login
         run: docker login -u ${{ secrets.registry_username }} -p ${{ secrets.registry_password }} git.hlafaille.xyz
