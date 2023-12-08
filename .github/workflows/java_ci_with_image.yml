@@ -39,16 +39,19 @@ jobs:
         with:
           name: seizuretracker.jar
 
-      - name: Build and push
-        run: docker build . -t git.hlafaille.xyz/hlafaille/seizuretracker:${{ github.ref_name }} && docker push git.hlafaille.xyz/hlafaille/seizuretracker:${{ github.ref_name }}
+      - name: Build image
+        run: docker build . -t git.hlafaille.xyz/hlafaille/seizuretracker:${{ github.ref_name }}
+
+      - name: Push image with version tag
+        run: docker push git.hlafaille.xyz/hlafaille/seizuretracker:${{ github.ref_name }}
+
+      - name: Push image with latest tag
+        run: docker push git.hlafaille.xyz/hlafaille/seizuretracker:latest
 
   deploy:
     runs-on: ubuntu-latest
     needs: build_oci_image
     steps:
-      - name: Checkout (for deploy script)
-        uses: actions/checkout@v4
-
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
