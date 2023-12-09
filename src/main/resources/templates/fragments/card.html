@@ -1,8 +1,14 @@
-<div th:fragment="baseCard(title, content)">
+<html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
+
+<div th:fragment="baseCard(header, title, subtitle, content)">
     <div class="card">
+        <div th:if="${!#strings.isEmpty(header)}" th:text="${header}" class="card-header"></div>
         <div class="card-body">
-            <h2 th:text="${title}" class="card-title"></h2>
-            <div th:replace="${content}"></div>
+            <div class="pb-1">
+                <h2 th:text="${title}" class="card-title"></h2>
+            </div>
+            <p th:if="${!#strings.isEmpty(subtitle)}" th:text="${subtitle}" class="card-subtitle text-muted"></p>
+            <div th:replace="${content}" class="p-1"></div>
         </div>
     </div>
 </div>

@@ -14,32 +14,31 @@
     <div class="container my-5">
         <div class="row justify-content-center">
             <div class="col-lg-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title">Let's get started</h2>
+                <div th:replace="~{fragments/card :: baseCard('Create a Log Entry: Step 1/3', 'Let\'s get started', null, ~{::content})}">
+                    <div th:fragment="content">
                         <form action="/log/newEntry" method="post" id="logNewSeizureForm">
-                            <div class="mb-3">
-                                <div class="col">
-                                    <div class="row mb-2">
-                                        <label for="severityInput">Severity</label>
-                                        <div class="col p-1 input-group">
-                                            <input id="severityInput" name="severity" type="number" min="1" max="10"
-                                                   class="form-control">
-                                            <span class="input-group-text" id="severitySuffix">/ 10</span>
-                                        </div>
+                            <div class="col">
+                                <div class="row pb-2">
+                                    <label for="severityInput">Severity</label>
+                                    <div class="col input-group">
+                                        <input id="severityInput" name="severity" type="number" min="1" max="10"
+                                               class="form-control">
+                                        <span class="input-group-text" id="severitySuffix">/ 10</span>
                                     </div>
-                                    <div class="row mb-2">
-                                        <label for="durationInput">Duration</label>
-                                        <div class="col p-1 input-group">
-                                            <input id="durationInput" name="duration" type="number"
-                                                   class="form-control">
-                                            <span class="input-group-text" id="durationSuffix">minutes</span>
-                                        </div>
+                                </div>
+                                <div class="row pb-3">
+                                    <label for="durationInput">Duration</label>
+                                    <div class="col input-group">
+                                        <input id="durationInput" name="duration" type="number"
+                                               class="form-control">
+                                        <span class="input-group-text" id="durationSuffix">minutes</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="btn-group w-100" role="group">
-                                <button type="submit" class="btn btn-primary">Next</button>
+                            <div class="row justify-content-end">
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary">Next</button>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -48,5 +47,6 @@
         </div>
     </div>
 </main>
+
 </body>
 </html>
