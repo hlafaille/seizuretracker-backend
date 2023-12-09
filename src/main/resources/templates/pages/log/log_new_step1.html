@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
+<head>
+    <div th:replace="~{scripts_common :: bootstrap}"></div>
+    <title>Record a Seizure - SeizureTracker</title>
+</head>
+<body>
+
+<!-- navbar -->
+<div th:replace="~{fragments/nav :: bar(activeSection = 'log')}"></div>
+
+<!-- basic card -->
+<main class="flex-fill">
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Let's get started</h2>
+                        <form action="/log/newEntry" method="post" id="logNewSeizureForm">
+                            <div class="mb-3">
+                                <div class="col">
+                                    <div class="row mb-2">
+                                        <label for="severityInput">Severity</label>
+                                        <div class="col p-1 input-group">
+                                            <input id="severityInput" name="severity" type="number" min="1" max="10"
+                                                   class="form-control">
+                                            <span class="input-group-text" id="severitySuffix">/ 10</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <label for="durationInput">Duration</label>
+                                        <div class="col p-1 input-group">
+                                            <input id="durationInput" name="duration" type="number"
+                                                   class="form-control">
+                                            <span class="input-group-text" id="durationSuffix">minutes</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="btn-group w-100" role="group">
+                                <button type="submit" class="btn btn-primary">Next</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

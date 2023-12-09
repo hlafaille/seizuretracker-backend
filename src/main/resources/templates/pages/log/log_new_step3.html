@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
+<head>
+    <div th:replace="~{scripts_common :: bootstrap}"></div>
+    <title>Record a Seizure - SeizureTracker</title>
+</head>
+<body>
+
+<!-- navbar -->
+<div th:replace="~{fragments/nav :: bar(activeSection = 'log')}"></div>
+
+<!-- basic card -->
+<main class="flex-fill">
+    <div class="container my-5">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">Record a Seizure</h2>
+                <p class="card-subtitle text-muted">What do you remember?</p>
+                <hr>
+                <form action="/log/newEntry" method="post" id="logNewSeizureForm">
+                    <div class="mb-3">
+                        <div class="d-grid">
+                            <div class="row">
+                                <div class="col p-1">
+                                    <label for="severityInput">Severity</label>
+                                    <input id="severityInput" name="severity" type="number" min="1" max="10"
+                                           class="form-control">
+                                </div>
+                                <div class="col p-1">
+                                    <label for="durationInput">Duration (minutes)</label>
+                                    <input id="durationInput" name="duration" type="number" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col p-1">
+                                    <label for="beforeNoteInput">Before</label>
+                                    <textarea style="resize: none;" id="beforeNoteInput" name="beforeNote"
+                                              class="form-control"></textarea>
+                                </div>
+                                <div class="col p-1">
+                                    <label for="duringNoteInput">During</label>
+                                    <textarea style="resize: none;" id="duringNoteInput" name="duringNote"
+                                              class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col p-1">
+                                    <label for="afterNoteInput">After</label>
+                                    <textarea style="resize: none;" id="afterNoteInput" name="afterNote"
+                                              class="form-control"></textarea>
+                                </div>
+                                <div class="col p-1">
+                                    <label for="additionalCommentInput">Additional Comment</label>
+                                    <textarea style="resize: none;" id="additionalCommentInput" name="additionalComment"
+                                              class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col p-1">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="hospitalVisitCheck"
+                                               name="hospitalVisit">
+                                        <label class="form-check-label" for="hospitalVisitCheck">
+                                            Hospital Visit Occurred
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-group w-100" role="group">
+                        <button type="submit" class="btn btn-primary">Record</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

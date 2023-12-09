@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import xyz.hlafaille.seizuretracker.entity.SeizureLog;
 import xyz.hlafaille.seizuretracker.entity.Session;
@@ -14,12 +13,9 @@ import xyz.hlafaille.seizuretracker.entity.User;
 import xyz.hlafaille.seizuretracker.exception.SessionCookieMissingException;
 import xyz.hlafaille.seizuretracker.exception.SessionEntityMissingException;
 import xyz.hlafaille.seizuretracker.exception.SessionUserMissingException;
-import xyz.hlafaille.seizuretracker.model.form.auth.CreateSeizureLogEntryFormModel;
 import xyz.hlafaille.seizuretracker.service.SeizureLogService;
 import xyz.hlafaille.seizuretracker.service.SessionService;
-import xyz.hlafaille.seizuretracker.service.UserService;
 
-import java.time.ZonedDateTime;
 import java.util.List;
 
 @Controller
@@ -46,10 +42,10 @@ public class LogController {
         // get the recorded logs
         List<SeizureLog> seizureLogs = seizureLogService.getSeizureLogEntriesByUserId(user.getId());
         model.addAttribute("seizureLogs", seizureLogs);
-        return "pages/log";
+        return "pages/log/log_dashboard";
     }
 
-    @GetMapping("/log/newEntry")
+    /*@GetMapping("/log/newEntry")
     public String logNewEntry(HttpServletRequest request, Model model) throws SessionCookieMissingException, SessionEntityMissingException, SessionUserMissingException {
         // get the user by their session id
         Cookie sessionCookie = sessionService.getSessionCookieFromBrowserCookies(request.getCookies());
@@ -77,5 +73,5 @@ public class LogController {
                 false
         );
         return "redirect:/log?entryCreated=true";
-    }
+    }*/
 }
