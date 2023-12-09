@@ -18,31 +18,31 @@ public class SeizureLog {
     @Id
     private UUID id;
 
-    @Column(nullable = false)
+    @Column
     private Integer severity;
 
-    @Column(nullable = false)
+    @Column
     private UUID user;
 
-    @Column(nullable = false)
+    @Column
     private Integer duration;
 
-    @Column(nullable = false, name = "before_seizure_note")
+    @Column(name = "before_seizure_note")
     private String beforeSeizureNote;
 
-    @Column(nullable = false, name = "during_seizure_note")
+    @Column(name = "during_seizure_note")
     private String duringSeizureNote;
 
-    @Column(nullable = false, name = "after_seizure_note")
+    @Column(name = "after_seizure_note")
     private String afterSeizureNote;
 
-    @Column(nullable = false, name = "hospital_visit_occurred")
+    @Column(name = "hospital_visit_occurred")
     private boolean hospitalVisitOccurred;
 
-    @Column(nullable = false, name = "additional_comment")
+    @Column(name = "additional_comment")
     private String additionalComment;
 
-    @Column(nullable = false)
+    @Column
     private Instant instant = Instant.now();
 
     @Column(nullable = false, name = "is_draft")
