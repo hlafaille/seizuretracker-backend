@@ -22,6 +22,6 @@ public class NewLogEntryController {
 
     @GetMapping("/log/newEntry")
     public String log(HttpServletRequest request, Model model) {
-
+        return "";
     }
 }
