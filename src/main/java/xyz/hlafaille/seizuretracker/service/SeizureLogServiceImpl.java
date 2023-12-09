@@ -37,7 +37,7 @@ public class SeizureLogServiceImpl implements SeizureLogService {
      */
     @Override
     @Transactional
-    public UUID createLogEntry(Integer severity, UUID userId, Integer duration, String beforeSeizureNote, String duringSeizureNote, String afterSeizureNote, boolean hospitalVisitOccurred, String additionalComment) {
+    public UUID createLogEntry(Integer severity, UUID userId, Integer duration, String beforeSeizureNote, String duringSeizureNote, String afterSeizureNote, boolean hospitalVisitOccurred, String additionalComment, boolean isDraft) {
         SeizureLog seizureLog = new SeizureLog();
         UUID seizureLogId = UUID.randomUUID();
         seizureLog.setId(seizureLogId);
@@ -49,6 +49,7 @@ public class SeizureLogServiceImpl implements SeizureLogService {
         seizureLog.setAfterSeizureNote(afterSeizureNote);
         seizureLog.setHospitalVisitOccurred(hospitalVisitOccurred);
         seizureLog.setAdditionalComment(additionalComment);
+        seizureLog.setDraft(isDraft);
         logger.info("created seizure log entry: %s".formatted(seizureLogId.toString()));
         seizureLogRepository.save(seizureLog);
         return seizureLogId;

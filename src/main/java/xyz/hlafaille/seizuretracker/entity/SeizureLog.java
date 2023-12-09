@@ -44,4 +44,7 @@ public class SeizureLog {
 
     @Column(nullable = false)
     private Instant instant = Instant.now();
+
+    @Column(nullable = false, name = "is_draft")
+    private boolean isDraft;
 }

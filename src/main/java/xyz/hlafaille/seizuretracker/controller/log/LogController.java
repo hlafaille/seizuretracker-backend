@@ -1,4 +1,4 @@
-package xyz.hlafaille.seizuretracker.controller;
+package xyz.hlafaille.seizuretracker.controller.log;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -73,7 +73,8 @@ public class LogController {
                 formData.getDuringNote(),
                 formData.getAfterNote(),
                 formData.isHospitalVisitOccurred(),
-                formData.getAdditionalComment()
+                formData.getAdditionalComment(),
+                false
         );
         return "redirect:/log?entryCreated=true";
     }

@@ -20,11 +20,13 @@ public interface SeizureLogService {
      * @param afterSeizureNote      Notes after the seizure
      * @param hospitalVisitOccurred If a hospital visit occurred
      * @param additionalComment     Any additional comments
+     * @param isDraft               Is this Log Entry a Draft
      * @return UUID of the seizure log entry
      */
     UUID createLogEntry(
             Integer severity, UUID userId, Integer duration, String beforeSeizureNote,
-            String duringSeizureNote, String afterSeizureNote, boolean hospitalVisitOccurred, String additionalComment
+            String duringSeizureNote, String afterSeizureNote, boolean hospitalVisitOccurred, String additionalComment,
+            boolean isDraft
     );
 
     /**
