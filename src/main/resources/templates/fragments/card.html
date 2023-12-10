@@ -1,14 +1,33 @@
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
 
-<div th:fragment="baseCard(header, title, subtitle, content)">
+<!--
+
+-->
+<div th:fragment="cardWithTitleAndSubtitle(titleText, subtitleText, bodyContent)">
     <div class="card">
-        <div th:if="${!#strings.isEmpty(header)}" th:text="${header}" class="card-header"></div>
         <div class="card-body">
             <div class="pb-1">
-                <h2 th:text="${title}" class="card-title"></h2>
+                <h2 th:text="${titleText}" class="card-title"></h2>
             </div>
-            <p th:if="${!#strings.isEmpty(subtitle)}" th:text="${subtitle}" class="card-subtitle text-muted"></p>
-            <div th:replace="${content}" class="p-1"></div>
+            <p th:if="${!#strings.isEmpty(subtitleText)}" th:text="${subtitleText}"
+               class="card-subtitle text-muted"></p>
+            <div th:replace="${bodyContent}" class="p-1"></div>
         </div>
+    </div>
+</div>
+
+
+<div th:fragment="cardWithHeaderAndFooter(headerContent, titleText, subtitleText, bodyContent, footerContent)">
+    <div class="card">
+        <div th:if="${headerContent != null}" th:insert="${headerContent}" class="card-header"></div>
+        <div class="card-body">
+            <div class="pb-1">
+                <h2 th:text="${titleText}" class="card-title"></h2>
+            </div>
+            <p th:if="${!#strings.isEmpty(subtitleText)}" th:text="${subtitleText}"
+               class="card-subtitle text-muted"></p>
+            <div th:replace="${bodyContent}" class="p-1"></div>
+        </div>
+        <div th:if="${(footerContent) != null}" th:insert="${footerContent}" class="card-footer"></div>
     </div>
 </div>
