@@ -1,7 +1,13 @@
-<html xmlns:th="https://www.thymeleaf.org" data-bs-theme="dark" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark" lang="en">
 
 
 <!--A button that acts as an <a href> tag-->
-<div th:fragment="linkButton(url)">
-    <a href="${url}"></a>
+<div th:fragment="linkButton(text, url)">
+    <div class="rounded-md">
+        <div class="container p-3 bg-teal">
+            <a th:href="${url}">
+                <span th:text="${text}"></span>
+            </a>
+        </div>
+    </div>
 </div>

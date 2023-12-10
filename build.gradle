@@ -28,7 +28,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     // implementation 'org.springframework.session:spring-session-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     compileOnly 'org.projectlombok:lombok'
@@ -48,14 +48,21 @@ tasks.named('test') {
 /**
  * Tailwind Compilation
  */
+processResources {
+    exclude '**/*/style.css'
+}
+
 tasks.register('compileTailwind', Exec) {
     String cmd = "npx"
-    // if the os is windows, add nodejs to the path and change the tsc command
     if (Os.isFamily(Os.FAMILY_WINDOWS)) {
         cmd = "C:\\Program Files\\nodejs\\npx.cmd"
     }
-    commandLine cmd, 'tailwindcss', '-i', './src/main/resources/static/style.css', '-o', './build/resources/main/static/style.css'
+
+    commandLine cmd, 'tailwindcss',
+            '--content', 'C:/Users/water/IdeaProjects/seizuretracker/src/main/resources/templates',
+            '-i', 'C:/Users/water/IdeaProjects/seizuretracker/src/main/resources/static/style.css',
+            '-o', 'C:/Users/water/IdeaProjects/seizuretracker/build/resources/main/static/style.css'
 }
 
-// Make the Java compile task depend on the TypeScript compile task
-jar.dependsOn tasks.getByName("compileTailwind")
+// Make the Java build task depend on the Tailwind compile task
+processResources.dependsOn compileTailwind

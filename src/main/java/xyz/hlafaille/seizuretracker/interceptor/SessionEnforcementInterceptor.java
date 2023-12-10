@@ -11,13 +11,9 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import xyz.hlafaille.seizuretracker.entity.Session;
 import xyz.hlafaille.seizuretracker.exception.SessionCookieMissingException;
 import xyz.hlafaille.seizuretracker.exception.SessionEntityMissingException;
-import xyz.hlafaille.seizuretracker.repository.SessionRepository;
-import xyz.hlafaille.seizuretracker.service.SeizureLogService;
 import xyz.hlafaille.seizuretracker.service.SessionService;
 
 import java.io.IOException;
-import java.util.Optional;
-import java.util.UUID;
 
 /**
  * Intercept every request, ensuring that they have a valid session

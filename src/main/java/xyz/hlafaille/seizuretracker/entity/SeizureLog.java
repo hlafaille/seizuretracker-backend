@@ -7,8 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.util.Date;
 import java.util.UUID;
 
 @Entity
