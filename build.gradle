@@ -43,3 +43,19 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+///////
+/**
+ * Tailwind Compilation
+ */
+tasks.register('compileTailwind', Exec) {
+    String cmd = "npx"
+    // if the os is windows, add nodejs to the path and change the tsc command
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        cmd = "C:\\Program Files\\nodejs\\npx.cmd"
+    }
+    commandLine cmd, 'tailwindcss', '-i', './src/main/resources/static/style.css', '-o', './build/resources/main/static/style.css'
+}
+
+// Make the Java compile task depend on the TypeScript compile task
+jar.dependsOn tasks.getByName("compileTailwind")
