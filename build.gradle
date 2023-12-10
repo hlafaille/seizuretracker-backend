@@ -43,20 +43,3 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
-
-///////
-/**
- * TypeScript Compilation
- */
-tasks.register('compileTypeScript', Exec) {
-    workingDir 'src/main/ts'
-    environment 'PATH', "/c/Program Files/nodejs:" + System.getenv("PATH")
-    String tscCommand = 'tsc';
-    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-        tscCommand = 'tsc.cmd'
-    }
-    commandLine tscCommand
-}
-
-// Make the Java compile task depend on the TypeScript compile task
-compileTypeScript.dependsOn processResources
