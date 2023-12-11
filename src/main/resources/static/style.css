@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+html {
+    @apply bg-gray-800
+}
+
+.button {
+    /* background */
+    @apply bg-cyan-600 hover:bg-cyan-400;
+
+    /* ring */
+    @apply ring-cyan-200/[0.55] hover:ring-2;
+
+    /* translation */
+    @apply hover:-translate-y-0.5;
+
+    /* transition */
+    @apply transition-all;
+
+    /* text */
+    @apply text-slate-100 hover:text-white whitespace-nowrap font-semibold;
+
+    /* etc */
+    @apply flex w-min p-3 rounded-lg;
+    @apply drop-shadow-md hover:drop-shadow-xl;
+
+
+}

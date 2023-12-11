@@ -2,12 +2,7 @@
 
 
 <!--A button that acts as an <a href> tag-->
-<div th:fragment="linkButton(text, url)">
-    <div class="rounded-md">
-        <div class="container p-3 bg-teal">
-            <a th:href="${url}">
-                <span th:text="${text}"></span>
-            </a>
-        </div>
-    </div>
-</div>
+<a class="button" th:fragment="linkButton(text, url)" th:href="${url}" th:text="${text}"/>
+
+<!--A standard button, for use in forms-->
+<button class="button" th:fragment="button(text, type)" th:type="${type}" th:text="${text}"/>

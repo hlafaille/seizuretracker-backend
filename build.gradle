@@ -59,7 +59,7 @@ tasks.register('compileTailwind', Exec) {
     }
 
     commandLine cmd, 'tailwindcss',
-            '--content', 'C:/Users/water/IdeaProjects/seizuretracker/src/main/resources/templates',
+            // '--content', 'C:/Users/water/IdeaProjects/seizuretracker/src/main/resources/templates',
             '-i', 'C:/Users/water/IdeaProjects/seizuretracker/src/main/resources/static/style.css',
             '-o', 'C:/Users/water/IdeaProjects/seizuretracker/build/resources/main/static/style.css'
 }

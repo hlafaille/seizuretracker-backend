@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class TkTestController {
     @GetMapping("/tk/test")
     public String getTkTestPage() {
-        return "views/tk_test_page.html";
+        return "views/tk_test_page";
     }
 }
