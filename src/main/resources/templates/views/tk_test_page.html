@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Fragment Test</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="m-4 flex flex-1">
+    <div th:replace="fragments/tk/button :: linkButton('Don\'t Press Me', 'https://google.com')"></div>
+    <div th:replace="fragments/tk/button :: button('Ok fine, press me', 'submit')"></div>
+    <div th:replace="fragments/tk/input :: lineEdit('Label', 'Placeholder', true)"></div>
+    <div th:replace="fragments/tk/input :: passwordEdit('Password', 'Placeholder', true)"></div>
+</div>
+</body>
+</html>
