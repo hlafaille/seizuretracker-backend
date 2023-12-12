@@ -60,8 +60,8 @@ tasks.register('compileTailwind', Exec) {
 
     commandLine cmd, 'tailwindcss',
             // '--content', 'C:/Users/water/IdeaProjects/seizuretracker/src/main/resources/templates',
-            '-i', 'C:/Users/water/IdeaProjects/seizuretracker/src/main/resources/static/style.css',
-            '-o', 'C:/Users/water/IdeaProjects/seizuretracker/build/resources/main/static/style.css'
+            '-i', 'src/main/resources/static/style.css',
+            '-o', 'build/resources/main/static/style.css'
 }
 
 // Make the Java build task depend on the Tailwind compile task
