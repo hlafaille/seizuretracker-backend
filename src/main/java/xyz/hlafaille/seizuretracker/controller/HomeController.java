@@ -34,6 +34,6 @@ public class HomeController {
         Session session = sessionService.getSessionEntityFromCookie(sessionCookie);
         User user = sessionService.getUserEntityFromSessionId(session.getId());
         model.addAttribute("userFirstName", user.getFirstName());
-        return "pages/home";
+        return "views/home";
     }
 }

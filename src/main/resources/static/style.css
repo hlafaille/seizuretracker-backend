@@ -6,6 +6,7 @@ html {
     @apply bg-gray-800 selection:text-white selection:bg-sky-400 antialiased;
 }
 
+/* UI TOOLKIT / WIDGETS */
 .button {
     outline: none;
     @apply bg-sky-600 hover:bg-sky-500 active:bg-sky-700;
@@ -29,6 +30,7 @@ html {
     }
 }
 
+/* CARDS */
 .card {
     @apply bg-slate-700/50;
     @apply border-2 border-slate-600/25;
@@ -41,6 +43,7 @@ html {
     /* @apply bg-gradient-to-t from-slate-300 bg-clip-text text-transparent to-white h-min; */
 }
 
+/* ALERTS */
 .alert-success {
     @apply overflow-y-auto;
     @apply bg-green-600;
@@ -65,6 +68,26 @@ html {
     @apply p-2 rounded-lg drop-shadow-md;
 }
 
-.htmx-indicator .loading-indicator{
-    @apply animate-pulse;
+/* NAVBAR */
+/* When we're in lg mode, we don't display the hamburger & drawer. */
+.navbar {
+    @apply bg-slate-700 rounded-b-md lg:rounded-md;
+    @apply w-full p-3 lg:m-3 drop-shadow-lg;
+    @apply border-2 border-slate-600/25;
+}
+
+.navbar .navbar-title {
+    @apply text-slate-100 font-bold whitespace-nowrap truncate text-2xl w-min pl-4 lg:pl-0 pr-4;
+}
+
+.navbar .navbar-content {
+    @apply flex items-center justify-start;
+}
+
+.navbar .navbar-item {
+    @apply text-slate-300 text-xl font-semibold whitespace-nowrap truncate w-auto;
+}
+
+.navbar .navbar-hamburger {
+    @apply lg:hidden text-white text-2xl font-semibold whitespace-nowrap truncate w-auto;
 }

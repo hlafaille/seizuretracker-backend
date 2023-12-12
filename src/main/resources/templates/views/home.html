@@ -2,14 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark" lang="en">
 <head>
     <div th:replace="~{scripts_common :: bootstrap}"></div>
-    <title>Log In - SeizureTracker</title>
+    <title>Home - SeizureTracker</title>
 </head>
 <body>
 
-<div class="flex justify-center items-center h-screen w-screen">
+
+<div class="flex justify-center items-center w-screen">
+    <div th:replace="~{fragments/nav :: navBar}"></div>
     <!--/*@thymesVar id="newAccount" type="java.lang.Boolean"*/-->
     <!--/*@thymesVar id="userMissing" type="java.lang.Boolean"*/-->
-    <div th:replace="~{fragments/auth/logInCard :: logInCard(${newAccount}, ${userMissing})}"></div>
 </div>
 </body>
 </html>
