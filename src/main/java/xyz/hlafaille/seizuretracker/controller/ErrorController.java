@@ -34,6 +34,6 @@ public class ErrorController implements org.springframework.boot.web.servlet.err
         model.addAttribute("funnyCardSubtitle", funnyCardSubtitle);
         model.addAttribute("errorMessage", errorMessage);
         model.addAttribute("detailedErrorMessage", detailedErrorMessage);
-        return "pages/error";
+        return "views/error";
     }
 }

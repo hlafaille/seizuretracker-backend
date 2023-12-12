@@ -18,7 +18,7 @@ html {
 }
 
 .line-edit {
-    input[type="text"], input[type="password"] {
+    input[type="text"], input[type="email"], input[type="password"] {
         outline: none;
         @apply bg-slate-700 hover:bg-slate-600/75 focus:bg-slate-500/75;
         @apply ring-slate-400/[0.55] hover:ring-2 focus:ring-2;

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark" lang="en">
+<head>
+    <div th:replace="~{scripts_common :: bootstrap}"></div>
+    <title>Log In - SeizureTracker</title>
+</head>
+<body>
+
+<div class="flex justify-center items-center h-screen w-screen">
+    <div class="sm:m-2">
+        <div th:replace="fragments/tk/card :: card('Houston, we have a problem', ~{::content})"
+             th:classappend="w-screen">
+            <div th:fragment="content">
+                <p class="" th:text="${funnyCardSubtitle}"></p>
+                <div class="alert alert-secondary font-monospace text-uppercase" role="alert">
+                    <div th:text="${errorMessage}"></div>
+                    <hr>
+                    <div class="text-muted" th:text="${detailedErrorMessage}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
