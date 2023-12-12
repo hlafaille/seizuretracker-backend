@@ -7,29 +7,7 @@
 <body>
 
 <div class="flex justify-center items-center h-screen w-screen">
-    <div class="p-4 w-full xl:w-96">
-        <div th:if="${newAccount}" class="alert-success mb-2" role="alert">
-            Account created! Try logging in.
-        </div>
-        <div th:if="${userMissing}" class="alert-danger mb-2" role="alert">
-            User not found
-        </div>
-        <div th:replace="fragments/tk/card :: card('Welcome', ~{::content})" th:classappend="w-screen">
-            <div th:fragment="content">
-                <form action="/login" method="post" id="loginForm">
-                    <div class="flex flex-col space-y-2">
-                        <div class="flex flex-col space-y-2">
-                            <div th:replace="fragments/tk/input :: emailLineEdit('emailAddress', 'E-Mail', true)"></div>
-                            <div th:replace="fragments/tk/input :: passwordLineEdit('password', 'Password', true)"></div>
-                        </div>
-                        <div class="flex flex-row space-x-2">
-                            <div th:replace="fragments/tk/button :: button('Log In', 'submit')"></div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    <div th:replace="fragments/login/card :: loginCard(${newAccount}, ${userMissing})"></div>
 </div>
 </body>
 </html>

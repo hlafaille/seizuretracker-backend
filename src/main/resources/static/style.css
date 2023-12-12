@@ -54,3 +54,7 @@ html {
     @apply font-bold whitespace-nowrap text-base text-white drop-shadow-lg;
     @apply flex p-2 rounded-lg drop-shadow-md;
 }
+
+.htmx-indicator .loading-indicator{
+    @apply animate-pulse;
+}
