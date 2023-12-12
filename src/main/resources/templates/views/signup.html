@@ -2,12 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark" lang="en">
 <head>
     <div th:replace="~{scripts_common :: bootstrap}"></div>
-    <title>Log In - SeizureTracker</title>
+    <title>Sign Up - SeizureTracker</title>
 </head>
 <body>
 
 <div class="flex justify-center items-center h-screen w-screen">
-    <div th:replace="~{fragments/auth/card :: loginCard(${newAccount}, ${userMissing})}"></div>
+    <div th:replace="~{fragments/auth/card :: signUpCard()}"></div>
 </div>
 </body>
 </html>

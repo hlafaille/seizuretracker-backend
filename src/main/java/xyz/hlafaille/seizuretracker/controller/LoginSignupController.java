@@ -76,7 +76,7 @@ public class LoginSignupController {
             sessionId = sessionService.beginSession(formData.getEmailAddress(), formData.getPassword());
         } catch (UserEntityMissingException | UserPasswordMismatchException e) {
             model.addAttribute("userNotFound", true);
-            return "fragments/login/card :: loginCard";
+            return "fragments/auth/card :: loginCard";
         }
 
         // set the cookie
