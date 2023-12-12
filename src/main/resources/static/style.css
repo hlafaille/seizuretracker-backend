@@ -36,23 +36,33 @@ html {
 }
 
 .card-title {
-    @apply font-bold whitespace-nowrap text-3xl text-white drop-shadow-lg;
+    @apply text-center font-bold whitespace-nowrap truncate text-3xl text-white drop-shadow-lg;
     /* The gradient background seems to be commented out, uncomment if needed */
     /* @apply bg-gradient-to-t from-slate-300 bg-clip-text text-transparent to-white h-min; */
 }
 
 .alert-success {
+    @apply overflow-y-auto;
     @apply bg-green-600;
     @apply border-2 border-green-500;
-    @apply font-bold whitespace-nowrap text-base text-white drop-shadow-lg;
-    @apply flex p-2 rounded-lg drop-shadow-md;
+    @apply font-bold break-words text-base text-white drop-shadow-lg;
+    @apply p-2 rounded-lg drop-shadow-md;
 }
 
 .alert-danger {
+    @apply overflow-y-auto;
     @apply bg-red-700;
     @apply border-2 border-red-500;
-    @apply font-bold whitespace-nowrap text-base text-white drop-shadow-lg;
-    @apply flex p-2 rounded-lg drop-shadow-md;
+    @apply font-bold break-words text-base text-white drop-shadow-lg;
+    @apply p-2 rounded-lg drop-shadow-md;
+}
+
+.alert-secondary {
+    @apply overflow-y-auto;
+    @apply bg-gray-700;
+    @apply border-2 border-gray-500;
+    @apply font-bold font-mono break-words text-base text-gray-400 uppercase drop-shadow-lg;
+    @apply p-2 rounded-lg drop-shadow-md;
 }
 
 .htmx-indicator .loading-indicator{

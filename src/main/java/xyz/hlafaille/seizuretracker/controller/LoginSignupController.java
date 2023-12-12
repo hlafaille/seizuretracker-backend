@@ -6,6 +6,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -57,7 +59,8 @@ public class LoginSignupController {
         if (isSessionResumable) {
             logger.info("session is resumable, redirecting home");
             response.addHeader("hx-redirect", "/home");
-            return "";
+            response.addHeader("hx-replace-url", "true");
+            return "redirect:/home";
         }
         return "views/login";
     }
@@ -71,7 +74,7 @@ public class LoginSignupController {
         UUID sessionId;
         try {
             sessionId = sessionService.beginSession(formData.getEmailAddress(), formData.getPassword());
-        } catch (UserEntityMissingException e) {
+        } catch (UserEntityMissingException | UserPasswordMismatchException e) {
             model.addAttribute("userNotFound", true);
             return "fragments/login/card :: loginCard";
         }
@@ -80,6 +83,7 @@ public class LoginSignupController {
         Cookie sessionCookie = new Cookie("session", sessionId.toString());
         response.addCookie(sessionCookie);
         response.addHeader("hx-redirect", "/home");
+        response.addHeader("hx-replace-url", "true");
         return "";
     }
 

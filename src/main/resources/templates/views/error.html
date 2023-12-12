@@ -7,15 +7,16 @@
 <body>
 
 <div class="flex justify-center items-center h-screen w-screen">
-    <div class="sm:m-2">
-        <div th:replace="fragments/tk/card :: card('Houston, we have a problem', ~{::content})"
-             th:classappend="w-screen">
+    <div class="p-4 w-full xl:w-96">
+        <div th:replace="fragments/tk/card :: card(':/', ~{::content})">
             <div th:fragment="content">
-                <p class="" th:text="${funnyCardSubtitle}"></p>
-                <div class="alert alert-secondary font-monospace text-uppercase" role="alert">
-                    <div th:text="${errorMessage}"></div>
-                    <hr>
-                    <div class="text-muted" th:text="${detailedErrorMessage}"></div>
+                <div class="flex flex-col justify-center items-center">
+                    <p class="text-center text-white font-semibold pb-4" th:text="${funnyCardSubtitle}"></p>
+                    <div class="text-center alert-secondary w-full h-full" role="alert">
+                        <p th:text="${errorMessage}"></p>
+                        <br>
+                        <p th:text="${detailedErrorMessage}"></p>
+                    </div>
                 </div>
             </div>
         </div>
