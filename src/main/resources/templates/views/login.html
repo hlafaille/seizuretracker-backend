@@ -7,7 +7,10 @@
 <body>
 
 <div class="flex justify-center items-center h-screen w-screen">
-    <div th:replace="~{fragments/auth/card :: loginCard(${newAccount}, ${userMissing})}"></div>
+    <!--/*@thymesVar id="newAccount" type="java.lang.Boolean"*/-->
+    <!--/*@thymesVar id="userMissing" type="java.lang.Boolean"*/-->
+    <!--/*@thymesVar id="userMissing" type="java.lang.Boolean"*/-->
+    <div th:replace="~{fragments/auth/logInCard :: logInCard(${newAccount}, ${userMissing})}"></div>
 </div>
 </body>
 </html>

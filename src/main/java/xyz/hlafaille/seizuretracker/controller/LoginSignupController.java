@@ -76,7 +76,7 @@ public class LoginSignupController {
             sessionId = sessionService.beginSession(formData.getEmailAddress(), formData.getPassword());
         } catch (UserEntityMissingException | UserPasswordMismatchException e) {
             model.addAttribute("userNotFound", true);
-            return "fragments/auth/card :: loginCard";
+            return "fragments/auth/logInCard :: logInCard";
         }
 
         // set the cookie
@@ -97,7 +97,7 @@ public class LoginSignupController {
             logger.info("session is resumable, redirecting home");
             return "redirect:/home";
         }
-        return "pages/signup";
+        return "views/signup";
     }
 
     /**
