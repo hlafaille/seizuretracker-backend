@@ -62,7 +62,7 @@ public class LoginSignupController {
         }
         model.addAttribute("newAccount", newAccount);
         model.addAttribute("userMissing", userMissing);
-       return "pages/login";
+       return "views/login";
     }
 
     /**

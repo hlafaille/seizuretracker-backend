@@ -27,7 +27,7 @@ html {
     @apply text-slate-200 text-center hover:text-white active:text-slate-300 whitespace-nowrap font-semibold;
 
     /* etc */
-    @apply flex p-3 rounded-lg w-full;
+    @apply w-full flex p-3 rounded-lg justify-center items-center;
     @apply drop-shadow-sm hover:drop-shadow-2xl;
 }
 
@@ -44,6 +44,9 @@ html {
         /* translation */
         /* @apply hover:-translate-y-0.5; */
 
+        /* border */
+        /* @apply border-b-2 border-slate-800/75; */
+
         /* transition */
         @apply transition-all;
 
@@ -51,7 +54,7 @@ html {
         @apply text-slate-100 hover:text-white whitespace-nowrap font-semibold;
 
         /* etc */
-        @apply flex p-3 rounded-lg w-full;
+        @apply w-full flex p-3 rounded-lg;
         @apply drop-shadow-sm hover:drop-shadow-2xl focus:drop-shadow-2xl;
     }
 }
@@ -61,14 +64,42 @@ html {
     @apply bg-slate-700/50;
 
     /* border */
-    @apply border-2 border-slate-600;
+    @apply border-2 border-slate-600/25;
 
     /* etc */
-    @apply flex p-6 rounded-lg;
+    @apply flex p-6 rounded-lg drop-shadow-2xl;
 }
 
 .card-title {
-    @apply font-bold whitespace-nowrap text-2xl drop-shadow-lg;
+    @apply font-bold whitespace-nowrap text-3xl drop-shadow-lg;
     @apply text-white;
    /*@apply bg-gradient-to-t from-slate-300 bg-clip-text text-transparent to-white h-min;*/
+}
+
+.alert-success {
+    /* background */
+    @apply bg-green-600;
+
+    /* border */
+    @apply border-2 border-green-500;
+
+    @apply font-bold whitespace-nowrap text-base drop-shadow-lg;
+    @apply text-white;
+
+    /* etc */
+    @apply flex p-2 rounded-lg drop-shadow-md;
+}
+
+.alert-danger {
+    /* background */
+    @apply bg-red-700;
+
+    /* border */
+    @apply border-2 border-red-500;
+
+    @apply font-bold whitespace-nowrap text-base drop-shadow-lg;
+    @apply text-white;
+
+    /* etc */
+    @apply flex p-2 rounded-lg drop-shadow-md;
 }

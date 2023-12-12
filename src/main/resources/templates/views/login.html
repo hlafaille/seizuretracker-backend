@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark" lang="en">
+<head>
+    <div th:replace="~{scripts_common :: bootstrap}"></div>
+    <title>Log In - SeizureTracker</title>
+</head>
+<body>
+
+<div class="flex justify-center items-center h-screen w-screen">
+    <div class="sm:m-2 sm:w-full md:w-96">
+        <div th:if="${newAccount}" class="alert-success mb-2" role="alert">
+            Account created! Try logging in.
+        </div>
+        <div th:if="${userMissing}" class="alert-danger mb-2" role="alert">
+            User not found
+        </div>
+        <div th:replace="fragments/tk/card :: card('Welcome', ~{::content})" th:classappend="w-screen">
+            <div th:fragment="content">
+                <form action="/login" method="post" id="loginForm">
+                    <div class="flex flex-col space-y-2">
+                        <div class="flex flex-col space-y-2">
+                            <div th:replace="fragments/tk/input :: lineEdit('Label', 'E-Mail', true)"></div>
+                            <div th:replace="fragments/tk/input :: passwordEdit('Password', 'Password', true)"></div>
+                        </div>
+                        <div class="flex flex-row space-x-2">
+                            <div th:replace="fragments/tk/button :: button('Log In', 'submit')"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
