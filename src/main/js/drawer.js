@@ -1,3 +1,20 @@
+import("swiped-events")
+
+/**
+ * Add a touch event listener
+ */
+document.addEventListener('swiped-right', function (e) {
+    console.log(e.target); // the element that was swiped
+});
+
+/**
+ * Listens for clicks on the navBarHamburger, toggling the drawer
+ */
+document.addEventListener('click', function (event) {
+    if (event.target.getAttribute('id') === 'navBarHamburger') {
+        toggleDrawer()
+    }
+})
 
 /**
  * Called from the hamburger in the navbar, toggles the drawer on and off
@@ -6,7 +23,7 @@ export function toggleDrawer() {
     const drawer = document.getElementById("navBarDrawer")
     const hamburger = document.getElementById("navBarHamburger")
     if (!drawer || !hamburger) {
-        console.error("Incorrect navbar setup")
+        console.error("Incorrect navbar setup. drawer==" + drawer + " & hamburger==" + hamburger)
         return
     }
 
@@ -18,9 +35,10 @@ export function toggleDrawer() {
         drawer.classList.add("navbar-drawer-enabled")
     }
 
-    if(isDrawerEnabled) {
+    if (isDrawerEnabled) {
         hamburger.classList.remove("navbar-drawer-enabled")
     } else {
         hamburger.classList.add("navbar-drawer-enabled")
     }
 }
+

@@ -102,8 +102,10 @@ html {
 
 
 .navbar-drawer {
-    @apply absolute inset-0 bg-gray-700/50 w-screen h-screen text-white;
-    @apply transition-transform transform translate-x-[-100%]
+    @apply absolute inset-0 bg-zinc-700/50 w-screen h-screen text-white;
+    @apply transition-transform transform translate-x-[-100%];
+    @apply border-2 border-slate-600/25;
+    @apply flex p-6 rounded-lg drop-shadow-2xl;
 }
 
 .navbar-drawer.navbar-drawer-enabled {
