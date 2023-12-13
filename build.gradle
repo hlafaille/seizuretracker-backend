@@ -50,6 +50,7 @@ tasks.named('test') {
  */
 processResources {
     exclude '**/*/style.css'
+    exclude '**/*/*.js'
 }
 
 tasks.register('compileTailwind', Exec) {
@@ -64,5 +65,41 @@ tasks.register('compileTailwind', Exec) {
             '-o', 'build/resources/main/static/style.css'
 }
 
+/**
+ * JavaScript Bundling
+ */
+
+tasks.register('bundleJavaScript', Exec) {
+    // add node_modules/.bin to the path
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        environment 'PATH', System.getenv("PATH") + ";" + new File("node_modules/.bin").absolutePath
+        println System.getenv("PATH")
+    } else {
+        environment 'PATH', System.getenv("PATH") + ":" + new File("node_modules/.bin").absolutePath
+    }
+
+    // Define the directory you want to list files from
+    File dir = new File('src/main/js') // Change to your directory
+
+    // establish our command
+    List<String> command = new ArrayList<>()
+    command.add("esbuild")
+
+    // Check if the directory exists
+    if (dir.exists() && dir.isDirectory()) {
+        // Recursively process all files in the directory
+        dir.eachFileRecurse { File file ->
+            // Print the absolute path of each file
+            command.add(file.absolutePath.toString())
+        }
+    } else {
+        println "Directory does not exist: ${dir.absolutePath}"
+        System.exit(1)
+    }
+
+    command.add("--bundle")
+    command.add("--outfile=build/resources/main/static/bundle.js")
+    commandLine command
+}
 // Make the Java build task depend on the Tailwind compile task
 processResources.dependsOn compileTailwind

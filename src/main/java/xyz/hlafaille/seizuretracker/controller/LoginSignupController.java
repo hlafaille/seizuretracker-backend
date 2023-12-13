@@ -69,7 +69,7 @@ public class LoginSignupController {
      * Log in the user by establishing them a new session, setting that cookie and then redirecting the user to /home
      */
     @PostMapping("/login")
-    public String doLogin(@ModelAttribute LoginFormModel formData, Model model, HttpServletResponse response) throws UserPasswordMismatchException {
+    public String doLogin(@ModelAttribute LoginFormModel formData, Model model, HttpServletResponse response) {
         // start the session
         UUID sessionId;
         try {

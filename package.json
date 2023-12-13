@@ -7,8 +7,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "tailwindcss": "^3.3.6",
-    "webpack": "^5.89.0",
-    "webpack-cli": "^5.1.4"
+    "esbuild": "^0.19.9",
+    "tailwindcss": "^3.3.6"
   }
 }
