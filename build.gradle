@@ -49,21 +49,42 @@ tasks.named('test') {
  * Tailwind Compilation
  */
 processResources {
-    exclude '**/*/style.css'
+    exclude '**/*/*.css'
     exclude '**/*/*.js'
 }
 
 tasks.register('compileTailwind', Exec) {
     workingDir projectDir
 
-    String cmd
+    // Define the directory you want to list files from
+    File dir = new File(workingDir.toString() + '/src/main/css') // Change to your directory
+
+    // establish our command
+    List<String> command = new ArrayList<>()
     if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-        cmd = workingDir.toString() + "/node_modules/.bin/tailwindcss.cmd"
+        command.add(workingDir.toString() + "/node_modules/.bin/tailwindcss.cmd")
     } else {
-        cmd = workingDir.toString() + "/node_modules/.bin/tailwindcss"
+        command.add(workingDir.toString() + "/node_modules/.bin/tailwindcss")
     }
 
-    commandLine cmd, '-i', 'src/main/resources/static/style.css', '-o', 'build/resources/main/static/style.css'
+    // Check if the directory exists
+    if (dir.exists() && dir.isDirectory()) {
+        // Recursively process all files in the directory
+        dir.eachFileRecurse { File file ->
+            // Print the absolute path of each file
+            command.add(file.absolutePath.toString())
+        }
+    } else {
+        println "Directory does not exist: ${dir.absolutePath}"
+        System.exit(1)
+    }
+
+    command.add('-i')
+    command.add('src/main/css/style.css')
+    command.add('-o')
+    command.add('build/resources/main/static/style.css')
+    println("Running tailwindcli: " + command.toString())
+    commandLine command
 }
 
 /**
@@ -97,6 +118,9 @@ tasks.register('bundleJavaScript', Exec) {
     }
 
     command.add("--bundle")
+    command.add("--format=iife")
+    command.add("--platform=browser")
+    command.add("--global-name=sz")
     command.add("--outfile=build/resources/main/static/bundle.js")
     println("Running esbuild: " + command.toString())
     commandLine command
