@@ -67,20 +67,8 @@ tasks.register('compileTailwind', Exec) {
         command.add(workingDir.toString() + "/node_modules/.bin/tailwindcss")
     }
 
-    // Check if the directory exists
-    if (dir.exists() && dir.isDirectory()) {
-        // Recursively process all files in the directory
-        dir.eachFileRecurse { File file ->
-            // Print the absolute path of each file
-            command.add(file.absolutePath.toString())
-        }
-    } else {
-        println "Directory does not exist: ${dir.absolutePath}"
-        System.exit(1)
-    }
-
     command.add('-i')
-    command.add('src/main/css/style.css')
+    command.add("src/main/css/style.css")
     command.add('-o')
     command.add('build/resources/main/static/style.css')
     println("Running tailwindcli: " + command.toString())

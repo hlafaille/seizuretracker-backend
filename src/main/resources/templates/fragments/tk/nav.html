@@ -1,9 +1,9 @@
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark" lang="en">
 
-<div th:fragment="navBar" class="navbar">
+<div th:fragment="navBar(appName)" class="navbar">
     <div class="navbar-content">
         <a id="navBarHamburger" href="javascript:sz.toggleDrawer()" class="navbar-hamburger">☰</a>
-        <p class="navbar-title">SeizureTracker</p>
+        <p class="navbar-title" th:text="${appName}"></p>
     </div>
 </div>
 

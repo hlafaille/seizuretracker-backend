@@ -68,8 +68,10 @@ html {
     @apply p-2 rounded-lg drop-shadow-md;
 }
 
-/* NAVBAR */
-/* When we're in lg mode, we don't display the hamburger & drawer. */
+
+
+
+
 .navbar {
     @apply bg-slate-700 rounded-b-md lg:rounded-md;
     @apply w-full p-3 lg:m-3 drop-shadow-lg;
