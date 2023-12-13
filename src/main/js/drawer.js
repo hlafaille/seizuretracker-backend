@@ -3,14 +3,24 @@
  * Called from the hamburger in the navbar, toggles the drawer on and off
  */
 export function toggleDrawer() {
-    const element = document.getElementById("navbarDrawer")
-    if (!element) {
-        console.error("An element with id `navbarDrawer` does not exist")
+    const drawer = document.getElementById("navBarDrawer")
+    const hamburger = document.getElementById("navBarHamburger")
+    if (!drawer || !hamburger) {
+        console.error("Incorrect navbar setup")
         return
     }
-    if (element.classList.contains("hidden")) {
-        element.classList.remove("hidden")
+
+    // determine if the drawer is currently enabled or not
+    const isDrawerEnabled = drawer.classList.contains("navbar-drawer-enabled")
+    if (isDrawerEnabled) {
+        drawer.classList.remove("navbar-drawer-enabled")
     } else {
-        element.classList.add("hidden")
+        drawer.classList.add("navbar-drawer-enabled")
+    }
+
+    if(isDrawerEnabled) {
+        hamburger.classList.remove("navbar-drawer-enabled")
+    } else {
+        hamburger.classList.add("navbar-drawer-enabled")
     }
 }

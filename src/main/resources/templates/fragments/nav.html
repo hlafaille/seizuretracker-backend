@@ -2,8 +2,9 @@
 
 <div th:fragment="navBar" class="navbar">
     <div class="navbar-content">
-        <a href="javascript:sz.toggleDrawer()" class="navbar-hamburger">☰</a>
-        <div id="navbarDrawer"></div>
+        <a id="navBarHamburger" href="javascript:sz.toggleDrawer()" class="navbar-hamburger">☰</a>
         <p class="navbar-title">SeizureTracker</p>
     </div>
 </div>
+
+<div id="navBarDrawer" th:fragment="navBarDrawer" class="navbar-drawer navbar-drawer-disabled"></div>

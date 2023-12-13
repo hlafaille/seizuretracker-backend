@@ -74,6 +74,7 @@ html {
     @apply bg-slate-700 rounded-b-md lg:rounded-md;
     @apply w-full p-3 lg:m-3 drop-shadow-lg;
     @apply border-2 border-slate-600/25;
+    @apply fixed top-0 left-0 right-0 z-10;
 }
 
 .navbar .navbar-title {
@@ -85,9 +86,23 @@ html {
 }
 
 .navbar .navbar-item {
-    @apply text-slate-300 text-xl font-semibold whitespace-nowrap truncate w-auto;
+    @apply text-slate-300 hover:text-slate-400 text-xl font-semibold whitespace-nowrap truncate w-auto;
 }
 
 .navbar .navbar-hamburger {
-    @apply lg:hidden text-white text-2xl font-semibold whitespace-nowrap truncate w-auto;
+    @apply transition-colors lg:hidden text-white hover:text-slate-400 text-2xl font-semibold whitespace-nowrap truncate w-auto;
+}
+
+#navBarHamburger.navbar-drawer-enabled {
+    @apply transition-colors text-slate-500;
+}
+
+
+.navbar-drawer {
+    @apply absolute inset-0 bg-gray-700/50 w-screen h-screen text-white;
+    @apply transition-transform transform translate-x-[-100%]
+}
+
+.navbar-drawer.navbar-drawer-enabled {
+    @apply translate-x-0
 }
