@@ -1,8 +1,21 @@
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark" lang="en">
+    <!--A button that acts as an <a href> tag-->
+    <a
+        class="button"
+        th:fragment="linkButton(text, url)"
+        th:href="${url}"
+        th:text="${text}"
+        th:with="idName = ${#strings.replace(text, ' ', '')} + 'Button'"
+        th:id="${idName}"
+    />
 
-
-<!--A button that acts as an <a href> tag-->
-<a class="button" th:fragment="linkButton(text, url)" th:href="${url}" th:text="${text}" th:with="idName = ${#strings.replace(text, ' ', '')} + 'Button'" th:id="${idName}"/>
-
-<!--A standard button, for use in forms-->
-<button class="button" th:fragment="button(text, type)" th:type="${type}" th:text="${text}" th:with="idName = ${#strings.replace(text, ' ', '')} + 'Button'" th:id="${idName}"/>
+    <!--A standard button, for use in forms-->
+    <button
+        class="button"
+        th:fragment="button(text, type)"
+        th:type="${type}"
+        th:text="${text}"
+        th:with="idName = ${#strings.replace(text, ' ', '')} + 'Button'"
+        th:id="${idName}"
+    />
+</html>

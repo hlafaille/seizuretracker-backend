@@ -1,20 +1,46 @@
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark" lang="en">
+    <!-- Equivalent to a line edit from Qt -->
+    <div
+        th:fragment="lineEdit(name, placeholder, doLabel=true)"
+        th:with="idName = ${#strings.replace(name, ' ', '')} + 'LineEdit'"
+        class="line-edit"
+    >
+        <label th:if="${doLabel}" th:for="${idName}" th:text="${name}" />
+        <input
+            th:id="${idName}"
+            th:placeholder="${placeholder}"
+            type="text"
+            th:name="${name}"
+        />
+    </div>
 
-<!-- Equivalent to a line edit from Qt -->
-<div th:fragment="lineEdit(name, placeholder, doLabel=true)" th:with="idName = ${#strings.replace(name, ' ', '')} + 'LineEdit'" class="line-edit">
-    <label th:if="${doLabel}" th:for="${idName}" th:text="${name}"/>
-    <input th:id="${idName}" th:placeholder="${placeholder}" type="text" th:name="${name}">
-</div>
+    <!-- ... -->
+    <div
+        th:fragment="emailLineEdit(name, placeholder, doLabel=true)"
+        th:with="idName = ${#strings.replace(name, ' ', '')} + 'LineEdit'"
+        class="line-edit"
+    >
+        <label th:if="${doLabel}" th:for="${idName}" th:text="${name}" />
+        <input
+            th:id="${idName}"
+            th:placeholder="${placeholder}"
+            type="email"
+            th:name="${name}"
+        />
+    </div>
 
-
-<!-- ... -->
-<div th:fragment="emailLineEdit(name, placeholder, doLabel=true)" th:with="idName = ${#strings.replace(name, ' ', '')} + 'LineEdit'" class="line-edit">
-    <label th:if="${doLabel}" th:for="${idName}" th:text="${name}"/>
-    <input th:id="${idName}" th:placeholder="${placeholder}" type="email" th:name="${name}">
-</div>
-
-<!-- Equivalent to line edit set to password mode in Qt -->
-<div th:fragment="passwordLineEdit(name, placeholder, doLabel=true)" th:with="idName = ${#strings.replace(name, ' ', '')} + 'LineEdit'" class="line-edit">
-    <label th:if="${doLabel}" th:for="${idName}" th:text="${name}"/>
-    <input th:id="${idName}" th:placeholder="${placeholder}" type="password" th:name="${name}">
-</div>
+    <!-- Equivalent to line edit set to password mode in Qt -->
+    <div
+        th:fragment="passwordLineEdit(name, placeholder, doLabel=true)"
+        th:with="idName = ${#strings.replace(name, ' ', '')} + 'LineEdit'"
+        class="line-edit"
+    >
+        <label th:if="${doLabel}" th:for="${idName}" th:text="${name}" />
+        <input
+            th:id="${idName}"
+            th:placeholder="${placeholder}"
+            type="password"
+            th:name="${name}"
+        />
+    </div>
+</html>

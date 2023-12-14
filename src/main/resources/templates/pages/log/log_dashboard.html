@@ -1,60 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
-<head th:replace="~{scripts_common :: head('Log Dashboard - SeizureTracker')}"></head>
-<body>
+    <head
+        th:replace="~{scripts_common :: head('Log Dashboard - SeizureTracker')}"
+    ></head>
+    <body>
+        <!-- navbar -->
+        <div
+            th:replace="~{fragments/tk/nav :: bar(activeSection = 'log')}"
+        ></div>
 
-<!-- navbar -->
-<div th:replace="~{fragments/tk/nav :: bar(activeSection = 'log')}"></div>
-
-<!-- basic card -->
-<main class="flex-fill">
-    <div class="container my-5">
-        <div class="card">
-            <div class="card-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div th:if="${entryCreated}" class="alert alert-success" role="alert">
-                                Entry Created
+        <!-- basic card -->
+        <main class="flex-fill">
+            <div class="container my-5">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div
+                                        th:if="${entryCreated}"
+                                        class="alert alert-success"
+                                        role="alert"
+                                    >
+                                        Entry Created
+                                    </div>
+                                    <h2 class="card-title">
+                                        We hope you're okay,
+                                        <span th:text="${userFirstName}"></span>
+                                    </h2>
+                                    <p class="card-subtitle text-muted">
+                                        Below is a log of your recorded
+                                        seizures.
+                                    </p>
+                                </div>
                             </div>
-                            <h2 class="card-title">We hope you're okay, <span
-                                    th:text="${userFirstName}"></span>
-                            </h2>
-                            <p class="card-subtitle text-muted">Below is a log of your recorded seizures. </p>
+                            <div class="row pt-2">
+                                <div class="col">
+                                    <a
+                                        href="/log/newDraft"
+                                        class="btn btn-outline-primary float-end"
+                                        >New</a
+                                    >
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row pt-2">
-                        <div class="col">
-                            <a href="/log/newDraft" class="btn btn-outline-primary float-end">New</a>
+                        <!-- table -->
+                        <div class="p-2">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Duration</th>
+                                            <th scope="col">Intensity</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr
+                                            th:each="logEntry, iterStat : ${seizureLogs}"
+                                        >
+                                            <td
+                                                th:text="${iterStat.index} + 1"
+                                            ></td>
+                                            <td
+                                                th:text="${#dates.format(logEntry.getInstant(), 'MM/dd/yyyy')}"
+                                            ></td>
+                                            <td
+                                                th:text="${logEntry.duration}+' min'"
+                                            ></td>
+                                            <td
+                                                th:text="${logEntry.severity}+'/10'"
+                                            ></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <!-- table -->
-                <div class="p-2">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Duration</th>
-                                <th scope="col">Intensity</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="logEntry, iterStat : ${seizureLogs}">
-                                <td th:text="${iterStat.index} + 1"></td>
-                                <td th:text="${#dates.format(logEntry.getInstant(), 'MM/dd/yyyy')}"></td>
-                                <td th:text="${logEntry.duration}+' min'"></td>
-                                <td th:text="${logEntry.severity}+'/10'"></td>
-                            </tr>
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</main>
-</body>
+        </main>
+    </body>
 </html>

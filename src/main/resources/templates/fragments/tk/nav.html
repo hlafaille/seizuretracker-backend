@@ -1,17 +1,28 @@
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark" lang="en">
-
-<div th:fragment="navBar(appName)" class="navbar">
-    <div class="navbar-content">
-        <a id="navBarHamburger" class="navbar-hamburger">☰</a>
-        <p class="navbar-title" th:text="${appName}"></p>
+    <div th:fragment="navBar(appName)" class="navbar">
+        <div class="navbar-content">
+            <a id="navBarHamburger" class="navbar-hamburger">☰</a>
+            <p class="navbar-title" th:text="${appName}"></p>
+        </div>
     </div>
-</div>
 
-<div id="navBarDrawer" th:fragment="navBarDrawer(navBarList)" class="navbar-drawer navbar-drawer-disabled">
-    <div th:replace="${navBarList}"></div>
-</div>
-<div th:fragment="navBarItem(text, url, iconRelativeUrl, iconAlt)" class="navbar-item">
-    <a th:href="${url}">
-        <img th:src="${iconRelativeUrl}" th:alt="${iconAlt}" th:text="${text}" />
-    </a>
-</div>
+    <div
+        id="navBarDrawer"
+        th:fragment="navBarDrawer(navBarList)"
+        class="navbar-drawer navbar-drawer-disabled"
+    >
+        <div th:replace="${navBarList}"></div>
+    </div>
+    <div
+        th:fragment="navBarItem(text, url, iconRelativeUrl, iconAlt)"
+        class="navbar-item"
+    >
+        <a th:href="${url}">
+            <img
+                th:src="${iconRelativeUrl}"
+                th:alt="${iconAlt}"
+                th:text="${text}"
+            />
+        </a>
+    </div>
+</html>

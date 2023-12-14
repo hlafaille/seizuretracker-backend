@@ -72,7 +72,7 @@ tasks.register("formatJava", Exec) {
 /**
  * Prettier - Format HTML
  */
-tasks.register("formatJava", Exec) {
+tasks.register("formatHtml", Exec) {
     group = "prettier"
     workingDir projectDir
 
