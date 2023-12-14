@@ -45,7 +45,10 @@ tasks.named('test') {
 }
 
 
-tasks.register("prettier", Exec) {
+/**
+ * Prettier - Format Java
+ */
+tasks.register("formatJava", Exec) {
     workingDir projectDir
 
     // establish our command
@@ -63,6 +66,51 @@ tasks.register("prettier", Exec) {
 
     commandLine command
 }
+
+
+/**
+ * Prettier - Format Tailwind Source CSS
+ */
+tasks.register("formatTailwindSource", Exec) {
+    workingDir projectDir
+
+    // establish our command
+    List<String> command = new ArrayList<>()
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        command.add(workingDir.toString() + "\\node_modules\\.bin\\prettier.cmd")
+    } else {
+        command.add(workingDir.toString() + "/node_modules/.bin/prettier")
+    }
+
+    // format
+    command.add("--plugin=prettier-plugin-tailwindcss")
+    command.add("--write")
+    command.add("src/main/css")
+    commandLine command
+}
+
+
+/**
+ * Prettier - Format JavaScript
+ */
+tasks.register("formatJavaScript", Exec) {
+    workingDir projectDir
+
+    // establish our command
+    List<String> command = new ArrayList<>()
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        command.add(workingDir.toString() + "\\node_modules\\.bin\\prettier.cmd")
+    } else {
+        command.add(workingDir.toString() + "/node_modules/.bin/prettier")
+    }
+
+    // format
+    command.add("--write")
+    command.add("src/main/js")
+    commandLine command
+}
+
+
 ///////
 /**
  * Tailwind Compilation
