@@ -44,6 +44,25 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
+
+tasks.register("prettier", Exec) {
+    workingDir projectDir
+
+    // establish our command
+    List<String> command = new ArrayList<>()
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        command.add(workingDir.toString() + "\\node_modules\\.bin\\prettier.cmd")
+    } else {
+        command.add(workingDir.toString() + "/node_modules/.bin/prettier")
+    }
+
+    // format java
+    command.add("--plugin=prettier-plugin-java")
+    command.add("--write")
+    command.add("src/main/java")
+
+    commandLine command
+}
 ///////
 /**
  * Tailwind Compilation
@@ -55,9 +74,6 @@ processResources {
 
 tasks.register('compileTailwind', Exec) {
     workingDir projectDir
-
-    // Define the directory you want to list files from
-    File dir = new File(workingDir.toString() + '/src/main/css') // Change to your directory
 
     // establish our command
     List<String> command = new ArrayList<>()
@@ -81,9 +97,6 @@ tasks.register('compileTailwind', Exec) {
 
 tasks.register('bundleJavaScript', Exec) {
     workingDir projectDir
-
-    // Define the directory you want to list files from
-    File dir = new File(workingDir.toString() + '/src/main/js') // Change to your directory
 
     // establish our command
     List<String> command = new ArrayList<>()

@@ -74,14 +74,14 @@ html {
 */
 
 .navbar {
-    @apply bg-slate-700 rounded-b-md lg:rounded-md;
-    @apply w-full p-3 lg:m-3 drop-shadow-lg;
+    @apply bg-slate-700 rounded-b-md;
+    @apply w-full p-3 drop-shadow-lg;
     @apply border-2 border-slate-600/25;
     @apply fixed top-0 left-0 right-0 z-10;
 }
 
 .navbar .navbar-title {
-    @apply text-slate-100 font-bold whitespace-nowrap truncate text-2xl w-min pl-4 lg:pl-0 pr-4;
+    @apply text-slate-100 font-bold whitespace-nowrap truncate text-2xl w-min pl-4 pr-4;
 }
 
 .navbar .navbar-content {
@@ -93,7 +93,8 @@ html {
 }
 
 .navbar .navbar-hamburger {
-    @apply transition-colors lg:hidden text-white hover:text-slate-400 text-2xl font-semibold whitespace-nowrap truncate w-auto;
+    @apply transition-colors text-white hover:text-slate-400 text-2xl font-semibold whitespace-nowrap truncate w-auto;
+    @apply select-none
 }
 
 #navBarHamburger.navbar-drawer-enabled {
@@ -102,7 +103,7 @@ html {
 
 
 .navbar-drawer {
-    @apply absolute inset-0 bg-zinc-700/50 w-screen h-screen text-white;
+    @apply absolute inset-0 bg-zinc-700/50 w-screen lg:w-1/3 h-screen text-white;
     @apply transition-transform transform translate-x-[-100%];
     @apply border-2 border-slate-600/25;
     @apply flex p-6 rounded-lg drop-shadow-2xl;
@@ -110,4 +111,14 @@ html {
 
 .navbar-drawer.navbar-drawer-enabled {
     @apply translate-x-0
+}
+
+.navbar-list {
+    @apply flex flex-col;
+    @apply md:pt-12;
+    @apply text-white font-semibold text-2xl;
+}
+
+.navbar-list.navbar-list-item {
+
 }
