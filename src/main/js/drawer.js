@@ -31,7 +31,7 @@ document.addEventListener('click', function (event) {
 })
 
 /**
- * Called from the hamburger in the navbar, toggles the drawer on and off
+ * Toggles the drawer on and off
  */
 export function toggleDrawer() {
     const drawer = document.getElementById('navBarDrawer')

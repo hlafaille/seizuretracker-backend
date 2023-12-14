@@ -1,8 +1,7 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
     <head
-        th:replace="~{scripts_common :: head('Error - SeizureTracker')}"
-    ></head>
+        th:replace="~{scripts_common :: head('Error - SeizureTracker')}"></head>
     <body>
         <!-- Your page content -->
         <main class="flex-fill">
@@ -12,18 +11,15 @@
                         <h2 class="card-title pt-2">Oh no!</h2>
                         <p
                             class="card-subtitle pt-1 pb-3 text-muted"
-                            th:text="${funnyCardSubtitle}"
-                        ></p>
+                            th:text="${funnyCardSubtitle}"></p>
                         <div
                             class="alert alert-secondary font-monospace text-uppercase"
-                            role="alert"
-                        >
+                            role="alert">
                             <div th:text="${errorMessage}"></div>
                             <hr />
                             <div
                                 class="text-muted"
-                                th:text="${detailedErrorMessage}"
-                            ></div>
+                                th:text="${detailedErrorMessage}"></div>
                         </div>
                         <a
                             href="javascript:history.back()"

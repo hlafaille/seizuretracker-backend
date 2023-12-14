@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-    @apply bg-gray-800 antialiased selection:bg-sky-400 selection:text-white;
+    @apply bg-zinc-900 antialiased selection:bg-sky-400 selection:text-white;
 }
 
 /* UI TOOLKIT / WIDGETS */
@@ -32,7 +32,9 @@ html {
     }
 }
 
-/* CARDS */
+/*
+    CARDS
+*/
 .card {
     @apply bg-slate-700/50;
     @apply border-2 border-slate-600/25;
@@ -41,11 +43,11 @@ html {
 
 .card-title {
     @apply truncate whitespace-nowrap text-center text-3xl font-bold text-white drop-shadow-lg;
-    /* The gradient background seems to be commented out, uncomment if needed */
-    /* @apply bg-gradient-to-t from-slate-300 bg-clip-text text-transparent to-white h-min; */
 }
 
-/* ALERTS */
+/*
+    ALERTS
+*/
 .alert-success {
     @apply overflow-y-auto;
     @apply bg-green-600;
@@ -73,7 +75,6 @@ html {
 /*
    NAVBAR
 */
-
 .navbar {
     @apply rounded-b-md bg-slate-700;
     @apply w-full p-3 drop-shadow-lg;
@@ -103,26 +104,23 @@ html {
 }
 
 .navbar-drawer {
-    @apply absolute inset-0 h-screen w-screen bg-zinc-700/50 text-white lg:w-96;
+    @apply absolute inset-0 h-screen w-screen bg-slate-700/50 text-white lg:w-96;
     @apply translate-x-[-100%] transform transition-transform;
-    @apply border-2 border-slate-600/25;
-    @apply flex rounded-lg p-6 drop-shadow-2xl;
+    @apply border-r-2 border-slate-600/50;
+    @apply flex p-6 drop-shadow-2xl;
 }
 
 .navbar-drawer.navbar-drawer-enabled {
     @apply translate-x-0;
 }
 
-.navbar-list {
+.navbar-drawer-list {
+    @apply mt-16;
     @apply flex flex-col;
-    @apply pt-12;
     @apply text-2xl font-semibold text-white;
 }
 
-.navbar-list.navbar-list-item {
-    img {
-    }
-
-    a {
-    }
+.navbar-drawer-list.navbar-drawer-list-item {
+    @apply h-min w-max;
+    @apply flex;
 }

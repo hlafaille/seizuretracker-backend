@@ -6,8 +6,7 @@
         th:href="${url}"
         th:text="${text}"
         th:with="idName = ${#strings.replace(text, ' ', '')} + 'Button'"
-        th:id="${idName}"
-    />
+        th:id="${idName}" />
 
     <!--A standard button, for use in forms-->
     <button
@@ -16,6 +15,5 @@
         th:type="${type}"
         th:text="${text}"
         th:with="idName = ${#strings.replace(text, ' ', '')} + 'Button'"
-        th:id="${idName}"
-    />
+        th:id="${idName}" />
 </html>

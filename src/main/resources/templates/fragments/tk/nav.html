@@ -1,4 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark" lang="en">
+    <!-- nav bar -->
     <div th:fragment="navBar(appName)" class="navbar">
         <div class="navbar-content">
             <a id="navBarHamburger" class="navbar-hamburger">☰</a>
@@ -6,23 +7,26 @@
         </div>
     </div>
 
+    <!-- nav bar drawer-->
     <div
         id="navBarDrawer"
-        th:fragment="navBarDrawer(content)"
-        class="navbar-drawer navbar-drawer-disabled"
-    >
-        <div th:replace="${content}"></div>
+        th:fragment="navBarDrawer(navBarDrawerList)"
+        class="navbar-drawer">
+        <div th:replace="${navBarDrawerList}"></div>
     </div>
-    <div
-        th:fragment="navBarDrawerItem(text, url, iconRelativeUrl, iconAlt)"
-        class="navbar-item"
-    >
-        <a th:href="${url}">
-            <img
-                th:src="${iconRelativeUrl}"
-                th:alt="${iconAlt}"
-                th:text="${text}"
-            />
-        </a>
+
+    <!-- nav bar drawer list -->
+    <div id="navBarDrawerList" th:fragment="navBarDrawerList(listItems)">
+        <div th:insert="~{::listItems}"></div>
     </div>
+
+    <!-- nav bar drawer list item -->
+    <a
+        href
+        th:fragment="navBarDrawerListItem(text, url, iconRelativeUrl, iconAlt)"
+        th:href="${url}"
+        class="navbar-drawer-list-item">
+        <p th:text="${text}"></p>
+        <img th:src="${iconRelativeUrl}" th:alt="${iconAlt}" />
+    </a>
 </html>

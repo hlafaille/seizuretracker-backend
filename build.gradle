@@ -85,6 +85,7 @@ tasks.register("formatHtml", Exec) {
         command.add(workingDir.toString() + "/node_modules/.bin/prettier")
     }
 
+    command.add("--bracket-same-line")
     command.add("--end-of-line")
     command.add("lf")
     command.add("--write")

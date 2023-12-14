@@ -1,13 +1,11 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
     <head
-        th:replace="~{scripts_common :: head('Log Dashboard - SeizureTracker')}"
-    ></head>
+        th:replace="~{scripts_common :: head('Log Dashboard - SeizureTracker')}"></head>
     <body>
         <!-- navbar -->
         <div
-            th:replace="~{fragments/tk/nav :: bar(activeSection = 'log')}"
-        ></div>
+            th:replace="~{fragments/tk/nav :: bar(activeSection = 'log')}"></div>
 
         <!-- basic card -->
         <main class="flex-fill">
@@ -20,8 +18,7 @@
                                     <div
                                         th:if="${entryCreated}"
                                         class="alert alert-success"
-                                        role="alert"
-                                    >
+                                        role="alert">
                                         Entry Created
                                     </div>
                                     <h2 class="card-title">
@@ -58,20 +55,15 @@
                                     </thead>
                                     <tbody>
                                         <tr
-                                            th:each="logEntry, iterStat : ${seizureLogs}"
-                                        >
+                                            th:each="logEntry, iterStat : ${seizureLogs}">
                                             <td
-                                                th:text="${iterStat.index} + 1"
-                                            ></td>
+                                                th:text="${iterStat.index} + 1"></td>
                                             <td
-                                                th:text="${#dates.format(logEntry.getInstant(), 'MM/dd/yyyy')}"
-                                            ></td>
+                                                th:text="${#dates.format(logEntry.getInstant(), 'MM/dd/yyyy')}"></td>
                                             <td
-                                                th:text="${logEntry.duration}+' min'"
-                                            ></td>
+                                                th:text="${logEntry.duration}+' min'"></td>
                                             <td
-                                                th:text="${logEntry.severity}+'/10'"
-                                            ></td>
+                                                th:text="${logEntry.severity}+'/10'"></td>
                                         </tr>
                                     </tbody>
                                 </table>

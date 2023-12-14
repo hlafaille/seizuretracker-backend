@@ -1,24 +1,20 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark" lang="en">
     <head
-        th:replace="~{scripts_common :: head('Error - SeizureTracker')}"
-    ></head>
+        th:replace="~{scripts_common :: head('Error - SeizureTracker')}"></head>
     <body>
         <div class="flex justify-center items-center h-screen w-screen">
             <div class="p-4 w-full xl:w-96">
                 <div
-                    th:replace="~{fragments/tk/card :: card(':/', ~{::content})}"
-                >
+                    th:replace="~{fragments/tk/card :: card(':/', ~{::content})}">
                     <div th:fragment="content">
                         <div class="flex flex-col justify-center items-center">
                             <p
                                 class="text-center text-white font-semibold pb-4"
-                                th:text="${funnyCardSubtitle}"
-                            ></p>
+                                th:text="${funnyCardSubtitle}"></p>
                             <div
                                 class="text-center alert-secondary w-full h-full"
-                                role="alert"
-                            >
+                                role="alert">
                                 <p th:text="${errorMessage}"></p>
                                 <br />
                                 <p th:text="${detailedErrorMessage}"></p>
