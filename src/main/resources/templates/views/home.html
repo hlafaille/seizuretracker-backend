@@ -10,7 +10,9 @@
             ></div>
             <div th:replace="~{fragments/tk/nav :: navBarDrawer(~{::content})}">
                 <div th:fragment="content">
-
+                    <div
+                        th:replace="~{fragments/tk/nav :: navBarDrawerItem('Home', '/home', '/images/home.svg', 'home icon')}"
+                    ></div>
                 </div>
             </div>
             <!--/*@thymesVar id="newAccount" type="java.lang.Boolean"*/-->
