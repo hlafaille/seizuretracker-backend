@@ -1,4 +1,4 @@
-import("swiped-events")
+import('swiped-events')
 
 /**
  * Handles swipe gesture for the html tag
@@ -9,7 +9,7 @@ document.addEventListener('swiped-right', function (e) {
     } else {
         console.log(e.target.tagName)
     }
-});
+})
 
 /**
  * Handles swipe gesture for closing the navBarDrawer
@@ -34,25 +34,29 @@ document.addEventListener('click', function (event) {
  * Called from the hamburger in the navbar, toggles the drawer on and off
  */
 export function toggleDrawer() {
-    const drawer = document.getElementById("navBarDrawer")
-    const hamburger = document.getElementById("navBarHamburger")
+    const drawer = document.getElementById('navBarDrawer')
+    const hamburger = document.getElementById('navBarHamburger')
     if (!drawer || !hamburger) {
-        console.error("Incorrect navbar setup. drawer==" + drawer + " & hamburger==" + hamburger)
+        console.error(
+            'Incorrect navbar setup. drawer==' +
+                drawer +
+                ' & hamburger==' +
+                hamburger
+        )
         return
     }
 
     // determine if the drawer is currently enabled or not
-    const isDrawerEnabled = drawer.classList.contains("navbar-drawer-enabled")
+    const isDrawerEnabled = drawer.classList.contains('navbar-drawer-enabled')
     if (isDrawerEnabled) {
-        drawer.classList.remove("navbar-drawer-enabled")
+        drawer.classList.remove('navbar-drawer-enabled')
     } else {
-        drawer.classList.add("navbar-drawer-enabled")
+        drawer.classList.add('navbar-drawer-enabled')
     }
 
     if (isDrawerEnabled) {
-        hamburger.classList.remove("navbar-drawer-enabled")
+        hamburger.classList.remove('navbar-drawer-enabled')
     } else {
-        hamburger.classList.add("navbar-drawer-enabled")
+        hamburger.classList.add('navbar-drawer-enabled')
     }
 }
-
