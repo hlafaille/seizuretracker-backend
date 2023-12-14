@@ -16,7 +16,7 @@ document.addEventListener('swiped-right', function (e) {
  * @todo maybe change this to always toggle the drawer if the drawer is open?
  */
 document.addEventListener('swiped-left', function (e) {
-    if (e.target.getAttribute('id') === 'navBarDrawer') {
+    if (e.target.getAttribute('id') === 'navBarDrawerList') {
         toggleDrawer()
     }
 })

@@ -6,7 +6,9 @@ html {
     @apply bg-zinc-900 antialiased selection:bg-sky-400 selection:text-white;
 }
 
-/* UI TOOLKIT / WIDGETS */
+/*
+    UI TOOLKIT / WIDGETS
+*/
 .button {
     outline: none;
     @apply bg-sky-600 hover:bg-sky-500 active:bg-sky-700;
@@ -107,20 +109,29 @@ html {
     @apply absolute inset-0 h-screen w-screen bg-slate-700/50 text-white lg:w-96;
     @apply translate-x-[-100%] transform transition-transform;
     @apply border-r-2 border-slate-600/50;
-    @apply flex p-6 drop-shadow-2xl;
+    @apply flex drop-shadow-2xl;
 }
 
 .navbar-drawer.navbar-drawer-enabled {
     @apply translate-x-0;
 }
 
-.navbar-drawer-list {
-    @apply mt-16;
+.navbar-drawer .navbar-drawer-list {
+    @apply mt-[3.8rem];
+    @apply w-full;
     @apply flex flex-col;
-    @apply text-2xl font-semibold text-white;
 }
 
-.navbar-drawer-list.navbar-drawer-list-item {
+.navbar-drawer-list .navbar-drawer-list-item {
+    img {
+        @apply w-10;
+        @apply pr-3;
+    }
+    @apply transition-all;
+    @apply pl-3 pb-3 pt-3;
     @apply h-min w-max;
-    @apply flex;
+    @apply flex flex-row;
+    @apply text-2xl font-semibold text-white;
+    @apply hover:bg-slate-700;
+    @apply w-full;
 }

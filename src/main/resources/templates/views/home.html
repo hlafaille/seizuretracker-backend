@@ -7,13 +7,18 @@
             <div th:replace="~{fragments/tk/nav :: navBarDrawer(~{::navBarDrawerList})}">
                 <div th:fragment="navBarDrawerList" th:replace="~{fragments/tk/nav :: navBarDrawerList(listItems)}">
                     <div th:fragment="listItems">
-                        <div
-                            th:replace="~{fragments/tk/nav :: navBarDrawerListItem('Home', '#', '/images/home.svg', 'Home Icon')}"></div>
+                        <a
+                            th:replace="~{fragments/tk/nav :: navBarDrawerListItem('Home', '/home', null, null)}"></a>
+                        <a
+                            th:replace="~{fragments/tk/nav :: navBarDrawerListItem('Log Dashboard', '/logDashboard', null, null)}"></a>
+                        <a
+                            th:replace="~{fragments/tk/nav :: navBarDrawerListItem('Medication', '/medication', null, null)}"></a>
+                        <a
+                            th:replace="~{fragments/tk/nav :: navBarDrawerListItem('Logout', '/logout', null, null)}"></a>
                     </div>
                 </div>
             </div>
-            <!--/*@thymesVar id="newAccount" type="java.lang.Boolean"*/-->
-            <!--/*@thymesVar id="userMissing" type="java.lang.Boolean"*/-->
         </div>
+    <div th:fragment="~{fragments/tk/card :: card('Mood Survey', content)}"></div>
     </body>
 </html>
