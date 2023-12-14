@@ -10,11 +10,15 @@ import xyz.hlafaille.seizuretracker.service.SessionService;
 
 @Controller
 public class LogEntryController {
+
     private final SessionService sessionService;
     private final SeizureLogService seizureLogService;
 
     @Autowired
-    public LogEntryController(SessionService sessionService, SeizureLogService seizureLogService) {
+    public LogEntryController(
+        SessionService sessionService,
+        SeizureLogService seizureLogService
+    ) {
         this.sessionService = sessionService;
         this.seizureLogService = seizureLogService;
     }
@@ -25,17 +29,26 @@ public class LogEntryController {
     }
 
     @GetMapping("/log/draft/{entryId}/initialize/step1")
-    public String logDraftInitializeStep1(HttpServletRequest request, Model model) {
+    public String logDraftInitializeStep1(
+        HttpServletRequest request,
+        Model model
+    ) {
         return "pages/log/log_new_step1";
     }
 
     @GetMapping("/log/draft/{entryId}/initialize/step2")
-    public String logDraftInitializeStep2(HttpServletRequest request, Model model) {
+    public String logDraftInitializeStep2(
+        HttpServletRequest request,
+        Model model
+    ) {
         return "pages/log/log_new_step2";
     }
 
     @GetMapping("/log/draft/{entryId}/initialize/step3")
-    public String logDraftInitializeStep3(HttpServletRequest request, Model model) {
+    public String logDraftInitializeStep3(
+        HttpServletRequest request,
+        Model model
+    ) {
         return "pages/log/log_new_step3";
     }
 }

@@ -6,9 +6,9 @@ import xyz.hlafaille.seizuretracker.exception.SessionEntityMissingException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler({SessionEntityMissingException.class})
+
+    @ExceptionHandler({ SessionEntityMissingException.class })
     public String handleSessionEntityMissingException() {
         return "redirect:/login";
     }
-
 }

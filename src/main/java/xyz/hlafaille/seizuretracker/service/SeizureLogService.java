@@ -1,11 +1,10 @@
 package xyz.hlafaille.seizuretracker.service;
 
-import org.springframework.stereotype.Service;
-import xyz.hlafaille.seizuretracker.entity.SeizureLog;
-
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
+import org.springframework.stereotype.Service;
+import xyz.hlafaille.seizuretracker.entity.SeizureLog;
 
 @Service
 public interface SeizureLogService {
@@ -24,9 +23,15 @@ public interface SeizureLogService {
      * @return UUID of the seizure log entry
      */
     UUID createLogEntry(
-            Integer severity, UUID userId, Integer duration, String beforeSeizureNote,
-            String duringSeizureNote, String afterSeizureNote, boolean hospitalVisitOccurred, String additionalComment,
-            boolean isDraft
+        Integer severity,
+        UUID userId,
+        Integer duration,
+        String beforeSeizureNote,
+        String duringSeizureNote,
+        String afterSeizureNote,
+        boolean hospitalVisitOccurred,
+        String additionalComment,
+        boolean isDraft
     );
 
     /**

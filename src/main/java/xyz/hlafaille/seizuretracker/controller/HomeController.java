@@ -22,16 +22,25 @@ public class HomeController {
     private final SessionService sessionService;
 
     @Autowired
-    public HomeController(UserServiceImpl userService, SessionService sessionService) {
+    public HomeController(
+        UserServiceImpl userService,
+        SessionService sessionService
+    ) {
         this.userService = userService;
         this.sessionService = sessionService;
     }
 
     @GetMapping("/home")
-    public String index(HttpServletRequest request, Model model) throws SessionCookieMissingException, SessionEntityMissingException, SessionUserMissingException {
+    public String index(HttpServletRequest request, Model model)
+        throws SessionCookieMissingException, SessionEntityMissingException, SessionUserMissingException {
         // get the user by their session id
-        Cookie sessionCookie = sessionService.getSessionCookieFromBrowserCookies(request.getCookies());
-        Session session = sessionService.getSessionEntityFromCookie(sessionCookie);
+        Cookie sessionCookie =
+            sessionService.getSessionCookieFromBrowserCookies(
+                request.getCookies()
+            );
+        Session session = sessionService.getSessionEntityFromCookie(
+            sessionCookie
+        );
         User user = sessionService.getUserEntityFromSessionId(session.getId());
         model.addAttribute("userFirstName", user.getFirstName());
         return "views/home";

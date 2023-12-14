@@ -5,6 +5,7 @@ package xyz.hlafaille.seizuretracker.exception;
  * For example, if the `session` cookie is not a UUID or is null.
  */
 public class SessionCookieInvalidException extends RuntimeException {
+
     public SessionCookieInvalidException() {
         super("Session cookie is invalid");
     }
