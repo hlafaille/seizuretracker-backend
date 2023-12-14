@@ -8,10 +8,10 @@
 
     <div
         id="navBarDrawer"
-        th:fragment="navBarDrawer(navBarList)"
+        th:fragment="navBarDrawer(content)"
         class="navbar-drawer navbar-drawer-disabled"
     >
-        <div th:replace="${navBarList}"></div>
+        <div th:replace="${content}"></div>
     </div>
     <div
         th:fragment="navBarItem(text, url, iconRelativeUrl, iconAlt)"
