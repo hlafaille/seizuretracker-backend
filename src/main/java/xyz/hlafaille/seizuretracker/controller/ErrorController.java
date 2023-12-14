@@ -28,7 +28,7 @@ public class ErrorController
         String detailedErrorMessage = "(no details on this error)";
         if (statusCode == HttpStatus.NOT_FOUND.value()) {
             funnyCardSubtitle =
-                "This page is on vacation. Or just lost. Probably lost.";
+                "In a galaxy far, far away, there's a page. Unfortunately, it's not this one.";
             errorMessage = "Page not found";
         } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
             funnyCardSubtitle =

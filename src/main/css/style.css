@@ -126,7 +126,7 @@ html {
         @apply pr-3;
     }
     @apply transition-all;
-    @apply pl-3 pb-3 pt-3;
+    @apply pb-3 pl-3 pt-3;
     @apply h-min w-max;
     @apply flex flex-row;
     @apply text-2xl font-semibold text-white;
