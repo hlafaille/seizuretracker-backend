@@ -70,6 +70,29 @@ tasks.register("formatJava", Exec) {
 
 
 /**
+ * Prettier - Format HTML
+ */
+tasks.register("formatJava", Exec) {
+    group = "prettier"
+    workingDir projectDir
+
+    // establish our command
+    List<String> command = new ArrayList<>()
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        command.add(workingDir.toString() + "\\node_modules\\.bin\\prettier.cmd")
+    } else {
+        command.add(workingDir.toString() + "/node_modules/.bin/prettier")
+    }
+
+    // format java
+    command.add("--write")
+    command.add("src/main/resources/templates")
+
+    commandLine command
+}
+
+
+/**
  * Prettier - Format Tailwind Source CSS
  */
 tasks.register("formatTailwindSource", Exec) {

@@ -7,8 +7,11 @@
     </div>
 </div>
 
-<div id="navBarDrawer" th:fragment="navBarDrawer" class="navbar-drawer navbar-drawer-disabled">
-    <div id="navBarList" class="navbar-list">
-        <a href="#" class="navbar-list-item">Home</a>
-    </div>
+<div id="navBarDrawer" th:fragment="navBarDrawer(navBarList)" class="navbar-drawer navbar-drawer-disabled">
+    <div th:replace="${navBarList}"></div>
+</div>
+<div th:fragment="navBarItem(text, url, iconRelativeUrl, iconAlt)" class="navbar-item">
+    <a th:href="${url}">
+        <img th:src="${iconRelativeUrl}" th:alt="${iconAlt}" th:text="${text}" />
+    </a>
 </div>
