@@ -45,6 +45,7 @@ html {
 
 .card-title {
     @apply truncate whitespace-nowrap text-center text-3xl font-bold text-white drop-shadow-lg;
+    @apply select-none;
 }
 
 /*
@@ -86,14 +87,11 @@ html {
 
 .navbar .navbar-title {
     @apply w-min truncate whitespace-nowrap pl-4 pr-4 text-2xl font-bold text-slate-100;
+    @apply select-none;
 }
 
 .navbar .navbar-content {
     @apply flex justify-start;
-}
-
-.navbar .navbar-item {
-    @apply w-auto truncate whitespace-nowrap text-xl font-semibold text-slate-300 hover:text-slate-400;
 }
 
 .navbar .navbar-hamburger {
@@ -134,4 +132,5 @@ html {
     @apply text-2xl font-semibold text-white;
     @apply hover:bg-slate-700;
     @apply w-full;
+    @apply select-none;
 }
