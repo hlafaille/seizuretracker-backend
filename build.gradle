@@ -60,8 +60,9 @@ tasks.register("formatJava", Exec) {
         command.add(workingDir.toString() + "/node_modules/.bin/prettier")
     }
 
-    // format java
     command.add("--plugin=prettier-plugin-java")
+    command.add("--end-of-line")
+    command.add("lf")
     command.add("--write")
     command.add("src/main/java")
 
@@ -84,7 +85,8 @@ tasks.register("formatHtml", Exec) {
         command.add(workingDir.toString() + "/node_modules/.bin/prettier")
     }
 
-    // format java
+    command.add("--end-of-line")
+    command.add("lf")
     command.add("--write")
     command.add("src/main/resources/templates")
 
@@ -107,8 +109,9 @@ tasks.register("formatTailwindSource", Exec) {
         command.add(workingDir.toString() + "/node_modules/.bin/prettier")
     }
 
-    // format
     command.add("--plugin=prettier-plugin-tailwindcss")
+    command.add("--end-of-line")
+    command.add("lf")
     command.add("--write")
     command.add("src/main/css")
     commandLine command

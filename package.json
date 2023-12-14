@@ -3,16 +3,12 @@
   "version": "1.0.0",
   "description": "<div align=\"center\">\r   <img src=\"https://i.imgur.com/yUE7Wsp.png\" width=\"200x\" height=\"200px\" alt=\"SeizureTracker Icon\">\r   <h4>SeizureTracker</h4>\r   A self-hosted organizational tool for those with epilepsy\r </div>\r <hr>",
   "main": "tailwind.config.js",
-  "scripts": {},
+  "scripts": {
+    "prepare": "husky install"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "esbuild": "^0.19.9",
-    "prettier": "^3.1.1",
-    "prettier-plugin-java": "^2.5.0",
-    "prettier-plugin-tailwindcss": "^0.5.9",
-    "swiped-events": "^1.1.9",
-    "tailwindcss": "^3.3.6"
   },
   "prettier": {
     "trailingComma": "es5",
@@ -21,11 +17,11 @@
     "singleQuote": true
   },
   "devDependencies": {
-    "husky": "^8.0.3"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "./gradlew formatJava && ./gradlew formatJavaScript && ./gradlew formatTailwindSource"
-    }
+    "esbuild": "^0.19.9",
+    "prettier": "^3.1.1",
+    "prettier-plugin-java": "^2.5.0",
+    "prettier-plugin-tailwindcss": "^0.5.9",
+    "tailwindcss": "^3.3.6",
+    "swiped-events": "^1.1.9"
   }
 }
