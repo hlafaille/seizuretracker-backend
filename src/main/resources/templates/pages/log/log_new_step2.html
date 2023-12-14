@@ -1,7 +1,6 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
-    <head
-        th:replace="~{scripts_common :: head('Record a Seizure - SeizureTracker')}"></head>
+    <head th:replace="~{scripts_common :: head('Record a Seizure - SeizureTracker')}"></head>
     <body>
         <!-- basic card -->
         <main class="flex-fill">
@@ -14,15 +13,10 @@
                                 <div class="pt-1 pb-1">Log a Seizure</div>
                             </div>
                             <div th:fragment="bodyContent">
-                                <form
-                                    action="/log/newEntry"
-                                    method="post"
-                                    id="logNewSeizureForm">
+                                <form action="/log/newEntry" method="post" id="logNewSeizureForm">
                                     <div class="col">
                                         <div class="row pb-2">
-                                            <label for="beforeNoteInput"
-                                                >Before</label
-                                            >
+                                            <label for="beforeNoteInput">Before</label>
                                             <div class="col input-group">
                                                 <textarea
                                                     id="beforeNoteInput"
@@ -31,9 +25,7 @@
                                             </div>
                                         </div>
                                         <div class="row pb-2">
-                                            <label for="duringNoteInput"
-                                                >During</label
-                                            >
+                                            <label for="duringNoteInput">During</label>
                                             <div class="col input-group">
                                                 <textarea
                                                     id="duringNoteInput"
@@ -42,9 +34,7 @@
                                             </div>
                                         </div>
                                         <div class="row pb-3">
-                                            <label for="afterNoteInput"
-                                                >After</label
-                                            >
+                                            <label for="afterNoteInput">After</label>
                                             <div class="col input-group">
                                                 <textarea
                                                     id="afterNoteInput"

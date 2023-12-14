@@ -1,11 +1,9 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
-    <head
-        th:replace="~{scripts_common :: head('Log Dashboard - SeizureTracker')}"></head>
+    <head th:replace="~{scripts_common :: head('Log Dashboard - SeizureTracker')}"></head>
     <body>
         <!-- navbar -->
-        <div
-            th:replace="~{fragments/tk/nav :: bar(activeSection = 'log')}"></div>
+        <div th:replace="~{fragments/tk/nav :: bar(activeSection = 'log')}"></div>
 
         <!-- basic card -->
         <main class="flex-fill">
@@ -15,29 +13,19 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col">
-                                    <div
-                                        th:if="${entryCreated}"
-                                        class="alert alert-success"
-                                        role="alert">
+                                    <div th:if="${entryCreated}" class="alert alert-success" role="alert">
                                         Entry Created
                                     </div>
                                     <h2 class="card-title">
                                         We hope you're okay,
                                         <span th:text="${userFirstName}"></span>
                                     </h2>
-                                    <p class="card-subtitle text-muted">
-                                        Below is a log of your recorded
-                                        seizures.
-                                    </p>
+                                    <p class="card-subtitle text-muted">Below is a log of your recorded seizures.</p>
                                 </div>
                             </div>
                             <div class="row pt-2">
                                 <div class="col">
-                                    <a
-                                        href="/log/newDraft"
-                                        class="btn btn-outline-primary float-end"
-                                        >New</a
-                                    >
+                                    <a href="/log/newDraft" class="btn btn-outline-primary float-end">New</a>
                                 </div>
                             </div>
                         </div>
@@ -54,16 +42,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr
-                                            th:each="logEntry, iterStat : ${seizureLogs}">
-                                            <td
-                                                th:text="${iterStat.index} + 1"></td>
-                                            <td
-                                                th:text="${#dates.format(logEntry.getInstant(), 'MM/dd/yyyy')}"></td>
-                                            <td
-                                                th:text="${logEntry.duration}+' min'"></td>
-                                            <td
-                                                th:text="${logEntry.severity}+'/10'"></td>
+                                        <tr th:each="logEntry, iterStat : ${seizureLogs}">
+                                            <td th:text="${iterStat.index} + 1"></td>
+                                            <td th:text="${#dates.format(logEntry.getInstant(), 'MM/dd/yyyy')}"></td>
+                                            <td th:text="${logEntry.duration}+' min'"></td>
+                                            <td th:text="${logEntry.severity}+'/10'"></td>
                                         </tr>
                                     </tbody>
                                 </table>

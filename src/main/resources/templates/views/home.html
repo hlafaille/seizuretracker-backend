@@ -1,15 +1,11 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark" lang="en">
-    <head
-        th:replace="~{scripts_common :: head('Home - SeizureTracker')}"></head>
+    <head th:replace="~{scripts_common :: head('Home - SeizureTracker')}"></head>
     <body>
         <div class="flex justify-center items-center w-screen">
-            <div
-                th:replace="~{fragments/tk/nav :: navBar(SeizureTracker)}"></div>
-            <div
-                th:replace="~{fragments/tk/nav :: navBarDrawer(~{::navBarDrawerList})}">
-                <div
-                    th:replace="~{fragments/tk/nav :: navBarDrawerList(listItems)}">
+            <div th:replace="~{fragments/tk/nav :: navBar(SeizureTracker)}"></div>
+            <div th:replace="~{fragments/tk/nav :: navBarDrawer(~{::navBarDrawerList})}">
+                <div th:fragment="navBarDrawerList" th:replace="~{fragments/tk/nav :: navBarDrawerList(listItems)}">
                     <div th:fragment="listItems">
                         <div
                             th:replace="~{fragments/tk/nav :: navBarDrawerListItem('Home', '#', '/images/home.svg', 'Home Icon')}"></div>

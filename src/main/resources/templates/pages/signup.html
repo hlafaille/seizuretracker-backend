@@ -1,28 +1,21 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
-    <head
-        th:replace="~{scripts_common :: head('Sign Up - SeizureTracker')}"></head>
+    <head th:replace="~{scripts_common :: head('Sign Up - SeizureTracker')}"></head>
     <body class="d-flex flex-column vh-100">
         <!-- Your page content -->
         <main class="flex-fill">
             <div class="container my-5">
                 <div class="card">
                     <div class="card-body">
-                        <h2 class="card-title pt-2">
-                            Let's get you an account
-                        </h2>
-                        <p class="card-subtitle pt-1text-muted">
-                            This shouldn't take long
-                        </p>
+                        <h2 class="card-title pt-2">Let's get you an account</h2>
+                        <p class="card-subtitle pt-1text-muted">This shouldn't take long</p>
                         <hr />
                         <form action="/signup" method="post" id="signupForm">
                             <div class="mb-3">
                                 <div class="d-grid">
                                     <div class="row">
                                         <div class="col">
-                                            <label for="firstNameInput"
-                                                >First name</label
-                                            >
+                                            <label for="firstNameInput">First name</label>
                                             <input
                                                 placeholder="Bob"
                                                 id="firstNameInput"
@@ -32,9 +25,7 @@
                                                 class="form-control" />
                                         </div>
                                         <div class="col">
-                                            <label for="lastNameInput"
-                                                >Last name</label
-                                            >
+                                            <label for="lastNameInput">Last name</label>
                                             <input
                                                 placeholder="Belcher"
                                                 id="lastNameInput"
@@ -47,9 +38,7 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="emailAddressInput"
-                                    >Email address</label
-                                >
+                                <label for="emailAddressInput">Email address</label>
                                 <input
                                     placeholder="bob@bobsburgers.com"
                                     id="emailAddressInput"
@@ -69,9 +58,7 @@
                                     pattern=".{8,}" />
                             </div>
                             <div class="btn-group w-100" role="group">
-                                <button type="submit" class="btn btn-primary">
-                                    Create Account
-                                </button>
+                                <button type="submit" class="btn btn-primary">Create Account</button>
                             </div>
                         </form>
                     </div>
