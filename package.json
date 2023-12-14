@@ -19,5 +19,13 @@
     "tabWidth": 4,
     "semi": false,
     "singleQuote": true
+  },
+  "devDependencies": {
+    "husky": "^8.0.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "./gradlew formatJava && ./gradlew formatJavaScript && ./gradlew formatTailwindSource"
+    }
   }
 }

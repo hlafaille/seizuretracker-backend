@@ -49,6 +49,7 @@ tasks.named('test') {
  * Prettier - Format Java
  */
 tasks.register("formatJava", Exec) {
+    group = "prettier"
     workingDir projectDir
 
     // establish our command
@@ -72,6 +73,7 @@ tasks.register("formatJava", Exec) {
  * Prettier - Format Tailwind Source CSS
  */
 tasks.register("formatTailwindSource", Exec) {
+    group = "prettier"
     workingDir projectDir
 
     // establish our command
@@ -94,6 +96,7 @@ tasks.register("formatTailwindSource", Exec) {
  * Prettier - Format JavaScript
  */
 tasks.register("formatJavaScript", Exec) {
+    group = "prettier"
     workingDir projectDir
 
     // establish our command
@@ -144,6 +147,7 @@ tasks.register('compileTailwind', Exec) {
  */
 
 tasks.register('bundleJavaScript', Exec) {
+    group = "bundle"
     workingDir projectDir
 
     // establish our command
