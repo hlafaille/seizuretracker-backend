@@ -34,12 +34,10 @@ public class LogController {
 
     @GetMapping("/logDashboard")
     public String log(
-        @RequestParam(required = false) boolean entryCreated,
         HttpServletRequest request,
         Model model
     )
         throws SessionCookieMissingException, SessionEntityMissingException, SessionUserMissingException {
-        model.addAttribute("entryCreated", entryCreated);
 
         // get the user by their session id
         Cookie sessionCookie =
