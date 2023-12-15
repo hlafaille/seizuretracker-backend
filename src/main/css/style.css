@@ -7,6 +7,14 @@ html {
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 
+.flex-center {
+    @apply flex h-screen w-screen items-center justify-center;
+}
+
+.flex-center.flex-center-base-z * {
+    @apply relative -z-10; /* <-- relative may be a problem later */
+}
+
 /*
     UI TOOLKIT / WIDGETS
 */
@@ -109,6 +117,7 @@ html {
     @apply translate-x-[-100%] transform transition-transform;
     @apply border-r-2 border-slate-600/50;
     @apply flex drop-shadow-2xl;
+    @apply backdrop-blur-lg
 }
 
 .navbar-drawer.navbar-drawer-enabled {
@@ -126,6 +135,7 @@ html {
         @apply w-10;
         @apply pr-3;
     }
+
     @apply transition-all;
     @apply pb-3 pl-3 pt-3;
     @apply h-min w-max;
@@ -137,5 +147,5 @@ html {
 }
 
 .border-gradient {
-    border-image: linear-gradient(to right, #FF6B6B, #FDEB71) 1;
+    border-image: linear-gradient(to right, #ff6b6b, #fdeb71) 1;
 }
