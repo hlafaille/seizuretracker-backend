@@ -1,9 +1,9 @@
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark" lang="en">
     <!-- nav bar -->
-    <div th:fragment="navBar(appName)" class="navbar">
+    <div th:fragment="navBar(navBarTitle)" class="navbar">
         <div class="navbar-content">
             <a id="navBarHamburger" class="navbar-hamburger">☰</a>
-            <p class="navbar-title" th:text="${appName}"></p>
+            <p class="navbar-title" th:text="${navBarTitle}"></p>
         </div>
     </div>
 
@@ -23,7 +23,7 @@
         th:id="navBarDrawerItem_+${text}"
         th:href="${url}">
         <div class="navbar-drawer-list-item">
-            <img th:if="${iconRelativeUrl}" th:src="${iconRelativeUrl}" th:alt="${iconAlt}" class="stroke-gray-100"/>
+            <img th:if="${iconRelativeUrl}" th:src="${iconRelativeUrl}" th:alt="${iconAlt}" class="stroke-gray-100" />
             <p th:text="${text}"></p>
         </div>
     </a>

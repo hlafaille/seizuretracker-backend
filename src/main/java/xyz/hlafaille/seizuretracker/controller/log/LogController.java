@@ -32,7 +32,7 @@ public class LogController {
         this.seizureLogService = seizureLogService;
     }
 
-    @GetMapping("/log")
+    @GetMapping("/logDashboard")
     public String log(
         @RequestParam(required = false) boolean entryCreated,
         HttpServletRequest request,
@@ -56,7 +56,7 @@ public class LogController {
         List<SeizureLog> seizureLogs =
             seizureLogService.getSeizureLogEntriesByUserId(user.getId());
         model.addAttribute("seizureLogs", seizureLogs);
-        return "pages/log/log_dashboard";
+        return "views/log/log_dashboard";
     }
     /*@GetMapping("/log/newEntry")
     public String logNewEntry(HttpServletRequest request, Model model) throws SessionCookieMissingException, SessionEntityMissingException, SessionUserMissingException {

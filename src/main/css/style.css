@@ -134,3 +134,7 @@ html {
     @apply w-full;
     @apply select-none;
 }
+
+.border-gradient {
+    border-image: linear-gradient(to right, #FF6B6B, #FDEB71) 1;
+}

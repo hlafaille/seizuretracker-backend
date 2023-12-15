@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark" lang="en">
+    <div th:fragment="populatedNavBar(navBarTitle)">
+        <div th:replace="~{fragments/tk/nav :: navBar(${navBarTitle})}"></div>
+        <div th:replace="~{fragments/tk/nav :: navBarDrawer(~{::navBarDrawerList})}">
+            <div th:fragment="navBarDrawerList" th:replace="~{fragments/tk/nav :: navBarDrawerList(listItems)}">
+                <div th:fragment="listItems">
+                    <a th:replace="~{fragments/tk/nav :: navBarDrawerListItem('Home', '/home', null, null)}"></a>
+                    <a
+                        th:replace="~{fragments/tk/nav :: navBarDrawerListItem('Log Dashboard', '/logDashboard', null, null)}"></a>
+                    <a
+                        th:replace="~{fragments/tk/nav :: navBarDrawerListItem('Medication', '/medication', null, null)}"></a>
+                    <a th:replace="~{fragments/tk/nav :: navBarDrawerListItem('Logout', '/logout', null, null)}"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>
