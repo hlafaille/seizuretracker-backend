@@ -27,7 +27,8 @@ html {
     UI TOOLKIT / WIDGETS
 */
 .hidden-all * {
-    display: none;
+    visibility: hidden;
+    max-height: 0;
 }
 
 .button {

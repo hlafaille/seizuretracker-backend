@@ -23,18 +23,30 @@ Step One Card.
 </div>
 
 <!--
-Step Two Card. This card utilizes hx-swap-oob for appending itself to the cardContainer in views/log/log_new,
-instead of swapping it traditionally. This way, we can build up a whole form that will get submitted together instead
-of establishing a server side record once stepOne gets POSTed.
+Step Two Card.
 -->
-<div id="stepTwoContent" th:fragment="_stepTwoContent">
+<div id="stepTwoContent" th:fragment="_stepTwoContent" class="flex flex-col space-y-2">
     <div id="completedForms" class="hidden-all">
         <div th:replace="~{::_stepOneContent}"></div>
     </div>
-    <div th:replace="fragments/tk/input :: lineEdit('beforeComment', 'Before Comments', false)"></div>
-    <div th:replace="fragments/tk/input :: lineEdit('duringComment', 'During Comment', false)"></div>
-    <div th:replace="fragments/tk/input :: lineEdit('afterComment', 'After Comment', false)"></div>
-    <div hx-get="/logDashboard/newEntry/stepThree" hx-trigger="click">
+    <div th:replace="fragments/tk/input :: lineEdit('beforeNote', 'Before Note', true)"></div>
+    <div th:replace="fragments/tk/input :: lineEdit('duringNote', 'During Note', true)"></div>
+    <div th:replace="fragments/tk/input :: lineEdit('afterNote', 'After Note', true)"></div>
+    <div hx-get="/logDashboard/newEntry/stepThree" hx-trigger="click" hx-swap="outerHTML" hx-target="#stepTwoContent">
+        <div th:replace="fragments/tk/button :: button('Next', 'button')"></div>
+    </div>
+</div>
+
+<!--
+Step Three Card.
+-->
+<div id="stepThreeContent" th:fragment="_stepThreeContent" class="flex flex-col space-y-2">
+    <div id="completedForms" class="hidden-all">
+        <div th:replace="~{::_stepOneContent}"></div>
+        <div th:replace="~{::_stepTwoContent}"></div>
+    </div>
+    <div th:replace="fragments/tk/input :: lineEdit('additionalComment', 'Additional Comments', true)"></div>
+    <div hx-post="/logDashboard/newEntry" hx-trigger="click">
         <div th:replace="fragments/tk/button :: button('Next', 'button')"></div>
     </div>
 </div>
