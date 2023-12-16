@@ -1,0 +1,7 @@
+<html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
+    <div
+        th:fragment="stepOne"
+        th:replace="fragments/tk/card :: cardLeftAlignedTitle('Let\'s get started', ~{::content})">
+        <div th:fragment="content"></div>
+    </div>
+</html>

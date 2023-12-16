@@ -1,0 +1,12 @@
+<html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark" lang="en">
+    <head th:replace="~{scripts_common :: head('New Log Entry - SeizureTracker')}"></head>
+    <body>
+        <div th:replace="~{fragments/tk/layout :: flexCenter(~{::content})}">
+            <div th:fragment="content">
+                <div th:replace="~{fragments/tk/card :: cardLeftAlignedTitle(title, ~{::cardContent})}">
+                    <div th:fragment="cardContent"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
