@@ -1,4 +1,10 @@
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark" lang="en">
+    <!--
+    Please note, the hx-preserve implementation is god awful and I spent an hour and change researching how to add an
+    attribute that doesn't expect a value to an element. Turns out it is impossible since all the answers don't fucking
+    work anymore. We're basically forced to assign a value to this attribute.
+    -->
+
     <!-- Equivalent to a line edit from Qt -->
     <div
         th:fragment="lineEdit(name, placeholder, doLabel=true)"
@@ -24,5 +30,19 @@
         class="line-edit">
         <label th:if="${doLabel}" th:for="${idName}" th:text="${name}" />
         <input th:id="${idName}" th:placeholder="${placeholder}" type="password" th:name="${name}" />
+    </div>
+
+    <!-- Equivalent to a QSpinBox from Qt -->
+    <div
+        th:fragment="spinBox(name, placeholder, hxPreserve)"
+        th:with="idName = ${#strings.replace(name, ' ', '')} + 'SpinBox'"
+        class="line-edit">
+        <label th:if="${doLabel}" th:for="${idName}" th:text="${name}" />
+        <input
+            th:attrappend="hx-preserve=${hxPreserve} ? 'true' : null"
+            th:id="${idName}"
+            th:placeholder="${placeholder}"
+            type="number"
+            th:name="${name}" />
     </div>
 </html>
