@@ -157,9 +157,9 @@ tasks.register('compileTailwind', Exec) {
     // establish our command
     List<String> command = new ArrayList<>()
     if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-        command.add(workingDir.toString() + "/node_modules/.bin/tailwindcss.cmd")
+        command.add("./node_modules/.bin/tailwindcss.cmd")
     } else {
-        command.add(workingDir.toString() + "/node_modules/.bin/tailwindcss")
+        command.add("./node_modules/.bin/tailwindcss")
     }
 
     command.add('-i')
@@ -181,9 +181,9 @@ tasks.register('bundleJavaScript', Exec) {
     // establish our command
     List<String> command = new ArrayList<>()
     if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-        command.add(workingDir.toString() + "/node_modules/.bin/esbuild.cmd")
+        command.add("./node_modules/.bin/esbuild.cmd")
     } else {
-        command.add(workingDir.toString() + "/node_modules/.bin/esbuild")
+        command.add("./node_modules/.bin/esbuild")
     }
 
     command.add("src/main/js/app.js")
