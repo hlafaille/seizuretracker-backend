@@ -1,6 +1,9 @@
 package xyz.hlafaille.seizuretracker.service;
 
 import jakarta.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -9,15 +12,12 @@ import xyz.hlafaille.seizuretracker.exception.UserEntityMissingException;
 import xyz.hlafaille.seizuretracker.exception.UserPasswordMismatchException;
 import xyz.hlafaille.seizuretracker.repository.UserRepository;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-
 /**
  * Implementation of UserService
  */
 @Service
 public class UserServiceImpl implements UserService {
+
     private static final int ARGON_SALT_LENGTH = 16;
     private static final int ARGON_HASH_LENGTH = 128;
     private static final int ARGON_PARALLELISM = 8;
@@ -32,7 +32,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserEntityById(UUID userId) throws UserEntityMissingException {
+    public User getUserEntityById(UUID userId)
+        throws UserEntityMissingException {
         Optional<User> user = userRepository.findById(userId);
         if (user.isEmpty()) {
             throw new UserEntityMissingException();
@@ -41,7 +42,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserEntityByEmail(String email) throws UserEntityMissingException {
+    public User getUserEntityByEmail(String email)
+        throws UserEntityMissingException {
         Optional<User> user = userRepository.findByEmail(email);
         if (user.isEmpty()) {
             throw new UserEntityMissingException();
@@ -56,7 +58,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UUID createUser(String firstName, String lastName, String email, String password) {
+    public UUID createUser(
+        String firstName,
+        String lastName,
+        String email,
+        String password
+    ) {
         UUID userId = UUID.randomUUID();
         User user = new User();
         user.setId(userId);
@@ -71,7 +78,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public String encryptPassword(String password) {
         Argon2PasswordEncoder argon2PasswordEncoder = new Argon2PasswordEncoder(
-                ARGON_SALT_LENGTH, ARGON_HASH_LENGTH, ARGON_PARALLELISM, ARGON_MEMORY, ARGON_ITERATIONS
+            ARGON_SALT_LENGTH,
+            ARGON_HASH_LENGTH,
+            ARGON_PARALLELISM,
+            ARGON_MEMORY,
+            ARGON_ITERATIONS
         );
         return argon2PasswordEncoder.encode(password);
     }
@@ -80,7 +91,11 @@ public class UserServiceImpl implements UserService {
     public boolean isPasswordMatching(User user, String password) {
         // get the user by their email
         Argon2PasswordEncoder argon2PasswordEncoder = new Argon2PasswordEncoder(
-                ARGON_SALT_LENGTH, ARGON_HASH_LENGTH, ARGON_PARALLELISM, ARGON_MEMORY, ARGON_ITERATIONS
+            ARGON_SALT_LENGTH,
+            ARGON_HASH_LENGTH,
+            ARGON_PARALLELISM,
+            ARGON_MEMORY,
+            ARGON_ITERATIONS
         );
 
         // check if the password matches
@@ -88,7 +103,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void matchPassword(User user, String password) throws UserPasswordMismatchException {
+    public void matchPassword(User user, String password)
+        throws UserPasswordMismatchException {
         if (!isPasswordMatching(user, password)) {
             throw new UserPasswordMismatchException();
         }

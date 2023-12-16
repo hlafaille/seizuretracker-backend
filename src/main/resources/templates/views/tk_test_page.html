@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Fragment Test</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="/css/style.css" />
+    </head>
+    <body>
+        <div class="m-4 flex">
+            <div th:replace="~{fragments/tk/card :: card('Thymeleaf UI Fragments Test Page', ~{::content})}">
+                <div th:fragment="content">
+                    <form>
+                        <div class="flex flex-col space-y-2">
+                            <div class="flex flex-col space-y-2">
+                                <div th:replace="~{fragments/tk/input :: lineEdit('Label', 'E-Mail', true)}"></div>
+                                <div
+                                    th:replace="~{fragments/tk/input :: passwordEdit('Password', 'Password', true)}"></div>
+                            </div>
+                            <div class="flex flex-row space-x-2">
+                                <div th:replace="~{fragments/tk/button :: linkButton('Forgot Password', '#')}"></div>
+                                <div th:replace="~{fragments/tk/button :: button('Log In', 'submit')}"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

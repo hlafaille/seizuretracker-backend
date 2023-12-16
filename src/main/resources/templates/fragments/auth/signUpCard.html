@@ -1,0 +1,25 @@
+<html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark" lang="en">
+    <div th:fragment="signUpCard" id="signUpCard" class="p-4 w-full xl:w-[32rem]">
+        <div th:replace="~{fragments/tk/card :: card('Hey There!', ~{::content})}">
+            <div th:fragment="content">
+                <form hx-post="/signup" hx-target="#signUpCard" hx-swap="outerHTML">
+                    <div class="flex flex-col space-y-2">
+                        <div class="flex flex-row space-x-2 w-full">
+                            <div th:replace="~{fragments/tk/input :: lineEdit('firstName', 'First Name', true)}"></div>
+                            <div th:replace="~{fragments/tk/input :: lineEdit('lastName', 'Last Name', true)}"></div>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <div
+                                th:replace="~{fragments/tk/input :: emailLineEdit('emailAddress', 'E-Mail', true)}"></div>
+                            <div
+                                th:replace="~{fragments/tk/input :: passwordLineEdit('password', 'Password', true)}"></div>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <div th:replace="~{fragments/tk/button :: button('Create Account', 'submit')}"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</html>

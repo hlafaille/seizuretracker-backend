@@ -1,6 +1,9 @@
 package xyz.hlafaille.seizuretracker.service;
 
 import jakarta.transaction.Transactional;
+import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,14 +11,13 @@ import org.springframework.stereotype.Service;
 import xyz.hlafaille.seizuretracker.entity.SeizureLog;
 import xyz.hlafaille.seizuretracker.repository.SeizureLogRepository;
 
-import java.time.ZonedDateTime;
-import java.util.List;
-import java.util.UUID;
-
 @Service
 public class SeizureLogServiceImpl implements SeizureLogService {
+
     private final SeizureLogRepository seizureLogRepository;
-    private final Logger logger = LoggerFactory.getLogger(SeizureLogService.class);
+    private final Logger logger = LoggerFactory.getLogger(
+        SeizureLogService.class
+    );
 
     @Autowired
     public SeizureLogServiceImpl(SeizureLogRepository seizureLogRepository) {
@@ -37,7 +39,17 @@ public class SeizureLogServiceImpl implements SeizureLogService {
      */
     @Override
     @Transactional
-    public UUID createLogEntry(Integer severity, UUID userId, Integer duration, String beforeSeizureNote, String duringSeizureNote, String afterSeizureNote, boolean hospitalVisitOccurred, String additionalComment, boolean isDraft) {
+    public UUID createLogEntry(
+        Integer severity,
+        UUID userId,
+        Integer duration,
+        String beforeSeizureNote,
+        String duringSeizureNote,
+        String afterSeizureNote,
+        boolean hospitalVisitOccurred,
+        String additionalComment,
+        boolean isDraft
+    ) {
         SeizureLog seizureLog = new SeizureLog();
         UUID seizureLogId = UUID.randomUUID();
         seizureLog.setId(seizureLogId);
@@ -50,7 +62,9 @@ public class SeizureLogServiceImpl implements SeizureLogService {
         seizureLog.setHospitalVisitOccurred(hospitalVisitOccurred);
         seizureLog.setAdditionalComment(additionalComment);
         seizureLog.setDraft(isDraft);
-        logger.info("created seizure log entry: %s".formatted(seizureLogId.toString()));
+        logger.info(
+            "created seizure log entry: %s".formatted(seizureLogId.toString())
+        );
         seizureLogRepository.save(seizureLog);
         return seizureLogId;
     }

@@ -1,0 +1,81 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
+    <head th:replace="~{scripts_common :: head('Record a Seizure - SeizureTracker')}"></head>
+    <body>
+        <!-- basic card -->
+        <main class="flex-fill">
+            <div class="container my-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div
+                            th:replace="~{fragments/card :: cardWithHeaderAndFooter(~{::headerContent}, 'Let\'s get started', null, ~{::bodyContent}, ~{::footerContent})}">
+                            <div th:fragment="headerContent">
+                                <div class="pt-1 pb-1">Log a Seizure</div>
+                            </div>
+                            <div th:fragment="bodyContent">
+                                <form action="/log/newEntry" method="post" id="logNewSeizureForm">
+                                    <div class="col">
+                                        <div class="row pb-2">
+                                            <label for="beforeNoteInput">Before</label>
+                                            <div class="col input-group">
+                                                <textarea
+                                                    id="beforeNoteInput"
+                                                    name="beforeNote"
+                                                    class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row pb-2">
+                                            <label for="duringNoteInput">During</label>
+                                            <div class="col input-group">
+                                                <textarea
+                                                    id="duringNoteInput"
+                                                    name="duringNote"
+                                                    class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row pb-3">
+                                            <label for="afterNoteInput">After</label>
+                                            <div class="col input-group">
+                                                <textarea
+                                                    id="afterNoteInput"
+                                                    name="afterNote"
+                                                    class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-end">
+                                            <div class="col-auto">
+                                                <a
+                                                    href="/log/draft/1234/initialize/step3"
+                                                    class="btn btn-outline-primary float-end"
+                                                    >Next</a
+                                                >
+                                                <!-- <button type="submit" class="btn btn-primary">Next</button> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div th:fragment="footerContent">
+                                <div class="pt-1 pb-1">
+                                    <div class="progress" style="height: 22px">
+                                        <div
+                                            class="progress-bar"
+                                            role="progressbar"
+                                            style="width: 66%"
+                                            aria-valuenow="66"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100">
+                                            Step 2/3
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- basic card -->
+    </body>
+</html>

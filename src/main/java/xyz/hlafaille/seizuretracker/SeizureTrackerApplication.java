@@ -10,5 +10,4 @@ public class SeizureTrackerApplication {
     public static void main(String[] args) {
         SpringApplication.run(SeizureTrackerApplication.class, args);
     }
-
 }
