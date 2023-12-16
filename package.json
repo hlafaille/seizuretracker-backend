@@ -4,7 +4,6 @@
   "description": "<div align=\"center\">\r   <img src=\"https://i.imgur.com/yUE7Wsp.png\" width=\"200x\" height=\"200px\" alt=\"SeizureTracker Icon\">\r   <h4>SeizureTracker</h4>\r   A self-hosted organizational tool for those with epilepsy\r </div>\r <hr>",
   "main": "tailwind.config.js",
   "scripts": {
-    "prepare": "husky install"
   },
   "author": "",
   "license": "ISC",
