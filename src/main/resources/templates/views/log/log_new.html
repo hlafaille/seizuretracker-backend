@@ -3,9 +3,11 @@
     <body>
         <div th:replace="~{fragments/tk/layout :: flexCenter(~{::content})}">
             <div th:fragment="content">
-                <div th:replace="~{fragments/tk/card :: cardLeftAlignedTitle(title, ~{::cardContent})}">
-                    <div th:fragment="cardContent"></div>
-                </div>
+                <form id="createLogEntryForm" hx-post="/logDashboard/new">
+                    <div id="cardContainer" class="w-min h-min">
+                        <div th:replace="fragments/log/logNewCards :: entryPoint"></div>
+                    </div>
+                </form>
             </div>
         </div>
     </body>

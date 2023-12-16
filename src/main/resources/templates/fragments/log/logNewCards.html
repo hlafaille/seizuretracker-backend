@@ -1,7 +1,40 @@
-<html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
-    <div
-        th:fragment="stepOne"
-        th:replace="fragments/tk/card :: cardLeftAlignedTitle('Let\'s get started', ~{::content})">
-        <div th:fragment="content"></div>
+<html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark"></html>
+
+<!--
+Entrypoint. This simply makes views/log_new make more sense
+-->
+<div th:fragment="entryPoint">
+    <div th:replace="fragments/tk/card :: cardLeftAlignedTitle('Log a Seizure', ~{::_entryPointCardContent})">
+        <div th:fragment="_entryPointCardContent">
+            <div th:replace="~{::_stepOneContent}"></div>
+        </div>
     </div>
-</html>
+</div>
+
+<!--
+Step One Card.
+-->
+<div id="stepOneContent" th:fragment="_stepOneContent" class="flex flex-col space-y-2">
+    <div th:replace="fragments/tk/input :: spinBox('severity', 'Severity', true)"></div>
+    <div th:replace="fragments/tk/input :: spinBox('duration', 'Duration', true)"></div>
+    <div hx-get="/logDashboard/newEntry/stepTwo" hx-trigger="click" hx-swap="outerHTML" hx-target="#stepOneContent">
+        <div th:replace="fragments/tk/button :: button('Next', 'button')"></div>
+    </div>
+</div>
+
+<!--
+Step Two Card. This card utilizes hx-swap-oob for appending itself to the cardContainer in views/log/log_new,
+instead of swapping it traditionally. This way, we can build up a whole form that will get submitted together instead
+of establishing a server side record once stepOne gets POSTed.
+-->
+<div id="stepTwoContent" th:fragment="_stepTwoContent">
+    <div id="completedForms" class="hidden-all">
+        <div th:replace="~{::_stepOneContent}"></div>
+    </div>
+    <div th:replace="fragments/tk/input :: lineEdit('beforeComment', 'Before Comments', false)"></div>
+    <div th:replace="fragments/tk/input :: lineEdit('duringComment', 'During Comment', false)"></div>
+    <div th:replace="fragments/tk/input :: lineEdit('afterComment', 'After Comment', false)"></div>
+    <div hx-get="/logDashboard/newEntry/stepThree" hx-trigger="click">
+        <div th:replace="fragments/tk/button :: button('Next', 'button')"></div>
+    </div>
+</div>

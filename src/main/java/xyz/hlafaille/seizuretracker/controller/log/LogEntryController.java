@@ -23,32 +23,13 @@ public class LogEntryController {
         this.seizureLogService = seizureLogService;
     }
 
-    @GetMapping("/log/newDraft")
-    public String createLogDraft(HttpServletRequest request, Model model) {
-        return "redirect:/log/draft/%s/initialize/step1".formatted(1234);
+    @GetMapping("/logDashboard/newEntry")
+    public String createLogEntry(HttpServletRequest request, Model model) {
+        return "views/log/log_new";
     }
 
-    @GetMapping("/log/draft/{entryId}/initialize/step1")
-    public String logDraftInitializeStep1(
-        HttpServletRequest request,
-        Model model
-    ) {
-        return "pages/log/log_new_step1";
-    }
-
-    @GetMapping("/log/draft/{entryId}/initialize/step2")
-    public String logDraftInitializeStep2(
-        HttpServletRequest request,
-        Model model
-    ) {
-        return "pages/log/log_new_step2";
-    }
-
-    @GetMapping("/log/draft/{entryId}/initialize/step3")
-    public String logDraftInitializeStep3(
-        HttpServletRequest request,
-        Model model
-    ) {
-        return "pages/log/log_new_step3";
+    @GetMapping("/logDashboard/newEntry/stepTwo")
+    public String createLogEntryStepTwo(HttpServletRequest request, Model model) {
+        return "fragments/log/logNewCards :: _stepTwoContent";
     }
 }

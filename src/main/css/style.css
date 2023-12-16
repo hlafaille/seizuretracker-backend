@@ -26,6 +26,10 @@ html {
 /*
     UI TOOLKIT / WIDGETS
 */
+.hidden-all * {
+    display: none;
+}
+
 .button {
     outline: none;
     @apply bg-sky-600 hover:bg-sky-500 active:bg-sky-700;
@@ -40,8 +44,12 @@ html {
 .line-edit {
     input[type='text'],
     input[type='email'],
-    input[type='password'] {
+    input[type='password'],
+    input[type='number']{
         outline: none;
+        -webkit-appearance: none;   /* for Chrome, Safari, and Opera */
+        -moz-appearance: none;      /* for Firefox */
+        appearance: none;           /* standard syntax */
         @apply bg-slate-700 hover:bg-slate-600/75 focus:bg-slate-500/75;
         @apply ring-slate-400/[0.55] hover:ring-2 focus:ring-2;
         @apply transition-all;
@@ -58,7 +66,7 @@ html {
     @apply bg-slate-700/50;
     @apply border-2 border-slate-600/25;
     @apply flex rounded-lg p-6 drop-shadow-2xl;
-    @apply w-full h-full;
+    @apply h-full w-full;
 }
 
 .card-title {
