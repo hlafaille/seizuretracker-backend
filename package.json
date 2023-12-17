@@ -10,12 +10,6 @@
   "license": "ISC",
   "dependencies": {
   },
-  "prettier": {
-    "trailingComma": "es5",
-    "tabWidth": 4,
-    "semi": false,
-    "singleQuote": true
-  },
   "devDependencies": {
     "esbuild-wasm": "^0.19.9",
     "prettier": "^3.1.1",

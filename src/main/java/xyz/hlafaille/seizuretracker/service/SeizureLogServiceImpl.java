@@ -15,9 +15,7 @@ import xyz.hlafaille.seizuretracker.repository.SeizureLogRepository;
 public class SeizureLogServiceImpl implements SeizureLogService {
 
     private final SeizureLogRepository seizureLogRepository;
-    private final Logger logger = LoggerFactory.getLogger(
-        SeizureLogService.class
-    );
+    private final Logger logger = LoggerFactory.getLogger(SeizureLogService.class);
 
     @Autowired
     public SeizureLogServiceImpl(SeizureLogRepository seizureLogRepository) {
@@ -62,9 +60,7 @@ public class SeizureLogServiceImpl implements SeizureLogService {
         seizureLog.setHospitalVisitOccurred(hospitalVisitOccurred);
         seizureLog.setAdditionalComment(additionalComment);
         seizureLog.setDraft(isDraft);
-        logger.info(
-            "created seizure log entry: %s".formatted(seizureLogId.toString())
-        );
+        logger.info("created seizure log entry: %s".formatted(seizureLogId.toString()));
         seizureLogRepository.save(seizureLog);
         return seizureLogId;
     }

@@ -1,9 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark" lang="en">
-    <div
-        id="flexCenter"
-        th:fragment="flexCenter(content)"
-        class="flex-center flex-center-base-z"
-    >
+    <div id="flexCenter" th:fragment="flexCenter(content)" class="flex-center flex-center-base-z">
         <div th:class="z-0" th:replace="${content}"></div>
     </div>
 </html>

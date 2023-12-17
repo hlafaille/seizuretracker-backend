@@ -5,7 +5,7 @@ const config = {
     semi: false,
     singleQuote: true,
     endOfLine: 'lf',
-    bracketSameLine: true,
+    bracketSameLine: false,
     printWidth: 120,
     plugins: [
         "prettier-plugin-tailwindcss",

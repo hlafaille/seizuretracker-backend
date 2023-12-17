@@ -17,17 +17,11 @@ public interface UserService {
 
     List<User> getAllUsers();
 
-    UUID createUser(
-        String firstName,
-        String lastName,
-        String email,
-        String password
-    );
+    UUID createUser(String firstName, String lastName, String email, String password);
 
     String encryptPassword(String password);
 
     boolean isPasswordMatching(User user, String password);
 
-    void matchPassword(User user, String password)
-        throws UserPasswordMismatchException;
+    void matchPassword(User user, String password) throws UserPasswordMismatchException;
 }

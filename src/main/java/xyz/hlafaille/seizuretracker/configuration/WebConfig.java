@@ -10,16 +10,10 @@ import xyz.hlafaille.seizuretracker.interceptor.SessionEnforcementInterceptor;
 public class WebConfig implements WebMvcConfigurer {
 
     private final SessionEnforcementInterceptor sessionEnforcementInterceptor;
-    private final String[] invalidSessionAllowedPaths = {
-        "/login",
-        "/error",
-        "/signup",
-    };
+    private final String[] invalidSessionAllowedPaths = { "/login", "/error", "/signup" };
 
     // @Autowired
-    public WebConfig(
-        SessionEnforcementInterceptor sessionEnforcementInterceptor
-    ) {
+    public WebConfig(SessionEnforcementInterceptor sessionEnforcementInterceptor) {
         this.sessionEnforcementInterceptor = sessionEnforcementInterceptor;
     }
 

@@ -32,8 +32,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserEntityById(UUID userId)
-        throws UserEntityMissingException {
+    public User getUserEntityById(UUID userId) throws UserEntityMissingException {
         Optional<User> user = userRepository.findById(userId);
         if (user.isEmpty()) {
             throw new UserEntityMissingException();
@@ -42,8 +41,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserEntityByEmail(String email)
-        throws UserEntityMissingException {
+    public User getUserEntityByEmail(String email) throws UserEntityMissingException {
         Optional<User> user = userRepository.findByEmail(email);
         if (user.isEmpty()) {
             throw new UserEntityMissingException();
@@ -58,12 +56,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UUID createUser(
-        String firstName,
-        String lastName,
-        String email,
-        String password
-    ) {
+    public UUID createUser(String firstName, String lastName, String email, String password) {
         UUID userId = UUID.randomUUID();
         User user = new User();
         user.setId(userId);
@@ -103,8 +96,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void matchPassword(User user, String password)
-        throws UserPasswordMismatchException {
+    public void matchPassword(User user, String password) throws UserPasswordMismatchException {
         if (!isPasswordMatching(user, password)) {
             throw new UserPasswordMismatchException();
         }

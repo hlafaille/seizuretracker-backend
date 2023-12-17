@@ -18,8 +18,7 @@ public interface SessionService {
      * @param sessionId Session ID
      * @return Session entity
      */
-    Session getSessionEntityById(UUID sessionId)
-        throws SessionEntityMissingException;
+    Session getSessionEntityById(UUID sessionId) throws SessionEntityMissingException;
 
     /**
      * Designed for use with an HttpServletRequest, this method will return our session cookie if it exists.
@@ -27,8 +26,7 @@ public interface SessionService {
      * @param cookies Array of Cookie(s) from HttpServletRequest
      * @return Cookie object
      */
-    Cookie getSessionCookieFromBrowserCookies(Cookie[] cookies)
-        throws SessionCookieMissingException;
+    Cookie getSessionCookieFromBrowserCookies(Cookie[] cookies) throws SessionCookieMissingException;
 
     /**
      * Get a Session entity from the database by a provided cookie.
@@ -36,8 +34,7 @@ public interface SessionService {
      * @param cookie Session Cookie object
      * @return Session entity
      */
-    Session getSessionEntityFromCookie(Cookie cookie)
-        throws SessionEntityMissingException;
+    Session getSessionEntityFromCookie(Cookie cookie) throws SessionEntityMissingException;
 
     /**
      * If a session is expired, return true. Else, return false.
@@ -60,8 +57,7 @@ public interface SessionService {
      * @param userId User ID
      * @return Session entity
      */
-    Session getSessionEntityFromUserId(UUID userId)
-        throws SessionEntityMissingException;
+    Session getSessionEntityFromUserId(UUID userId) throws SessionEntityMissingException;
 
     /**
      * Get a user's entity from a session
@@ -69,8 +65,7 @@ public interface SessionService {
      * @param sessionId Session ID
      * @return User entity
      */
-    User getUserEntityFromSessionId(UUID sessionId)
-        throws SessionEntityMissingException, SessionUserMissingException;
+    User getUserEntityFromSessionId(UUID sessionId) throws SessionEntityMissingException, SessionUserMissingException;
 
     /**
      * End a session by its ID
@@ -84,8 +79,7 @@ public interface SessionService {
      *
      * @param sessionId Session ID
      */
-    void endSessionByUserId(UUID sessionId)
-        throws SessionEntityMissingException;
+    void endSessionByUserId(UUID sessionId) throws SessionEntityMissingException;
 
     /**
      * Private method for determining if the user has a resumable session. For example, this is useful for if the

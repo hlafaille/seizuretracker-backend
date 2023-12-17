@@ -21,9 +21,7 @@ import xyz.hlafaille.seizuretracker.service.SessionService;
 public class SessionEnforcementInterceptor implements HandlerInterceptor {
 
     private final SessionService sessionService;
-    private final Logger logger = LoggerFactory.getLogger(
-        SessionEnforcementInterceptor.class
-    );
+    private final Logger logger = LoggerFactory.getLogger(SessionEnforcementInterceptor.class);
 
     @Autowired
     public SessionEnforcementInterceptor(SessionService sessionService) {
@@ -31,32 +29,20 @@ public class SessionEnforcementInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public boolean preHandle(
-        HttpServletRequest request,
-        HttpServletResponse response,
-        Object handler
-    ) throws SessionEntityMissingException, IOException {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+        throws SessionEntityMissingException, IOException {
         Cookie cookie;
         try {
-            cookie =
-                sessionService.getSessionCookieFromBrowserCookies(
-                    request.getCookies()
-                );
+            cookie = sessionService.getSessionCookieFromBrowserCookies(request.getCookies());
         } catch (SessionCookieMissingException e) {
-            logger.info(
-                "user does not have session cookie, redirecting user to /login"
-            );
+            logger.info("user does not have session cookie, redirecting user to /login");
             response.sendRedirect("/login");
             return false;
         }
 
         Session session = sessionService.getSessionEntityFromCookie(cookie);
         if (sessionService.isSessionExpired(session)) {
-            logger.info(
-                "session:%s is expired: redirecting user login".formatted(
-                        session.getId().toString()
-                    )
-            );
+            logger.info("session:%s is expired: redirecting user login".formatted(session.getId().toString()));
             response.sendRedirect("/login");
             return false;
         }

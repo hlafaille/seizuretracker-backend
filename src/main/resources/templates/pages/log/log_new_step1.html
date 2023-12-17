@@ -1,8 +1,6 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
-    <head
-        th:replace="~{scripts_common :: head('Record a Seizure - SeizureTracker')}"
-    ></head>
+    <head th:replace="~{scripts_common :: head('Record a Seizure - SeizureTracker')}"></head>
 
     <body>
         <!-- basic card -->
@@ -12,14 +10,10 @@
                     th:replace="~{fragments/card :: cardWithHeaderAndFooter(~{::headerContent}, 'Let\'s get started', null, ~{::bodyContent}, ~{::footerContent})}"
                 >
                     <div th:fragment="headerContent">
-                        <div class="pt-1 pb-1">Log a Seizure</div>
+                        <div class="pb-1 pt-1">Log a Seizure</div>
                     </div>
                     <div th:fragment="bodyContent">
-                        <form
-                            action="/log/newEntry"
-                            method="post"
-                            id="logNewSeizureForm"
-                        >
+                        <form action="/log/newEntry" method="post" id="logNewSeizureForm">
                             <div class="col">
                                 <div class="row pb-2">
                                     <label for="severityInput">Severity</label>
@@ -32,35 +26,20 @@
                                             max="10"
                                             class="form-control"
                                         />
-                                        <span
-                                            class="input-group-text"
-                                            id="severitySuffix"
-                                            >/ 10</span
-                                        >
+                                        <span class="input-group-text" id="severitySuffix">/ 10</span>
                                     </div>
                                 </div>
                                 <div class="row pb-3">
                                     <label for="durationInput">Duration</label>
                                     <div class="col input-group">
-                                        <input
-                                            id="durationInput"
-                                            name="duration"
-                                            type="number"
-                                            class="form-control"
-                                        />
-                                        <span
-                                            class="input-group-text"
-                                            id="durationSuffix"
-                                            >minutes</span
-                                        >
+                                        <input id="durationInput" name="duration" type="number" class="form-control" />
+                                        <span class="input-group-text" id="durationSuffix">minutes</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row justify-content-end">
                                 <div class="col-auto">
-                                    <a
-                                        href="/log/draft/1234/initialize/step2"
-                                        class="btn btn-outline-primary float-end"
+                                    <a href="/log/draft/1234/initialize/step2" class="btn btn-outline-primary float-end"
                                         >Next</a
                                     >
                                     <!-- <button type="submit" class="btn btn-primary">Next</button> -->
@@ -69,7 +48,7 @@
                         </form>
                     </div>
                     <div th:fragment="footerContent">
-                        <div class="pt-1 pb-1">
+                        <div class="pb-1 pt-1">
                             <div class="progress" style="height: 22px">
                                 <div
                                     class="progress-bar"

@@ -8,20 +8,12 @@
     </div>
 
     <!-- nav bar drawer-->
-    <div
-        id="navBarDrawer"
-        th:fragment="navBarDrawer(navBarDrawerList)"
-        class="navbar-drawer"
-    >
+    <div id="navBarDrawer" th:fragment="navBarDrawer(navBarDrawerList)" class="navbar-drawer">
         <div th:replace="${navBarDrawerList}"></div>
     </div>
 
     <!-- nav bar drawer list -->
-    <div
-        id="navBarDrawerList"
-        th:fragment="navBarDrawerList(listItems)"
-        class="navbar-drawer-list"
-    >
+    <div id="navBarDrawerList" th:fragment="navBarDrawerList(listItems)" class="navbar-drawer-list">
         <div th:replace="~{::listItems}"></div>
     </div>
 
@@ -32,12 +24,7 @@
         th:href="${url}"
     >
         <div class="navbar-drawer-list-item">
-            <img
-                th:if="${iconRelativeUrl}"
-                th:src="${iconRelativeUrl}"
-                th:alt="${iconAlt}"
-                class="stroke-gray-100"
-            />
+            <img th:if="${iconRelativeUrl}" th:src="${iconRelativeUrl}" th:alt="${iconAlt}" class="stroke-gray-100" />
             <p th:text="${text}"></p>
         </div>
     </a>
