@@ -43,3 +43,17 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+/**
+ * Basic task to call the 'build' script in package.json. We use powershell & bash here to give us a proper shell
+ * environment.
+ */
+tasks.register('npmBuild', Exec) {
+    group 'npm'
+    if(Os.isFamily(Os.FAMILY_WINDOWS)) {
+        commandLine 'powershell', 'npm run build'
+    } else if (Os.isFamily(Os.FAMILY_UNIX)) {
+        commandLine 'bash', '-c', 'npm run build'
+    }
+}
+processResources.dependsOn npmBuild
