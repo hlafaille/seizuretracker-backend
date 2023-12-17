@@ -7,5 +7,5 @@ esbuild.build({
     format: "iife",
     platform: "browser",
     globalName: "SeizureTracker",
-    outfile: "build/resources/main/static/bundle.js"
+    outfile: ".generatedResources/bundle.js"
 }).catch(() => process.exit(1));

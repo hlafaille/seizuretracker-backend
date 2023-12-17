@@ -50,10 +50,22 @@ tasks.named('test') {
  */
 tasks.register('npmBuild', Exec) {
     group 'npm'
-    if(Os.isFamily(Os.FAMILY_WINDOWS)) {
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
         commandLine 'powershell', 'npm run build'
     } else if (Os.isFamily(Os.FAMILY_UNIX)) {
         commandLine 'bash', '-c', 'npm run build'
     }
 }
-processResources.dependsOn npmBuild
+compileJava.dependsOn npmBuild
+
+/**
+ * Copies files from .generatedResources into src/main/resources/static
+ */
+tasks.register('generatedResourcesCopy', Copy) {
+        group 'npm'
+        from '.generatedResources/bundle.js'
+        into 'src/main/resources/static'
+        from '.generatedResources/style.css'
+        into 'src/main/resources/static'
+}
+processResources.dependsOn generatedResourcesCopy
