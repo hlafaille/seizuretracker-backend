@@ -3,6 +3,7 @@
     <head th:replace="~{scripts_common :: head('Login - SeizureTracker')}"></head>
     <body>
         <div
-            th:replace="~{fragments/tk/layout :: flexCenter(~{fragments/auth/logInCard :: logInCard(${newAccount}, ${userMissing})})}"></div>
+            th:replace="~{fragments/tk/layout :: flexCenter(~{fragments/auth/logInCard :: logInCard(${newAccount}, ${userMissing})})}"
+        ></div>
     </body>
 </html>

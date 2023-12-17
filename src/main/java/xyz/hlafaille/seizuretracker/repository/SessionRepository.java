@@ -8,8 +8,7 @@ import org.springframework.stereotype.Repository;
 import xyz.hlafaille.seizuretracker.entity.Session;
 
 @Repository
-public interface SessionRepository
-    extends JpaRepository<Session, UUID>, QueryByExampleExecutor<Session> {
+public interface SessionRepository extends JpaRepository<Session, UUID>, QueryByExampleExecutor<Session> {
     default Session findSessionByUser(UUID userId) throws RuntimeException {
         List<Session> sessions = this.findAll();
         for (Session x : sessions) {

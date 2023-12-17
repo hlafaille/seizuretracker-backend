@@ -8,8 +8,6 @@ import org.springframework.stereotype.Repository;
 import xyz.hlafaille.seizuretracker.entity.SeizureLog;
 
 @Repository
-public interface SeizureLogRepository
-    extends
-        JpaRepository<SeizureLog, UUID>, QueryByExampleExecutor<SeizureLog> {
+public interface SeizureLogRepository extends JpaRepository<SeizureLog, UUID>, QueryByExampleExecutor<SeizureLog> {
     List<SeizureLog> findAllByUser(UUID userId);
 }

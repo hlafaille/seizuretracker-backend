@@ -1,5 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark" lang="en">
-    <div th:fragment="logInCard(newAccount, userNotFound)" id="loginCard" class="p-4 w-full lg:w-[32rem]">
+    <div th:fragment="logInCard(newAccount, userNotFound)" id="loginCard" class="w-full p-4 lg:w-[32rem]">
         <div th:if="${newAccount}" class="alert-success mb-2" role="alert">Account created! Try logging in.</div>
         <div th:if="${userNotFound}" class="alert-danger mb-2" role="alert">User not found</div>
         <div th:replace="~{fragments/tk/card :: card('Welcome Back', ~{::content})}">
@@ -8,9 +8,11 @@
                     <div class="flex flex-col space-y-2">
                         <div class="flex flex-col space-y-2">
                             <div
-                                th:replace="~{fragments/tk/input :: emailLineEdit('emailAddress', 'E-Mail', true)}"></div>
+                                th:replace="~{fragments/tk/input :: emailLineEdit('emailAddress', 'E-Mail', true)}"
+                            ></div>
                             <div
-                                th:replace="~{fragments/tk/input :: passwordLineEdit('password', 'Password', true)}"></div>
+                                th:replace="~{fragments/tk/input :: passwordLineEdit('password', 'Password', true)}"
+                            ></div>
                         </div>
                         <div class="flex flex-row space-x-2">
                             <div th:replace="~{fragments/tk/button :: button('Log In', 'submit')}"></div>

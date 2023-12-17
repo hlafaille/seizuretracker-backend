@@ -4,7 +4,7 @@
         <div th:replace="~{fragments/tk/layout :: flexCenter(~{::content})}">
             <div th:fragment="content">
                 <form id="createLogEntryForm" hx-post="/logDashboard/new">
-                    <div id="cardContainer" class="w-min h-min">
+                    <div id="cardContainer" class="h-min w-min">
                         <div th:replace="fragments/log/logNewCards :: entryPoint"></div>
                     </div>
                 </form>

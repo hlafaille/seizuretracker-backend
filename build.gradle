@@ -44,159 +44,28 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
+/**
+ * Basic task to call the 'build' script in package.json. We use powershell & bash here to give us a proper shell
+ * environment.
+ */
+tasks.register('npmBuild', Exec) {
+    group 'npm'
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        commandLine 'powershell', 'npm run build'
+    } else if (Os.isFamily(Os.FAMILY_UNIX)) {
+        commandLine 'bash', '-c', 'npm run build'
+    }
+}
+compileJava.dependsOn npmBuild
 
 /**
- * Prettier - Format Java
+ * Copies files from .generatedResources into src/main/resources/static
  */
-tasks.register("formatJava", Exec) {
-    group = "prettier"
-    workingDir projectDir
-
-    // establish our command
-    List<String> command = new ArrayList<>()
-    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-        command.add(workingDir.toString() + "\\node_modules\\.bin\\prettier.cmd")
-    } else {
-        command.add(workingDir.toString() + "/node_modules/.bin/prettier")
-    }
-
-    command.add("--plugin=prettier-plugin-java")
-    command.add("--end-of-line")
-    command.add("lf")
-    command.add("--write")
-    command.add("src/main/java")
-
-    commandLine command
+tasks.register('generatedResourcesCopy', Copy) {
+        group 'npm'
+        from '.generatedResources/bundle.js'
+        into 'src/main/resources/static'
+        from '.generatedResources/style.css'
+        into 'src/main/resources/static'
 }
-
-
-/**
- * Prettier - Format HTML
- */
-tasks.register("formatHtml", Exec) {
-    group = "prettier"
-    workingDir projectDir
-
-    // establish our command
-    List<String> command = new ArrayList<>()
-    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-        command.add(workingDir.toString() + "\\node_modules\\.bin\\prettier.cmd")
-    } else {
-        command.add(workingDir.toString() + "/node_modules/.bin/prettier")
-    }
-
-    command.add("--bracket-same-line")
-    command.add("--print-width=120")
-    command.add("--end-of-line")
-    command.add("lf")
-    command.add("--write")
-    command.add("src/main/resources/templates")
-
-    commandLine command
-}
-
-
-/**
- * Prettier - Format Tailwind Source CSS
- */
-tasks.register("formatTailwindSource", Exec) {
-    group = "prettier"
-    workingDir projectDir
-
-    // establish our command
-    List<String> command = new ArrayList<>()
-    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-        command.add(workingDir.toString() + "\\node_modules\\.bin\\prettier.cmd")
-    } else {
-        command.add(workingDir.toString() + "/node_modules/.bin/prettier")
-    }
-
-    command.add("--plugin=prettier-plugin-tailwindcss")
-    command.add("--end-of-line")
-    command.add("lf")
-    command.add("--write")
-    command.add("src/main/css")
-    commandLine command
-}
-
-
-/**
- * Prettier - Format JavaScript
- */
-tasks.register("formatJavaScript", Exec) {
-    group = "prettier"
-    workingDir projectDir
-
-    // establish our command
-    List<String> command = new ArrayList<>()
-    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-        command.add(workingDir.toString() + "\\node_modules\\.bin\\prettier.cmd")
-    } else {
-        command.add(workingDir.toString() + "/node_modules/.bin/prettier")
-    }
-
-    // format
-    command.add("--write")
-    command.add("src/main/js")
-    commandLine command
-}
-
-
-///////
-/**
- * Tailwind Compilation
- */
-processResources {
-    exclude '**/*/*.css'
-    exclude '**/*/*.js'
-}
-
-tasks.register('compileTailwind', Exec) {
-    workingDir projectDir
-
-    // establish our command
-    List<String> command = new ArrayList<>()
-    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-        command.add(workingDir.toString() + "/node_modules/.bin/tailwindcss.cmd")
-    } else {
-        command.add(workingDir.toString() + "/node_modules/.bin/tailwindcss")
-    }
-
-    command.add('-i')
-    command.add("src/main/css/style.css")
-    command.add('-o')
-    command.add('build/resources/main/static/style.css')
-    println("Running tailwindcli: " + command.toString())
-    commandLine command
-}
-
-/**
- * JavaScript Bundling
- */
-
-tasks.register('bundleJavaScript', Exec) {
-    group = "bundle"
-    workingDir projectDir
-
-    // establish our command
-    List<String> command = new ArrayList<>()
-    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-        command.add(workingDir.toString() + "/node_modules/.bin/esbuild.cmd")
-    } else {
-        command.add(workingDir.toString() + "/node_modules/.bin/esbuild")
-    }
-
-    command.add("src/main/js/app.js")
-    command.add("--bundle")
-    command.add("--format=iife")
-    command.add("--platform=browser")
-    command.add("--global-name=SeizureTracker")
-    command.add("--tree-shaking=false")
-    command.add("--outfile=build/resources/main/static/bundle.js")
-    println("Running esbuild: " + command.toString())
-    commandLine command
-}
-
-// Make the Java build task depend on the Tailwind compile task
-processResources.dependsOn compileTailwind
-processResources.dependsOn bundleJavaScript
+processResources.dependsOn generatedResourcesCopy

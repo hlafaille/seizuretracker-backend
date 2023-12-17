@@ -9,21 +9,24 @@
     <div
         th:fragment="lineEdit(name, placeholder, hxPreserve)"
         th:with="idName = ${#strings.replace(name, ' ', '')} + 'LineEdit'"
-        class="line-edit">
+        class="line-edit"
+    >
         <label th:if="${doLabel}" th:for="${idName}" th:text="${name}" />
         <input
             th:attrappend="hx-preserve=${hxPreserve} ? 'true' : null"
             th:id="${idName}"
             th:placeholder="${placeholder}"
             type="text"
-            th:name="${name}" />
+            th:name="${name}"
+        />
     </div>
 
     <!-- ... -->
     <div
         th:fragment="emailLineEdit(name, placeholder, doLabel=true)"
         th:with="idName = ${#strings.replace(name, ' ', '')} + 'LineEdit'"
-        class="line-edit">
+        class="line-edit"
+    >
         <label th:if="${doLabel}" th:for="${idName}" th:text="${name}" />
         <input th:id="${idName}" th:placeholder="${placeholder}" type="email" th:name="${name}" />
     </div>
@@ -32,7 +35,8 @@
     <div
         th:fragment="passwordLineEdit(name, placeholder, doLabel=true)"
         th:with="idName = ${#strings.replace(name, ' ', '')} + 'LineEdit'"
-        class="line-edit">
+        class="line-edit"
+    >
         <label th:if="${doLabel}" th:for="${idName}" th:text="${name}" />
         <input th:id="${idName}" th:placeholder="${placeholder}" type="password" th:name="${name}" />
     </div>
@@ -41,13 +45,15 @@
     <div
         th:fragment="spinBox(name, placeholder, hxPreserve)"
         th:with="idName = ${#strings.replace(name, ' ', '')} + 'SpinBox'"
-        class="line-edit">
+        class="line-edit"
+    >
         <label th:if="${doLabel}" th:for="${idName}" th:text="${name}" />
         <input
             th:attrappend="hx-preserve=${hxPreserve} ? 'true' : null"
             th:id="${idName}"
             th:placeholder="${placeholder}"
             type="number"
-            th:name="${name}" />
+            th:name="${name}"
+        />
     </div>
 </html>

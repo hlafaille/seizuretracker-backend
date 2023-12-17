@@ -28,9 +28,7 @@ public class LoginSignupController {
 
     private final UserService userService;
     private final SessionService sessionService;
-    private final Logger logger = LoggerFactory.getLogger(
-        SeizureLogService.class
-    );
+    private final Logger logger = LoggerFactory.getLogger(SeizureLogService.class);
 
     /*@ExceptionHandler({UserEntityMissingException.class})
     public String handleUserEntityMissingException(Model model){
@@ -39,10 +37,7 @@ public class LoginSignupController {
     }*/
 
     @Autowired
-    public LoginSignupController(
-        UserService userService,
-        SessionService sessionService
-    ) {
+    public LoginSignupController(UserService userService, SessionService sessionService) {
         this.userService = userService;
         this.sessionService = sessionService;
     }
@@ -59,15 +54,8 @@ public class LoginSignupController {
      * Log in page
      */
     @GetMapping("/login")
-    public String login(
-        HttpServletRequest request,
-        Model model,
-        HttpServletResponse response
-    ) {
-        boolean isSessionResumable =
-            sessionService.isSessionResumableByBrowserCookies(
-                request.getCookies()
-            );
+    public String login(HttpServletRequest request, Model model, HttpServletResponse response) {
+        boolean isSessionResumable = sessionService.isSessionResumableByBrowserCookies(request.getCookies());
         if (isSessionResumable) {
             logger.info("session is resumable, redirecting home");
             response.addHeader("hx-redirect", "/home");
@@ -81,19 +69,11 @@ public class LoginSignupController {
      * Log in the user by establishing them a new session, setting that cookie and then redirecting the user to /home
      */
     @PostMapping("/login")
-    public String doLogin(
-        @ModelAttribute LoginFormModel formData,
-        Model model,
-        HttpServletResponse response
-    ) {
+    public String doLogin(@ModelAttribute LoginFormModel formData, Model model, HttpServletResponse response) {
         // start the session
         UUID sessionId;
         try {
-            sessionId =
-                sessionService.beginSession(
-                    formData.getEmailAddress(),
-                    formData.getPassword()
-                );
+            sessionId = sessionService.beginSession(formData.getEmailAddress(), formData.getPassword());
         } catch (UserEntityMissingException | UserPasswordMismatchException e) {
             model.addAttribute("userNotFound", true);
             return "fragments/auth/logInCard :: logInCard";
@@ -112,10 +92,7 @@ public class LoginSignupController {
      */
     @GetMapping("/signup")
     public String signup(HttpServletRequest request) {
-        boolean isSessionResumable =
-            sessionService.isSessionResumableByBrowserCookies(
-                request.getCookies()
-            );
+        boolean isSessionResumable = sessionService.isSessionResumableByBrowserCookies(request.getCookies());
         if (isSessionResumable) {
             logger.info("session is resumable, redirecting home");
             return "redirect:/home";
@@ -144,9 +121,7 @@ public class LoginSignupController {
     public String doLogout(HttpServletRequest request)
         throws SessionCookieMissingException, SessionEntityMissingException {
         Session session = sessionService.getSessionEntityFromCookie(
-            sessionService.getSessionCookieFromBrowserCookies(
-                request.getCookies()
-            )
+            sessionService.getSessionCookieFromBrowserCookies(request.getCookies())
         );
         sessionService.endSessionById(session.getId());
         return "redirect:/login";

@@ -24,10 +24,7 @@ public class SessionServiceImpl implements SessionService {
     private final Logger logger = LoggerFactory.getLogger(SessionService.class);
 
     @Autowired
-    public SessionServiceImpl(
-        SessionRepository sessionRepository,
-        UserService userService
-    ) {
+    public SessionServiceImpl(SessionRepository sessionRepository, UserService userService) {
         this.sessionRepository = sessionRepository;
         this.userService = userService;
     }
@@ -39,8 +36,7 @@ public class SessionServiceImpl implements SessionService {
      * @return Session entity
      */
     @Override
-    public Session getSessionEntityById(UUID sessionId)
-        throws SessionEntityMissingException {
+    public Session getSessionEntityById(UUID sessionId) throws SessionEntityMissingException {
         Optional<Session> session = sessionRepository.findById(sessionId);
         if (session.isEmpty()) {
             throw new SessionEntityMissingException();
@@ -55,8 +51,7 @@ public class SessionServiceImpl implements SessionService {
      * @return Cookie object
      */
     @Override
-    public Cookie getSessionCookieFromBrowserCookies(Cookie[] cookies)
-        throws SessionCookieMissingException {
+    public Cookie getSessionCookieFromBrowserCookies(Cookie[] cookies) throws SessionCookieMissingException {
         if (cookies == null || cookies.length == 0) {
             throw new SessionCookieMissingException();
         }
@@ -75,8 +70,7 @@ public class SessionServiceImpl implements SessionService {
      * @return Session entity
      */
     @Override
-    public Session getSessionEntityFromCookie(Cookie cookie)
-        throws SessionEntityMissingException {
+    public Session getSessionEntityFromCookie(Cookie cookie) throws SessionEntityMissingException {
         // ensure the developer passed in the right cookie
         assert cookie.getName().equals("session");
 
@@ -88,9 +82,7 @@ public class SessionServiceImpl implements SessionService {
         UUID sessionCookieValue = UUID.fromString(sessionCookieRawValue);
 
         // get the session entity
-        Optional<Session> sessionEntity = sessionRepository.findById(
-            sessionCookieValue
-        );
+        Optional<Session> sessionEntity = sessionRepository.findById(sessionCookieValue);
         if (sessionEntity.isEmpty()) {
             throw new SessionEntityMissingException();
         }
@@ -114,8 +106,7 @@ public class SessionServiceImpl implements SessionService {
      * @param session Session entity
      */
     @Override
-    public void checkSessionExpired(Session session)
-        throws SessionExpiredException {
+    public void checkSessionExpired(Session session) throws SessionExpiredException {
         if (isSessionExpired(session)) {
             throw new SessionExpiredException();
         }
@@ -128,8 +119,7 @@ public class SessionServiceImpl implements SessionService {
      * @return Session entity
      */
     @Override
-    public Session getSessionEntityFromUserId(UUID userId)
-        throws SessionEntityMissingException {
+    public Session getSessionEntityFromUserId(UUID userId) throws SessionEntityMissingException {
         List<Session> allSessions = sessionRepository.findAll();
         for (Session session : allSessions) {
             if (session.getUser() == userId) {
@@ -174,8 +164,7 @@ public class SessionServiceImpl implements SessionService {
      * @param userId User ID
      */
     @Override
-    public void endSessionByUserId(UUID userId)
-        throws SessionEntityMissingException {
+    public void endSessionByUserId(UUID userId) throws SessionEntityMissingException {
         Session session = getSessionEntityFromUserId(userId);
         sessionRepository.deleteById(session.getId());
     }
@@ -218,9 +207,7 @@ public class SessionServiceImpl implements SessionService {
         userService.matchPassword(user, password);
 
         // determine when this session should expire
-        ZonedDateTime expiresAt = ZonedDateTime
-            .now(ZoneId.of("UTC"))
-            .plusHours(3);
+        ZonedDateTime expiresAt = ZonedDateTime.now(ZoneId.of("UTC")).plusHours(3);
 
         // create a new session
         UUID sessionId = UUID.randomUUID();
@@ -234,9 +221,7 @@ public class SessionServiceImpl implements SessionService {
             sessionRepository.save(session);
         } catch (DataIntegrityViolationException e) {
             if (e.getMessage().toLowerCase().contains("duplicate entry")) {
-                Session existingSession = sessionRepository.findSessionByUser(
-                    user.getId()
-                );
+                Session existingSession = sessionRepository.findSessionByUser(user.getId());
                 return existingSession.getId();
             }
         }

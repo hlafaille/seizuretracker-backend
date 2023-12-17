@@ -24,35 +24,22 @@ public class LogController {
     private final SeizureLogService seizureLogService;
 
     @Autowired
-    public LogController(
-        SessionService sessionService,
-        SeizureLogService seizureLogService
-    ) {
+    public LogController(SessionService sessionService, SeizureLogService seizureLogService) {
         this.sessionService = sessionService;
         this.seizureLogService = seizureLogService;
     }
 
     @GetMapping("/logDashboard")
-    public String log(
-        HttpServletRequest request,
-        Model model
-    )
+    public String log(HttpServletRequest request, Model model)
         throws SessionCookieMissingException, SessionEntityMissingException, SessionUserMissingException {
-
         // get the user by their session id
-        Cookie sessionCookie =
-            sessionService.getSessionCookieFromBrowserCookies(
-                request.getCookies()
-            );
-        Session session = sessionService.getSessionEntityFromCookie(
-            sessionCookie
-        );
+        Cookie sessionCookie = sessionService.getSessionCookieFromBrowserCookies(request.getCookies());
+        Session session = sessionService.getSessionEntityFromCookie(sessionCookie);
         User user = sessionService.getUserEntityFromSessionId(session.getId());
         model.addAttribute("userFirstName", user.getFirstName());
 
         // get the recorded logs
-        List<SeizureLog> seizureLogs =
-            seizureLogService.getSeizureLogEntriesByUserId(user.getId());
+        List<SeizureLog> seizureLogs = seizureLogService.getSeizureLogEntriesByUserId(user.getId());
         model.addAttribute("seizureLogs", seizureLogs);
         return "views/log/log_dashboard";
     }

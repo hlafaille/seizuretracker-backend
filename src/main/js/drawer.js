@@ -37,12 +37,7 @@ export function toggleDrawer() {
     const drawer = document.getElementById('navBarDrawer')
     const hamburger = document.getElementById('navBarHamburger')
     if (!drawer || !hamburger) {
-        console.error(
-            'Incorrect navbar setup. drawer==' +
-                drawer +
-                ' & hamburger==' +
-                hamburger
-        )
+        console.error('Incorrect navbar setup. drawer==' + drawer + ' & hamburger==' + hamburger)
         return
     }
 

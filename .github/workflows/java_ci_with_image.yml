@@ -23,7 +23,7 @@ jobs:
         run: npm i
 
       - name: Execute Gradle Build
-        run: ./gradlew build
+        run: ./gradlew bootJar
 
       - uses: actions/upload-artifact@v3
         with:

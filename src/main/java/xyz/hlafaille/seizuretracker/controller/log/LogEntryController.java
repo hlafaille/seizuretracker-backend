@@ -24,10 +24,7 @@ public class LogEntryController {
     private final SeizureLogService seizureLogService;
 
     @Autowired
-    public LogEntryController(
-        SessionService sessionService,
-        SeizureLogService seizureLogService
-    ) {
+    public LogEntryController(SessionService sessionService, SeizureLogService seizureLogService) {
         this.sessionService = sessionService;
         this.seizureLogService = seizureLogService;
     }
@@ -48,21 +45,26 @@ public class LogEntryController {
     }
 
     @PostMapping("/logDashboard/newEntry")
-    public String doLogNewEntry(HttpServletRequest request, CreateSeizureLogEntryFormModel formData, Model model, HttpServletResponse response) throws SessionEntityMissingException, SessionUserMissingException, SessionCookieMissingException {
+    public String doLogNewEntry(
+        HttpServletRequest request,
+        CreateSeizureLogEntryFormModel formData,
+        Model model,
+        HttpServletResponse response
+    ) throws SessionEntityMissingException, SessionUserMissingException, SessionCookieMissingException {
         // get the user by their session id
         Cookie sessionCookie = sessionService.getSessionCookieFromBrowserCookies(request.getCookies());
         Session session = sessionService.getSessionEntityFromCookie(sessionCookie);
         User user = sessionService.getUserEntityFromSessionId(session.getId());
         seizureLogService.createLogEntry(
-                formData.getSeverity(),
-                user.getId(),
-                formData.getDuration(),
-                formData.getBeforeNote(),
-                formData.getDuringNote(),
-                formData.getAfterNote(),
-                formData.isHospitalVisitOccurred(),
-                formData.getAdditionalComment(),
-                false
+            formData.getSeverity(),
+            user.getId(),
+            formData.getDuration(),
+            formData.getBeforeNote(),
+            formData.getDuringNote(),
+            formData.getAfterNote(),
+            formData.isHospitalVisitOccurred(),
+            formData.getAdditionalComment(),
+            false
         );
         response.addHeader("hx-redirect", "/logDashboard");
         return "";
