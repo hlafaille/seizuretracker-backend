@@ -9,6 +9,8 @@ permissions:
 jobs:
   build_jar:
     runs-on: ubuntu-latest
+    container:
+      image: node:20-bookworm
     steps:
       - uses: actions/setup-java@v3
         with:
