@@ -4,7 +4,9 @@
 Entrypoint. This simply makes views/log_new make more sense
 -->
 <div th:fragment="entryPoint">
-    <div th:replace="fragments/tk/card :: cardLeftAlignedTitle('Log a Seizure', ~{::_entryPointCardContent})">
+    <div
+        th:replace="fragments/tk/card :: cardLeftAlignedTitle('Log a Seizure', ~{::_entryPointCardContent})"
+    >
         <div th:fragment="_entryPointCardContent">
             <div th:replace="~{::_stepOneContent}"></div>
         </div>
@@ -14,10 +16,23 @@ Entrypoint. This simply makes views/log_new make more sense
 <!--
 Step One Card.
 -->
-<div id="stepOneContent" th:fragment="_stepOneContent" class="flex flex-col space-y-2">
-    <div th:replace="fragments/tk/input :: spinBox('severity', 'Severity', true)"></div>
-    <div th:replace="fragments/tk/input :: spinBox('duration', 'Duration', true)"></div>
-    <div hx-get="/logDashboard/newEntry/stepTwo" hx-trigger="click" hx-swap="outerHTML" hx-target="#stepOneContent">
+<div
+    id="stepOneContent"
+    th:fragment="_stepOneContent"
+    class="flex flex-col space-y-2"
+>
+    <div
+        th:replace="fragments/tk/input :: spinBox('severity', 'Severity', true)"
+    ></div>
+    <div
+        th:replace="fragments/tk/input :: spinBox('duration', 'Duration', true)"
+    ></div>
+    <div
+        hx-get="/logDashboard/newEntry/stepTwo"
+        hx-trigger="click"
+        hx-swap="outerHTML"
+        hx-target="#stepOneContent"
+    >
         <div th:replace="fragments/tk/button :: button('Next', 'button')"></div>
     </div>
 </div>
@@ -25,14 +40,29 @@ Step One Card.
 <!--
 Step Two Card.
 -->
-<div id="stepTwoContent" th:fragment="_stepTwoContent" class="flex flex-col space-y-2">
+<div
+    id="stepTwoContent"
+    th:fragment="_stepTwoContent"
+    class="flex flex-col space-y-2"
+>
     <div id="completedForms" class="hidden-all">
         <div th:replace="~{::_stepOneContent}"></div>
     </div>
-    <div th:replace="fragments/tk/input :: lineEdit('beforeNote', 'Before Note', true)"></div>
-    <div th:replace="fragments/tk/input :: lineEdit('duringNote', 'During Note', true)"></div>
-    <div th:replace="fragments/tk/input :: lineEdit('afterNote', 'After Note', true)"></div>
-    <div hx-get="/logDashboard/newEntry/stepThree" hx-trigger="click" hx-swap="outerHTML" hx-target="#stepTwoContent">
+    <div
+        th:replace="fragments/tk/input :: lineEdit('beforeNote', 'Before Note', true)"
+    ></div>
+    <div
+        th:replace="fragments/tk/input :: lineEdit('duringNote', 'During Note', true)"
+    ></div>
+    <div
+        th:replace="fragments/tk/input :: lineEdit('afterNote', 'After Note', true)"
+    ></div>
+    <div
+        hx-get="/logDashboard/newEntry/stepThree"
+        hx-trigger="click"
+        hx-swap="outerHTML"
+        hx-target="#stepTwoContent"
+    >
         <div th:replace="fragments/tk/button :: button('Next', 'button')"></div>
     </div>
 </div>
@@ -40,12 +70,18 @@ Step Two Card.
 <!--
 Step Three Card.
 -->
-<div id="stepThreeContent" th:fragment="_stepThreeContent" class="flex flex-col space-y-2">
+<div
+    id="stepThreeContent"
+    th:fragment="_stepThreeContent"
+    class="flex flex-col space-y-2"
+>
     <div id="completedForms" class="hidden-all">
         <div th:replace="~{::_stepOneContent}"></div>
         <div th:replace="~{::_stepTwoContent}"></div>
     </div>
-    <div th:replace="fragments/tk/input :: lineEdit('additionalComment', 'Additional Comments', true)"></div>
+    <div
+        th:replace="fragments/tk/input :: lineEdit('additionalComment', 'Additional Comments', true)"
+    ></div>
     <div hx-post="/logDashboard/newEntry" hx-trigger="click">
         <div th:replace="fragments/tk/button :: button('Next', 'button')"></div>
     </div>
