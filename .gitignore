@@ -1,6 +1,6 @@
 HELP.md
 .gradle
-!**/style.css
+!**/bundle.css
 !**/bundle.js
 build/
 !gradle/wrapper/gradle-wrapper.jar
