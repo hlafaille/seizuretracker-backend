@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import xyz.hlafaille.seizuretracker.component.HtmxRequestHeader;
 import xyz.hlafaille.seizuretracker.entity.SeizureLog;
 import xyz.hlafaille.seizuretracker.entity.Session;
 import xyz.hlafaille.seizuretracker.entity.User;
@@ -30,7 +31,7 @@ public class LogController {
     }
 
     @GetMapping("/logDashboard")
-    public String log(HttpServletRequest request, Model model)
+    public String log(HttpServletRequest request, Model model, HtmxRequestHeader htmxRequestHeader)
         throws SessionCookieMissingException, SessionEntityMissingException, SessionUserMissingException {
         // get the user by their session id
         Cookie sessionCookie = sessionService.getSessionCookieFromBrowserCookies(request.getCookies());
@@ -41,6 +42,10 @@ public class LogController {
         // get the recorded logs
         List<SeizureLog> seizureLogs = seizureLogService.getSeizureLogEntriesByUserId(user.getId());
         model.addAttribute("seizureLogs", seizureLogs);
+
+        if(htmxRequestHeader.isHxRequest()) {
+            return "fragments/log/base_content :: baseContent";
+        }
         return "views/log/log_dashboard";
     }
     /*@GetMapping("/log/newEntry")

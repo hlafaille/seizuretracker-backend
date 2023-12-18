@@ -84,7 +84,7 @@ public class LoginSignupController {
         response.addCookie(sessionCookie);
         response.addHeader("hx-redirect", "/home");
         response.addHeader("hx-replace-url", "true");
-        return "";
+        return null;
     }
 
     /**
@@ -104,26 +104,27 @@ public class LoginSignupController {
      * Create a new user with data submitted by the user in the SignupFormModel and redirect them to /login
      */
     @PostMapping("/signup")
-    public String doSignup(@ModelAttribute SignupFormModel formData) {
+    public String doSignup(@ModelAttribute SignupFormModel formData, HttpServletResponse response) {
         userService.createUser(
             formData.getFirstName(),
             formData.getLastName(),
             formData.getEmailAddress(),
             formData.getPassword()
         );
-        return "redirect:/login?newAccount=true";
+        response.addHeader("hx-redirect", "/login");
+        return "redirect:/login";
     }
 
     /**
      * Log out the current user and redirect the user to /login
      */
     @GetMapping("/logout")
-    public String doLogout(HttpServletRequest request)
+    public void doLogout(HttpServletRequest request, HttpServletResponse response)
         throws SessionCookieMissingException, SessionEntityMissingException {
         Session session = sessionService.getSessionEntityFromCookie(
             sessionService.getSessionCookieFromBrowserCookies(request.getCookies())
         );
         sessionService.endSessionById(session.getId());
-        return "redirect:/login";
+        response.addHeader("hx-redirect", "/login");
     }
 }
