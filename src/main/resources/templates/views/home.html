@@ -3,14 +3,7 @@
     <head th:replace="~{scripts_common :: head('Home - SeizureTracker')}"></head>
     <body>
         <div th:replace="~{fragments/populatedNav :: populatedNavBar(${userFirstName} + '\'s Home')}"></div>
-        <div th:replace="~{fragments/tk/layout :: flexCenter(~{::content})}">
-            <div th:fragment="content">
-                <div id="moodCard" th:replace="~{fragments/tk/card :: card('Mood Survey', ~{::moodCardContent})}">
-                    <div th:fragment="moodCardContent" class="text-white">
-                        <p>Todo: Put Card Here</p>
-                    </div>
-                </div>
-            </div>
+        <div th:replace="~{fragments/tk/layout :: flexCenter(~{fragments/home/base_content :: baseContent})}">
         </div>
     </body>
 </html>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import xyz.hlafaille.seizuretracker.component.HtmxRequestHeader;
 import xyz.hlafaille.seizuretracker.entity.Session;
 import xyz.hlafaille.seizuretracker.entity.User;
 import xyz.hlafaille.seizuretracker.exception.SessionCookieMissingException;
@@ -28,13 +29,17 @@ public class HomeController {
     }
 
     @GetMapping("/home")
-    public String index(HttpServletRequest request, Model model)
+    public String index(HttpServletRequest request, Model model, HtmxRequestHeader htmxRequestHeader)
         throws SessionCookieMissingException, SessionEntityMissingException, SessionUserMissingException {
-        // get the user by their session id
         Cookie sessionCookie = sessionService.getSessionCookieFromBrowserCookies(request.getCookies());
         Session session = sessionService.getSessionEntityFromCookie(sessionCookie);
         User user = sessionService.getUserEntityFromSessionId(session.getId());
         model.addAttribute("userFirstName", user.getFirstName());
+
+        // if this is an htmx request, return base content. else, return the full view
+        if (htmxRequestHeader.isHxRequest()) {
+            return "fragments/home/base_content :: baseContent";
+        }
         return "views/home";
     }
 }
