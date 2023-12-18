@@ -19,12 +19,14 @@
 
     <!-- nav bar drawer list item -->
     <a
-        th:fragment="navBarDrawerListItem(text, url, iconRelativeUrl, iconAlt)"
+        th:fragment="navBarDrawerListItem(text, url, innerHxTarget)"
         th:id="navBarDrawerItem_+${text}"
-        th:href="${url}"
+        th:hx-get="${url}"
+        th:hx-target="${innerHxTarget}"
+        hx-trigger="click"
+        hx-swap="innerHTML"
     >
         <div class="navbar-drawer-list-item">
-            <img th:if="${iconRelativeUrl}" th:src="${iconRelativeUrl}" th:alt="${iconAlt}" class="stroke-gray-100" />
             <p th:text="${text}"></p>
         </div>
     </a>

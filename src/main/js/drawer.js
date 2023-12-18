@@ -3,7 +3,7 @@ import('swiped-events')
 /**
  * Handles swipe gesture for the html tag
  */
-document.addEventListener('swiped-right', function (e) {
+document.addEventListener('swiped-right', function(e) {
     if (e.target.tagName.toLowerCase() === 'html') {
         toggleDrawer()
     } else {
@@ -15,16 +15,24 @@ document.addEventListener('swiped-right', function (e) {
  * Handles swipe gesture for closing the navBarDrawer
  * @todo maybe change this to always toggle the drawer if the drawer is open?
  */
-document.addEventListener('swiped-left', function (e) {
+document.addEventListener('swiped-left', function(e) {
     if (e.target.getAttribute('id') === 'navBarDrawerList') {
         toggleDrawer()
+    }
+})
+
+document.addEventListener('htmx:afterRequest', function(event) {
+    if (event.target.id.includes('navBarDrawerItem')) {
+        toggleDrawer()
+    } else {
+        console.log(event.target.id)
     }
 })
 
 /**
  * Listens for clicks on the navBarHamburger, toggling the drawer
  */
-document.addEventListener('click', function (event) {
+document.addEventListener('click', function(event) {
     if (event.target.getAttribute('id') === 'navBarHamburger') {
         toggleDrawer()
     }
