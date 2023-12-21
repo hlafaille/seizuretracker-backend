@@ -10,6 +10,7 @@ html {
 
 body {
     overflow: hidden;
+    @apply bg-zinc-900;
 }
 
 .flex-center {
