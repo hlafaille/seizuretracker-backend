@@ -4,10 +4,10 @@ import('swiped-events')
  * Handles swipe gesture for the html tag
  */
 document.addEventListener('swiped-right', function(e) {
-    if (e.target.tagName.toLowerCase() === 'html') {
+    /** @type {HTMLElement} */
+    const targetElement = e.target
+    if (!targetElement.classList.contains('navbar-drawer') || !targetElement.classList.contains('navbar-drawer-list') || !targetElement.classList.contains('navbar-drawer-list-item')) {
         toggleDrawer()
-    } else {
-        console.log(e.target.tagName)
     }
 })
 
@@ -16,7 +16,9 @@ document.addEventListener('swiped-right', function(e) {
  * @todo maybe change this to always toggle the drawer if the drawer is open?
  */
 document.addEventListener('swiped-left', function(e) {
-    if (e.target.getAttribute('id') === 'navBarDrawerList') {
+    /** @type {HTMLElement} */
+    const targetElement = e.target
+    if (targetElement.classList.contains('navbar-drawer') || targetElement.classList.contains('navbar-drawer-list') || targetElement.classList.contains('navbar-drawer-list-item')) {
         toggleDrawer()
     }
 })
