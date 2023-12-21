@@ -10,6 +10,7 @@ html {
 
 body {
     overflow: hidden;
+    @apply bg-zinc-900;
 }
 
 .flex-center {
@@ -111,9 +112,9 @@ body {
    NAVBAR
 */
 .navbar {
-    @apply rounded-b-md bg-neutral-700;
+    @apply bg-neutral-700;
     @apply w-full p-3 drop-shadow-lg;
-    @apply border-2 border-neutral-600/25;
+    @apply border-b-2 border-l-2 border-r-2 border-neutral-600/25;
     @apply fixed left-0 right-0 top-0;
     z-index: 2;
 }
@@ -137,7 +138,8 @@ body {
 }
 
 .navbar-drawer {
-    @apply absolute inset-0 h-screen w-screen bg-neutral-800 text-white lg:w-96;
+    /* @apply absolute inset-0 h-screen w-screen bg-neutral-800 text-white lg:w-96; */
+    @apply absolute inset-0 h-screen w-screen backdrop-blur bg-neutral-800/50 text-white lg:w-96;
     @apply translate-x-[-100%] transform transition-transform;
     @apply border-r-2 border-neutral-600/50;
     @apply flex drop-shadow-2xl;
