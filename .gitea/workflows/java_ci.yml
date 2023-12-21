@@ -2,6 +2,9 @@ name: Java CI with Gradle
 
 on:
   push:
+    branches-ignore:
+      - main
+      - develop
 
 permissions:
   contents: read
