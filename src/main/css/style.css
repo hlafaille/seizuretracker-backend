@@ -5,6 +5,11 @@
 html {
     @apply bg-zinc-900 antialiased selection:bg-sky-400 selection:text-white;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    overscroll-behavior: none;
+}
+
+body {
+    overflow: hidden;
 }
 
 .flex-center {

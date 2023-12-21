@@ -62,10 +62,12 @@ compileJava.dependsOn npmBuild
  * Copies files from .generatedResources into src/main/resources/static
  */
 tasks.register('generatedResourcesCopy', Copy) {
-        group 'npm'
-        from '.generatedResources/bundle.js'
-        into 'src/main/resources/static'
-        from '.generatedResources/bundle.css'
-        into 'src/main/resources/static'
+    group 'npm'
+    from '.generatedResources/bundle.js'
+    into 'src/main/resources/static'
+    from '.generatedResources/770.bundle.js'
+    into 'src/main/resources/static'
+    from '.generatedResources/bundle.css'
+    into 'src/main/resources/static'
 }
 processResources.dependsOn generatedResourcesCopy
