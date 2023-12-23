@@ -90,7 +90,7 @@ public class LoginSignupController {
     /**
      * Signup page
      */
-    @GetMapping("/signup")
+    @GetMapping("/signUp")
     public String signup(HttpServletRequest request) {
         boolean isSessionResumable = sessionService.isSessionResumableByBrowserCookies(request.getCookies());
         if (isSessionResumable) {
