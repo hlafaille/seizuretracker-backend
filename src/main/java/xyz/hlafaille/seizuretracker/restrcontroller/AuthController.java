@@ -26,7 +26,21 @@ public class AuthController {
     public ResponseEntity<GenericErrorResponse> handleSessionAlreadyExistsException() {
         return ResponseEntity
                 .status(400)
-                .body(new GenericErrorResponse("Session already exists"));
+                .body(new GenericErrorResponse("A session already exists for this user, please sign out of any other sessions before creating a new one."));
+    }
+
+    @ExceptionHandler(UserEntityMissingException.class)
+    public ResponseEntity<GenericErrorResponse> handleUserEntityMissingException() {
+        return ResponseEntity
+                .status(400)
+                .body(new GenericErrorResponse("A user with those credentials could not be found."));
+    }
+
+    @ExceptionHandler(UserPasswordMismatchException.class)
+    public ResponseEntity<GenericErrorResponse> handleUserPasswordMismatchException( ) {
+        return ResponseEntity
+                .status(400)
+                .body(new GenericErrorResponse("A user with those credentials could not be found."));
     }
 
     /**
