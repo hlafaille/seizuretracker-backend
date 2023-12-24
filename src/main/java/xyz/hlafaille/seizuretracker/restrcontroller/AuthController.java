@@ -10,6 +10,7 @@ import xyz.hlafaille.seizuretracker.model.CreateSessionRequest;
 import xyz.hlafaille.seizuretracker.model.CreateSessionResponse;
 import xyz.hlafaille.seizuretracker.model.GenericErrorResponse;
 import xyz.hlafaille.seizuretracker.service.SessionService;
+
 import java.util.UUID;
 
 @RestController
@@ -30,6 +31,7 @@ public class AuthController {
 
     /**
      * Create a new Session, returning a CreateSessionResponse containing an accessToken
+     *
      * @param body CreateSessionRequest schema
      */
     @PostMapping("/session")
