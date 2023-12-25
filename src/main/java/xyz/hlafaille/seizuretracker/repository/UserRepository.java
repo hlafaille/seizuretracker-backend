@@ -12,4 +12,6 @@ import xyz.hlafaille.seizuretracker.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID>, QueryByExampleExecutor<User> {
     Optional<User> findByEmail(String email);
+
+    Boolean existsByEmail(String email);
 }
