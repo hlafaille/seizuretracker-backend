@@ -201,7 +201,7 @@ public class SessionServiceImpl implements SessionService {
     }
 
     public UUID beginSession(String emailAddress, String password)
-        throws UserEntityMissingException, UserPasswordMismatchException {
+            throws UserEntityMissingException, UserPasswordMismatchException, SessionAlreadyExistsException {
         // find the user from the database, ensure that their password matches
         User user = userService.getUserEntityByEmail(emailAddress);
         userService.matchPassword(user, password);
@@ -221,8 +221,7 @@ public class SessionServiceImpl implements SessionService {
             sessionRepository.save(session);
         } catch (DataIntegrityViolationException e) {
             if (e.getMessage().toLowerCase().contains("duplicate entry")) {
-                Session existingSession = sessionRepository.findSessionByUser(user.getId());
-                return existingSession.getId();
+                throw new SessionAlreadyExistsException();
             }
         }
         logger.info("user:%s began session".formatted(user.getId().toString()));
