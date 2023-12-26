@@ -9,8 +9,4 @@ import xyz.hlafaille.seizuretracker.dto.moodsurvey.CreateMoodSurveyEntryResponse
 @RestController
 @RequestMapping("/v1/moodSurvey")
 public class MoodSurveyController {
-    @PostMapping("")
-    public CreateMoodSurveyEntryResponse createMoodSurveyEntry(@RequestBody) {
-
-    }
 }
