@@ -3,11 +3,10 @@ package xyz.hlafaille.seizuretracker.restrcontroller;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import xyz.hlafaille.seizuretracker.exception.UserEntityMissingException;
 import xyz.hlafaille.seizuretracker.exception.UserEntityAlreadyExistsException;
-import xyz.hlafaille.seizuretracker.model.CreateUserRequest;
-import xyz.hlafaille.seizuretracker.model.CreateUserResponse;
-import xyz.hlafaille.seizuretracker.model.GenericErrorResponse;
+import xyz.hlafaille.seizuretracker.dto.user.CreateUserRequest;
+import xyz.hlafaille.seizuretracker.dto.user.CreateUserResponse;
+import xyz.hlafaille.seizuretracker.dto.GenericErrorResponse;
 import xyz.hlafaille.seizuretracker.service.UserService;
 
 import java.util.UUID;

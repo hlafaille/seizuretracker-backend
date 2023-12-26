@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.*;
 import xyz.hlafaille.seizuretracker.exception.SessionAlreadyExistsException;
 import xyz.hlafaille.seizuretracker.exception.UserEntityMissingException;
 import xyz.hlafaille.seizuretracker.exception.UserPasswordMismatchException;
-import xyz.hlafaille.seizuretracker.model.CreateSessionRequest;
-import xyz.hlafaille.seizuretracker.model.CreateSessionResponse;
-import xyz.hlafaille.seizuretracker.model.GenericErrorResponse;
+import xyz.hlafaille.seizuretracker.dto.auth.CreateSessionRequest;
+import xyz.hlafaille.seizuretracker.dto.auth.CreateSessionResponse;
+import xyz.hlafaille.seizuretracker.dto.GenericErrorResponse;
 import xyz.hlafaille.seizuretracker.service.SessionService;
 
 import java.util.UUID;

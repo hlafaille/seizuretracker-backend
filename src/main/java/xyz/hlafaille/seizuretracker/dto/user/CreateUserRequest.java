@@ -1,4 +1,4 @@
-package xyz.hlafaille.seizuretracker.model;
+package xyz.hlafaille.seizuretracker.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
