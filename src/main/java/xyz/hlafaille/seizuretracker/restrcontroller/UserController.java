@@ -28,7 +28,7 @@ public class UserController {
                 .body(new GenericErrorResponse("A user with that Email already exists"));
     }
 
-    @PostMapping("")
+    @PostMapping("/createAccount")
     public ResponseEntity<CreateUserResponse> createUser(@RequestBody CreateUserRequest body, HttpServletResponse response) throws UserEntityAlreadyExistsException {
         UUID userId = userService.createUser(
                 body.getFirstName(),
