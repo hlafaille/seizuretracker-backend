@@ -1,36 +1,21 @@
 package xyz.hlafaille.seizuretracker.configuration;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import xyz.hlafaille.seizuretracker.component.HtmxRequestArgumentResolver;
-import xyz.hlafaille.seizuretracker.interceptor.SessionEnforcementInterceptor;
-
-import java.util.List;
+import xyz.hlafaille.seizuretracker.interceptor.CorsInterceptor;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    private final SessionEnforcementInterceptor sessionEnforcementInterceptor;
-    private final String[] invalidSessionAllowedPaths = {"/login", "/error", "/signup"};
-    private final HtmxRequestArgumentResolver htmxRequestArgumentResolver;
+    private final CorsInterceptor corsInterceptor;
 
-
-    // @Autowired
-    public WebConfig(SessionEnforcementInterceptor sessionEnforcementInterceptor, HtmxRequestArgumentResolver htmxRequestArgumentResolver) {
-        this.sessionEnforcementInterceptor = sessionEnforcementInterceptor;
-        this.htmxRequestArgumentResolver = htmxRequestArgumentResolver;
+    public WebConfig(CorsInterceptor corsInterceptor) {
+        this.corsInterceptor = corsInterceptor;
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        // registry.addInterceptor(sessionEnforcementInterceptor).excludePathPatterns(invalidSessionAllowedPaths);
-    }
-
-    @Override
-    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(htmxRequestArgumentResolver);
+        registry.addInterceptor(corsInterceptor);
     }
 }
