@@ -1,6 +1,7 @@
 package xyz.hlafaille.seizuretracker.service;
 
 import jakarta.transaction.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import xyz.hlafaille.seizuretracker.entity.User;
 import xyz.hlafaille.seizuretracker.exception.UserEntityMissingException;
 import xyz.hlafaille.seizuretracker.exception.UserPasswordMismatchException;
+import xyz.hlafaille.seizuretracker.exception.UserEntityAlreadyExistsException;
 import xyz.hlafaille.seizuretracker.repository.UserRepository;
 
 /**
@@ -56,7 +58,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UUID createUser(String firstName, String lastName, String email, String password) {
+    public UUID createUser(String firstName, String lastName, String email, String password) throws UserEntityAlreadyExistsException {
+        if (userRepository.existsByEmail(email)) {
+            throw new UserEntityAlreadyExistsException();
+        }
         UUID userId = UUID.randomUUID();
         User user = new User();
         user.setId(userId);

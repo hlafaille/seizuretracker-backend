@@ -1,3 +1,0 @@
-#!/bin/sh
-export JAVA_HOME=~/.jdks/corretto-20.0.2.1
-./gradlew --no-daemon formatJava formatTailwindSource formatHtml
