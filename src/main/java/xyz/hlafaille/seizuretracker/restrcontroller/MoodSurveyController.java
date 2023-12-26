@@ -34,6 +34,6 @@ public class MoodSurveyController {
         );
         return ResponseEntity
                 .status(201)
-                .body(new CreateMoodSurveyEntryResponse(UUID.randomUUID()));
+                .body(new CreateMoodSurveyEntryResponse(moodSurveyEntryId));
     }
 }
