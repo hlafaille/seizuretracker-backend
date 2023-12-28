@@ -28,12 +28,12 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(corsInterceptor);
         registry.addInterceptor(authorizationEnforcementInterceptor)
                 .addPathPatterns(
-                        "/v1/auth/**",
-                        "/v1/users/**"
+                        "/auth/**",
+                        "/user/**"
                 )
                 .excludePathPatterns(
-                        "/v1/users/createAccount",
-                        "/v1/auth/session"
+                        "/user/createAccount",
+                        "/auth/session"
                 );
     }
 

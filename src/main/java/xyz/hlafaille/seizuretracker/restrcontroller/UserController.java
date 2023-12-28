@@ -12,7 +12,7 @@ import xyz.hlafaille.seizuretracker.service.UserService;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/v1/users")
+@RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;

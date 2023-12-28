@@ -1,0 +1,89 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "SeizureTracker API",
+    "version": "1.0.0",
+    "description": "The backend for SeizureTracker.",
+    "contact": {
+      "name": "MindMeld",
+      "url": "https://git.hlafaille.xyz/MindMeld"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.seizuretracker.hlafaille.xyz/v1",
+      "description": "Production"
+    },
+    {
+      "url": "http://localhost:8080",
+      "description": "Local"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "CreateSessionResponse": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string",
+            "nullable": false,
+            "required": true
+          }
+        }
+      },
+      "CreateMoodSurveyEntryResponse": {
+        "type": "object",
+        "properties": {
+          "moodSurveyEntryId": {
+            "type": "string",
+            "nullable": false,
+            "required": true
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/auth/session": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Begin a new session",
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateSessionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/moodSurvey": {
+      "post": {
+        "tags": ["Mood Survey"],
+        "summary": "Create a mood survey entry",
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateMoodSurveyEntryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/createAccount": {
+      "post": {
+        "tags": ["Users"]
+      }
+    }
+  }
+}
