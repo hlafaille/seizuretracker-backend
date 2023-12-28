@@ -4,8 +4,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import xyz.hlafaille.seizuretracker.exception.UserEntityAlreadyExistsException;
-import xyz.hlafaille.seizuretracker.dto.user.CreateUserRequest;
-import xyz.hlafaille.seizuretracker.dto.user.CreateUserResponse;
+import xyz.hlafaille.seizuretracker.dto.user.CreateNewAccountRequest;
+import xyz.hlafaille.seizuretracker.dto.user.CreateNewAccountResponse;
 import xyz.hlafaille.seizuretracker.dto.GenericErrorResponse;
 import xyz.hlafaille.seizuretracker.service.UserService;
 
@@ -29,7 +29,7 @@ public class UserController {
     }
 
     @PostMapping("/createAccount")
-    public ResponseEntity<CreateUserResponse> createUser(@RequestBody CreateUserRequest body, HttpServletResponse response) throws UserEntityAlreadyExistsException {
+    public ResponseEntity<CreateNewAccountResponse> createUser(@RequestBody CreateNewAccountRequest body, HttpServletResponse response) throws UserEntityAlreadyExistsException {
         UUID userId = userService.createUser(
                 body.getFirstName(),
                 body.getLastName(),
@@ -38,7 +38,7 @@ public class UserController {
         );
         return ResponseEntity
                 .status(201)
-                .body(new CreateUserResponse(userId));
+                .body(new CreateNewAccountResponse(userId));
     }
 
 }
