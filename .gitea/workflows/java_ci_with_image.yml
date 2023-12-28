@@ -40,16 +40,16 @@ jobs:
           name: seizuretracker.jar
 
       - name: Build image
-        run: docker build . -t git.hlafaille.xyz/hlafaille/seizuretracker:${{ github.ref_name }} -t git.hlafaille.xyz/hlafaille/seizuretracker:latest
+        run: docker build . -t git.hlafaille.xyz/MindMeld/seizuretracker-backend:${{ github.ref_name }} -t git.hlafaille.xyz/MindMeld/seizuretracker-backend:latest
 
       - name: Registry login
         run: docker login -u ${{ secrets.registry_username }} -p ${{ secrets.registry_password }} git.hlafaille.xyz
 
       - name: Push image with version tag
-        run: docker push git.hlafaille.xyz/hlafaille/seizuretracker:${{ github.ref_name }}
+        run: docker push git.hlafaille.xyz/MindMeld/seizuretracker-backend:${{ github.ref_name }}
 
       - name: Push image with latest tag
-        run: docker push git.hlafaille.xyz/hlafaille/seizuretracker:latest
+        run: docker push git.hlafaille.xyz/MindMeld/seizuretracker-backend:latest
 
   deploy:
     runs-on: ubuntu-latest
