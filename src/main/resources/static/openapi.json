@@ -84,6 +84,35 @@
           }
         }
       },
+      "CreateNewAccountRequest": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "nullable": false,
+            "required": true,
+            "example": "Test"
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": false,
+            "required": true,
+            "example": "McTesterson"
+          },
+          "emailAddress": {
+            "type": "string",
+            "nullable": false,
+            "required": true,
+            "example": "test.mctesterson@test.com"
+          },
+          "password": {
+            "type": "string",
+            "nullable": false,
+            "required": true,
+            "example": "MySuperSecurePassword1!"
+          }
+        }
+      },
       "CreateNewAccountResponse": {
         "type": "object",
         "properties": {
@@ -174,6 +203,17 @@
           "Users"
         ],
         "summary": "Create a new account",
+        "requestBody": {
+          "required": true,
+          "description": "Details for a new account",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateNewAccountRequest"
+              }
+            }
+          }
+        },
         "responses": {
           "201": {
             "description": "Successful response",
