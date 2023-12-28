@@ -15,7 +15,7 @@ import xyz.hlafaille.seizuretracker.service.MoodSurveyService;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/v1/moodSurvey")
+@RequestMapping("/moodSurvey")
 public class MoodSurveyController {
     private final MoodSurveyService moodSurveyService;
 

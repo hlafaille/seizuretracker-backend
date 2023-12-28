@@ -4,22 +4,27 @@ import jakarta.transaction.Transactional;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
+
+import lombok.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.hlafaille.seizuretracker.entity.SeizureLog;
+import xyz.hlafaille.seizuretracker.entity.User;
 import xyz.hlafaille.seizuretracker.repository.SeizureLogRepository;
 
 @Service
 public class SeizureLogServiceImpl implements SeizureLogService {
 
     private final SeizureLogRepository seizureLogRepository;
+    private final UserService userService;
     private final Logger logger = LoggerFactory.getLogger(SeizureLogService.class);
 
     @Autowired
-    public SeizureLogServiceImpl(SeizureLogRepository seizureLogRepository) {
+    public SeizureLogServiceImpl(SeizureLogRepository seizureLogRepository, UserService userService) {
         this.seizureLogRepository = seizureLogRepository;
+        this.userService = userService;
     }
 
     /**
@@ -37,7 +42,7 @@ public class SeizureLogServiceImpl implements SeizureLogService {
      */
     @Override
     @Transactional
-    public UUID createLogEntry(
+    public @NonNull UUID createLogEntry(
         Integer severity,
         UUID userId,
         Integer duration,
@@ -72,7 +77,12 @@ public class SeizureLogServiceImpl implements SeizureLogService {
      * @return List of SeizureLog entities
      */
     @Override
-    public List<SeizureLog> getSeizureLogEntriesByUserId(UUID userId) {
+    public @NonNull List<SeizureLog> getSeizureLogEntriesByUserId(UUID userId) {
         return seizureLogRepository.findAllByUser(userId);
+    }
+
+    @Override
+    public @NonNull SeizureLog getSingleSeizureLogEntriesById(User user, UUID logEntryId) {
+        return null;
     }
 }

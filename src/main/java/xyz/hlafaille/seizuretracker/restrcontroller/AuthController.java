@@ -14,7 +14,7 @@ import xyz.hlafaille.seizuretracker.service.SessionService;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/v1/auth")
+@RequestMapping("/auth")
 public class AuthController {
     private final SessionService sessionService;
 

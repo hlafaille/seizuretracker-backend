@@ -1,0 +1,255 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "SeizureTracker API",
+    "version": "1.0.0",
+    "description": "The backend for SeizureTracker.",
+    "contact": {
+      "name": "MindMeld",
+      "url": "https://git.hlafaille.xyz/MindMeld"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.seizuretracker.hlafaille.xyz/v1",
+      "description": "Production"
+    },
+    {
+      "url": "http://localhost:8080",
+      "description": "Local"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "in": "header",
+        "bearerFormat": "token"
+      }
+    },
+    "schemas": {
+      "CreateSessionRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": false,
+            "required": true,
+            "example": "testy.mctesterson@test.com"
+          },
+          "password": {
+            "type": "string",
+            "nullable": false,
+            "required": true,
+            "example": "MySuperSecurePassword123!"
+          }
+        }
+      },
+      "CreateSessionResponse": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string",
+            "nullable": false,
+            "required": true,
+            "example": "741f1b14-a3d9-4ba9-8d19-c0972b90fe57"
+          }
+        }
+      },
+      "MoodSurveyAllowedMoods": {
+        "type": "string",
+        "enum": [
+          "BAD",
+          "MEH",
+          "GOOD",
+          "CONFUSED"
+        ]
+      },
+      "CreateMoodSurveyEntryRequest": {
+        "properties": {
+          "currentMood": {
+            "$ref": "#/components/schemas/MoodSurveyAllowedMoods"
+          }
+        }
+      },
+      "CreateMoodSurveyEntryResponse": {
+        "type": "object",
+        "properties": {
+          "moodSurveyEntryId": {
+            "type": "string",
+            "nullable": false,
+            "required": true,
+            "example": "741f1b14-a3d9-4ba9-8d19-c0972b90fe57"
+          }
+        }
+      },
+      "CreateNewAccountRequest": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "nullable": false,
+            "required": true,
+            "example": "Test"
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": false,
+            "required": true,
+            "example": "McTesterson"
+          },
+          "emailAddress": {
+            "type": "string",
+            "nullable": false,
+            "required": true,
+            "example": "test.mctesterson@test.com"
+          },
+          "password": {
+            "type": "string",
+            "nullable": false,
+            "required": true,
+            "example": "MySuperSecurePassword1!"
+          }
+        }
+      },
+      "CreateNewAccountResponse": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "nullable": false,
+            "required": true,
+            "example": "741f1b14-a3d9-4ba9-8d19-c0972b90fe57"
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "paths": {
+    "/auth/session": {
+      "post": {
+        "security": [],
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Begin a new session",
+        "description": "Provide the `email` and `password` of a user and receive an `accessToken`. The `accessToken` must be provided as an `Authorization: Bearer` header for other protected requests.",
+        "requestBody": {
+          "required": true,
+          "description": "Login details of the user",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSessionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateSessionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/moodSurvey": {
+      "post": {
+        "tags": [
+          "Mood Survey"
+        ],
+        "summary": "Create a mood survey entry",
+        "requestBody": {
+          "required": true,
+          "description": "Current mood of the user",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMoodSurveyEntryRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateMoodSurveyEntryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/createAccount": {
+      "post": {
+        "security": [],
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create a new account",
+        "requestBody": {
+          "required": true,
+          "description": "Details for a new account",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateNewAccountRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateNewAccountResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/seizureLog/entry/{logEntryId}": {
+      "get": {
+        "tags": [
+          "Seizure Log"
+        ],
+        "summary": "Get a Seizure Log entry for the authenticated user by ID",
+        "parameters": [
+          {
+            "name": "logEntryId",
+            "in": "path",
+            "description": "ID of the requested Seizure Log entry",
+            "required": true,
+            "allowEmptyValue": false,
+            "example": "741f1b14-a3d9-4ba9-8d19-c0972b90fe57"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    }
+  }
+}

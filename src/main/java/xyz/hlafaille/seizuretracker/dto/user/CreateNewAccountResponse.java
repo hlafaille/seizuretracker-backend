@@ -7,6 +7,6 @@ import java.util.UUID;
 
 @Data
 @AllArgsConstructor
-public class CreateUserResponse {
+public class CreateNewAccountResponse {
     private UUID userId;
 }
